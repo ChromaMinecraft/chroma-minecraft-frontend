@@ -1,6 +1,8 @@
 import Head from 'next/head';
 
 export default function Home() {
+  const icons = [{ value: 'Discord' }];
+
   return (
     <>
       <Head>
@@ -45,12 +47,14 @@ export default function Home() {
         </h4>
         <div className="my-16"></div>
         <div className="flex flex-column justify-center sm:px-16">
-          <a
-            className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-            href="tes"
-          >
-            tes
-          </a>
+          {icons.map(({ value }) => (
+            <a
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+              href="tes"
+            >
+              {value}
+            </a>
+          ))}
         </div>
       </div>
     </>
