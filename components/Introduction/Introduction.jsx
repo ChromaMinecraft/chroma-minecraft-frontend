@@ -33,7 +33,7 @@ const Introduction = () => {
         <h4 className="font-medium xs:text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
           {contents.subTitle[0]}
         </h4>
-        <h4 className="font-hairline xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
+        <h4 className="font-light xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
           {contents.subTitle[1]}
         </h4>
         <div className="flex flex-row justify-center sm:px-16 my-12">
