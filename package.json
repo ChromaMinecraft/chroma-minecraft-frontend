@@ -7,6 +7,10 @@
     "build": "next build",
     "start": "next start"
   },
+  "devDependencies": {
+    "postcss-flexbugs-fixes": "4.2.1",
+    "postcss-preset-env": "^6.7.0"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
     "autoprefixer": "^9.8.6",
