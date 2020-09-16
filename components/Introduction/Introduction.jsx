@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { contents, icons } from './index.config';
+import Axios from 'axios';
 
 const Introduction = () => {
+  const [playerCount, setPlayerCount] = useState(0);
+  
+  useEffect(() => {
+    const getPlayersCount = async () => {
+      const { data } = await Axios.get('https://api.mcsrvstat.us/2/mc.chroma-gaming.xyz');
+      setPlayerCount(data.players.online);
+    }
+    getPlayersCount();    
+  }, [])
+
   return (
     <>
       <div
@@ -35,6 +46,9 @@ const Introduction = () => {
         </h4>
         <h4 className="font-light xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
           {contents.subTitle[1]}
+        </h4>
+        <h4 className="font-light xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mt-5">
+          <span className="font-bold">{playerCount} Pemain</span> sedang bermain saat ini
         </h4>
         <div className="flex flex-row justify-center sm:px-16 my-12">
           {icons.map(
