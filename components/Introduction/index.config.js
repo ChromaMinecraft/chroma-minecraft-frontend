@@ -31,7 +31,7 @@ export const icons = [
   {
     text: 'Vote',
     id: 'vote',
-    url: 'https://minecraft-mp.com/server/268502/vote/',
+    url: 'https://minecraft-mp.com/server/268676/vote/',
     target: '_blank',
     key: 'link-introduction-vote',
     content: <FaPoll />,
