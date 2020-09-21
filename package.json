@@ -12,7 +12,6 @@
     "postcss-preset-env": "^6.7.0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.14.0",
     "autoprefixer": "^9.8.6",
     "axios": "^0.20.0",
     "copy-to-clipboard": "^3.3.1",

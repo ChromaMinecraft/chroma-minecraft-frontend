@@ -1,7 +1,6 @@
-import Head from "next/head";
-import GoogleFonts from "next-google-fonts";
-import Introduction from "../components/Introduction";
-import { useState } from "react";
+import Head from 'next/head';
+import GoogleFonts from 'next-google-fonts';
+import Introduction from '../components/Introduction';
 
 export default function Home() {
   return (
@@ -17,7 +16,6 @@ export default function Home() {
         rel="stylesheet"
       />
       <Introduction />
-      
     </>
   );
 }

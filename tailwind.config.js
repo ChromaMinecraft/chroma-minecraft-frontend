@@ -4,6 +4,12 @@ module.exports = {
   purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
   separator: ':',
   theme: {
+    extend: {
+      backgroundImage: theme => ({
+        'introduction': "url('/img/bg.png')",
+        'introduction-overlay': "rgba(0, 0, 0, 0.4)",
+      }),
+    },
     screens: {
       'xs': { 'min': '0px', 'max': '639px' },
       'sm': { 'min': '640px', 'max': '767px' },
