@@ -14,18 +14,10 @@ const Introduction = () => {
 
   const getPlayers = async () => {
     const { data } = await Axios.get(URL_SERVER);
-    const playerArr = [];
-
-    if (data.players.online > 0) {
-      data.players.list.map((e) => {
-        playerArr.push(e);
-      });
-
-      playerArr.join('<br>');
-    }
+    const result = data.players.list.join('<br>');
 
     setPlayerCount(data.players.online);
-    setPlayerList(playerArr);
+    setPlayerList(result);
   };
 
   const setupIconEvents = () => {
