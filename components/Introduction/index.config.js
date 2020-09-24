@@ -58,7 +58,7 @@ export const contents = {
   ],
   count: {
     player: "Pemain ",
-    title: "sedang bermain saat ini",
+    title: "sedang bermain.",
     subInfo: "(Arahkan mouse ke jumlah pemain untuk melihat daftar pemain)",
   },
 };

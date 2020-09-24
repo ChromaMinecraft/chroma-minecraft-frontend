@@ -95,16 +95,16 @@ const Introduction = () => {
               place="bottom"
             ></ReactTooltip>
           </h4>
-          <span className="xs:text-xs sm:text-xs md:text-xs lg:text-sm xl:text-base">
+          <span className="xs:text-xs sm:text-xs md:text-xs lg:text-sm xl:text-base font-light">
             {contents.count.subInfo}
           </span>
         </div>
-        <div className="flex flex-row justify-center xs:px-16 sm:px-16 md:px-16 mt-12">
+        <div className="flex flex-row flex-wrap justify-center xs:px-16 sm:px-16 md:px-16 mt-12">
           {icons.map(
             ({ text, id, url, key, target, content, events: { onClick } }) => (
               <div
                 key={key}
-                className="mx-12 xs:mx-6 flex flex-col justify-center"
+                className="mx-6 xs:mx-3 w-auto flex flex-col justify-center"
               >
                 <div className="flex flex-row justify-center">
                   <a
