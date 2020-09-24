@@ -27,7 +27,7 @@ const Donate = (props) => {
                   tersebut.
                 </p>
                 <p className="font-light my-3">
-                  Mohon maaf sebelum dan terima kasih.
+                  Mohon maaf sebelumnya dan terima kasih.
                 </p>
                 <a
                   className="text-center min-w-full border-1 border-solid rounded-lg bg-gray-800 hover:border-1 text-white font-semibold p-3"

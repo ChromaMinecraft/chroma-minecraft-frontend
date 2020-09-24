@@ -47,7 +47,7 @@ export const icons = [
     key: "link-introduction-vote-reward",
     content: <FaAward />,
     events: {},
-  }
+  },
 ];
 
 export const contents = {

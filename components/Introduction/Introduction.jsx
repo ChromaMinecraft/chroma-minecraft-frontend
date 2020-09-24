@@ -64,7 +64,8 @@ const Introduction = () => {
     <>
       <div className="z-0 min-h-screen bg-cover bg-center static bg-introduction" />
       <div className="transform z-10 absolute text-center text-white top-50 left-50 w-screen align-middle -translate-x-1/2 -translate-y-1/2">
-        <div className="min-h-screen bg-introduction-overlay" />
+        <div className="min-h-screen" style={{background:'rgba(0, 0, 0, 0.4)'}} />
+        {/* <div className="min-h-screen bg-introduction-overlay" /> */}
       </div>
       <div className="transform z-20 absolute text-center text-white top-50 left-50 w-screen align-middle xs:px-16 sm:px-16 -translate-x-1/2 -translate-y-1/2">
         <h4 className="font-semibold xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
@@ -99,12 +100,14 @@ const Introduction = () => {
             {contents.count.subInfo}
           </span>
         </div>
-        <div className="flex flex-row flex-wrap justify-center xs:px-16 sm:px-16 md:px-16 mt-12">
+        {/* <div className="flex flex-wrap justify-center "> */}
+        <div className="flex flex-wrap justify-center  md:px-16 mt-12">
           {icons.map(
             ({ text, id, url, key, target, content, events: { onClick } }) => (
               <div
                 key={key}
                 className="mx-6 xs:mx-3 w-auto flex flex-col justify-center"
+                // className="mx-6 xs:mx-3 w-auto flex flex-col justify-center"
               >
                 <div className="flex flex-row justify-center">
                   <a
