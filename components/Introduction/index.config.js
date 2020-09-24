@@ -1,4 +1,6 @@
-import { FaDiscord, FaPlay, FaPoll, FaAward } from "react-icons/fa";
+import { FaDiscord, FaPlay, FaPoll, FaAward, FaDonate } from "react-icons/fa";
+
+export const URL_SERVER = 'https://api.mcsrvstat.us/2/mc.chroma-gaming.xyz';
 
 export const icons = [
   {
@@ -8,6 +10,15 @@ export const icons = [
     target: "_blank",
     key: "link-introduction-discord",
     content: <FaDiscord />,
+    events: {},
+  },
+  {
+    text: "Donate",
+    id: "donate",
+    url: "https://saweria.co/chromamc",
+    target: "_blank",
+    key: "link-introduction-donate",
+    content: <FaDonate />,
     events: {},
   },
   {

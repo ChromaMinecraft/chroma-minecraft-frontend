@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { contents, icons } from './index.config';
+import { contents, icons, URL_SERVER } from './index.config';
 import Axios from 'axios';
 import ReactTooltip from 'react-tooltip';
 import Reward from '../Reward';
-import copy from 'copy-to-clipboard';
+import Donate from '../Donate';
 
-const URL_SERVER = 'https://api.mcsrvstat.us/2/mc.chroma-gaming.xyz';
+import copy from 'copy-to-clipboard';
 
 const Introduction = () => {
   const [playerCount, setPlayerCount] = useState(0);
   const [playerList, setPlayerList] = useState('');
-  const [isModalShown, setIsModalShown] = useState(false);
+
+  const [isRewardShown, setIsRewardShown] = useState(false);
+  const [isDonateShown, setIsDonateShown] = useState(false);
 
   const getPlayers = async () => {
-    const { data } = await Axios.get(URL_SERVER);
-    const result = data.players.list.join('<br>');
+    const {
+      data: { players },
+    } = await Axios.get(URL_SERVER);
 
-    setPlayerCount(data.players.online);
+    players.list = !players.list ? [] : players.list;
+
+    const result = players.list.join('<br>');
+
+    setPlayerCount(players.list.length);
     setPlayerList(result);
   };
 
@@ -29,9 +36,13 @@ const Introduction = () => {
             const isCopied = copy(url);
             if (isCopied) alert('Link telah berhasil dicopy');
             break;
+          case 'donate':
+            e.preventDefault();
+            setIsDonateShown(true);
+            break;
           case 'vote-reward':
             e.preventDefault();
-            setIsModalShown(true);
+            setIsRewardShown(true);
             break;
           default:
             break;
@@ -40,7 +51,8 @@ const Introduction = () => {
     });
   };
 
-  const onModalClosed = () => setIsModalShown(false);
+  const onRewardClosed = () => setIsRewardShown(false);
+  const onDonateClosed = () => setIsDonateShown(false);
 
   setupIconEvents();
 
@@ -54,7 +66,7 @@ const Introduction = () => {
       <div className="transform z-10 absolute text-center text-white top-50 left-50 w-screen align-middle -translate-x-1/2 -translate-y-1/2">
         <div className="min-h-screen bg-introduction-overlay" />
       </div>
-      <div className="transform z-20 absolute text-center text-white top-50 left-50 w-screen align-middle sm:px-16 -translate-x-1/2 -translate-y-1/2">
+      <div className="transform z-20 absolute text-center text-white top-50 left-50 w-screen align-middle xs:px-16 sm:px-16 -translate-x-1/2 -translate-y-1/2">
         <h4 className="font-semibold xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
           {contents.title}{' '}
         </h4>
@@ -87,7 +99,7 @@ const Introduction = () => {
             {contents.count.subInfo}
           </span>
         </div>
-        <div className="flex flex-row justify-center sm:px-16 mt-12">
+        <div className="flex flex-row justify-center xs:px-16 sm:px-16 md:px-16 mt-12">
           {icons.map(
             ({ text, id, url, key, target, content, events: { onClick } }) => (
               <div
@@ -116,7 +128,8 @@ const Introduction = () => {
         </div>
       </div>
 
-      {isModalShown && <Reward onClose={onModalClosed} />}
+      {isRewardShown && <Reward onClose={onRewardClosed} />}
+      {isDonateShown && <Donate onClose={onDonateClosed} />}
     </>
   );
 };
