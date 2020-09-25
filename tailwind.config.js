@@ -7,7 +7,6 @@ module.exports = {
     extend: {
       backgroundImage: theme => ({
         'introduction': "url('/img/bg.png')",
-        // 'introduction-overlay': "rgba(0, 0, 0, 1)",
       }),
     },
     screens: {
