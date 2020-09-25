@@ -15,7 +15,7 @@ export const icons = [
   {
     text: "Donate",
     id: "donate",
-    url: "https://saweria.co/chromamc",
+    url: "#",
     target: "_blank",
     key: "link-introduction-donate",
     content: <FaDonate />,
