@@ -99,14 +99,12 @@ const Introduction = () => {
             {contents.count.subInfo}
           </span>
         </div>
-        {/* <div className="flex flex-wrap justify-center "> */}
         <div className="flex flex-wrap justify-center  md:px-16 mt-12">
           {icons.map(
             ({ text, id, url, key, target, content, events: { onClick } }) => (
               <div
                 key={key}
                 className="mx-6 xs:mx-3 w-auto flex flex-col justify-center"
-                // className="mx-6 xs:mx-3 w-auto flex flex-col justify-center"
               >
                 <div className="flex flex-row justify-center">
                   <a

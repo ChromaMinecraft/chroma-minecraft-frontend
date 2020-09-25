@@ -16,6 +16,7 @@ export default function Home() {
           content="Server minecraft survival yang mendukung berbagai platform (Java / Bedrock / Pocket Edition)."
           key="meta-description"
         />
+        <meta property="og:image" content="/img/logo.png" />
         <meta property="og:locale" content="id_ID" key="meta-locale" />
         <meta
           property="og:locale:alternate"
