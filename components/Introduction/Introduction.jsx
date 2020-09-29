@@ -66,7 +66,7 @@ const Introduction = () => {
       <div className="transform z-10 absolute text-center text-white top-50 left-50 w-screen align-middle -translate-x-1/2 -translate-y-1/2">
         <div className="min-h-screen bg-gray-900 bg-opacity-50" />
       </div>
-      <div className="transform z-20 absolute text-center text-white top-50 left-50 w-screen align-middle xs:px-16 sm:px-16 -translate-x-1/2 -translate-y-1/2">
+      <div className="transform z-20 absolute text-center text-white top-50 left-50 w-screen align-middle xs:px-10 sm:px-16 -translate-x-1/2 -translate-y-1/2">
         <h4 className="font-semibold xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
           {contents.title}{' '}
         </h4>
