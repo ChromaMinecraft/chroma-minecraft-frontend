@@ -19,15 +19,10 @@ const Donate = (props) => {
             </div>
             <div className="flex flex-wrap justify-center p-6">
               <div className="flex flex-col">
-                <p className="font-light">
-                  Untuk saat ini, donatur tidak akan mendapat benefit apapun
-                  dari server minecraft ini. Donasi ini bersifat sukarela supaya
-                  server tetap hidup. Jika di kemudian hari, donatur akan
-                  mendapatkan benefit, maka anda juga akan mendapat benefit
-                  tersebut.
-                </p>
-                <p className="font-light my-3">
-                  Mohon maaf sebelumnya dan terima kasih.
+                <p className="font-light mb-3">
+                  Untuk mempermudah pembayaran dari donasi dapat dilakukan
+                  melalui discord secara langsung, silahkan baca petunjuk
+                  pembayaran terlebih dahulu di channel #pin kategori Minecraft.
                 </p>
                 <a
                   className="text-center min-w-full border-1 border-solid rounded-lg bg-gray-800 hover:border-1 text-white font-semibold p-3"

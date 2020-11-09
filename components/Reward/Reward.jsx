@@ -130,7 +130,7 @@ const Reward = (props) => {
                       className="w-full md:w-1/2 lg:w-1/3 xl:w-1/3 py-1"
                     >
                       <p>
-                        {key}. {rewardByRarity[key].type} (Drop rate{' '}
+                        {key}. {rewardByRarity[key].type} (
                         {rewardByRarity[key].rate})
                       </p>
                       <div className="ml-4">

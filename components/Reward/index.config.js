@@ -10,7 +10,7 @@ export const reward = [
 
 export const rewardByRarity = {
   A: {
-    type: 'Common Item',
+    type: 'Common',
     rate: '34.667%',
     list: [
       { name: 'Cobblestone', amount: 50 },
@@ -24,7 +24,7 @@ export const rewardByRarity = {
     ]
   },
   B: {
-    type: 'Uncommon Item',
+    type: 'Uncommon',
     rate: '28,667%',
     list: [
       { name: 'Pufferfish', amount: 5 },
@@ -40,7 +40,7 @@ export const rewardByRarity = {
     ]
   },
   C: {
-    type: 'Rare Item',
+    type: 'Rare',
     rate: '21,333%',
     list: [
       { name: 'Obsidian', amount: 5 },
@@ -53,7 +53,7 @@ export const rewardByRarity = {
     ]
   },
   D: {
-    type: 'Epic Item',
+    type: 'Epic',
     rate: '10%',
     list: [
       { name: 'Mycelium', amount: 5 },
@@ -72,7 +72,7 @@ export const rewardByRarity = {
     ]
   },
   E: {
-    type: 'Legendary Item',
+    type: 'Legendary',
     rate: '5.333%',
     list: [
       { name: 'Enchanted Golden Apple', amount: 1 },
