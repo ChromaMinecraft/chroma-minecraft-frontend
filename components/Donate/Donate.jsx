@@ -22,11 +22,11 @@ const Donate = (props) => {
                 <p className="font-light mb-3">
                   Untuk mempermudah pembayaran dari donasi dapat dilakukan
                   melalui discord secara langsung, silahkan baca petunjuk
-                  pembayaran terlebih dahulu di channel #pin kategori Minecraft.
+                  pembayaran terlebih dahulu di channel <b>#pin</b> kategori Minecraft.
                 </p>
                 <a
                   className="text-center min-w-full border-1 border-solid rounded-lg bg-gray-800 hover:border-1 text-white font-semibold p-3"
-                  href="https://saweria.co/chromamc"
+                  href="/donate"
                   target="_blank"
                 >
                   Donasi Sekarang
