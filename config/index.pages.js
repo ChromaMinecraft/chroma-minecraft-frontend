@@ -24,7 +24,7 @@ export const icons = [
   {
     text: "Play",
     id: "play",
-    url: "mc.chroma-gaming.xyz",
+    url: "#",
     target: "_self",
     key: "link-introduction-play",
     content: <FaPlay />,
@@ -49,16 +49,3 @@ export const icons = [
     events: {},
   },
 ];
-
-export const contents = {
-  title: "Chroma Minecraft",
-  subTitle: [
-    "Server minecraft survival yang mendukung berbagai platform (Java / Bedrock / Pocket Edition).",
-    "Temukan keseruan sensasi berpetualang di dunia minecraft yang penuh dengan misteri, harta karun, village, dan lainnya."
-  ],
-  count: {
-    player: "Pemain ",
-    title: "sedang bermain.",
-    subInfo: "(Arahkan mouse ke jumlah pemain untuk melihat daftar pemain)",
-  },
-};

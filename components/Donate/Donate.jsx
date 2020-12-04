@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const Donate = (props) => {
   return (
@@ -22,11 +22,12 @@ const Donate = (props) => {
                 <p className="font-light mb-3">
                   Untuk mempermudah pembayaran dari donasi dapat dilakukan
                   melalui discord secara langsung, silahkan baca petunjuk
-                  pembayaran terlebih dahulu di channel <b>#pin</b> kategori Minecraft.
+                  pembayaran terlebih dahulu di channel <b>#pin</b> kategori
+                  Minecraft.
                 </p>
                 <a
                   className="text-center min-w-full border-1 border-solid rounded-lg bg-gray-800 hover:border-1 text-white font-semibold p-3"
-                  href="/donate"
+                  href="https://discord.gg/hDrwCsfWqq"
                   target="_blank"
                 >
                   Donasi Sekarang
