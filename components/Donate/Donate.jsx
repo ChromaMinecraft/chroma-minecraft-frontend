@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Donate = (props) => {
   return (
@@ -25,13 +26,14 @@ const Donate = (props) => {
                   pembayaran terlebih dahulu di channel <b>#pin</b> kategori
                   Minecraft.
                 </p>
-                <a
-                  className="text-center min-w-full border-1 border-solid rounded-lg bg-gray-800 hover:border-1 text-white font-semibold p-3"
-                  href="https://discord.gg/hDrwCsfWqq"
-                  target="_blank"
-                >
-                  Donasi Sekarang
-                </a>
+                <Link href="/donate">
+                  <a
+                    className="text-center min-w-full border-1 border-solid rounded-lg bg-gray-800 hover:border-1 text-white font-semibold p-3"
+                    target="_blank"
+                  >
+                    Donasi Sekarang
+                  </a>
+                </Link>
               </div>
             </div>
           </div>

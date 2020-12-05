@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
-
 import copy from 'copy-to-clipboard';
-import { icons, URL_SERVER } from '../config/index.pages';
+
+import { icons } from '../config/index.pages';
+import { LIST_URL } from '../config/links';
 
 import Reward from '../components/Reward';
 import Donate from '../components/Donate';
@@ -48,7 +49,7 @@ export default function Home() {
     const getPlayers = async () => {
       const {
         data: { players = {} },
-      } = await Axios.get(URL_SERVER);
+      } = await Axios.get(LIST_URL.STATUS);
       const { online = 0 } = players;
 
       setPlayerCount(online);

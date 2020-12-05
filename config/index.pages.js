@@ -1,12 +1,11 @@
 import { FaDiscord, FaPlay, FaPoll, FaAward, FaDonate } from "react-icons/fa";
-
-export const URL_SERVER = 'https://api.mcsrvstat.us/2/mc.chroma-gaming.xyz';
+import { LIST_URL } from './links';
 
 export const icons = [
   {
     text: "Discord",
     id: "discord",
-    url: "http://discord.chroma-gaming.xyz",
+    url: LIST_URL.SERVER,
     target: "_blank",
     key: "link-introduction-discord",
     content: <FaDiscord />,
@@ -33,7 +32,7 @@ export const icons = [
   {
     text: "Vote",
     id: "vote",
-    url: "https://minecraft-mp.com/server/268676/vote/",
+    url: LIST_URL.VOTE,
     target: "_blank",
     key: "link-introduction-vote",
     content: <FaPoll />,
