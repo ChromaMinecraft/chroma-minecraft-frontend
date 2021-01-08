@@ -9,12 +9,16 @@ import Reward from '../components/Reward';
 import Donate from '../components/Donate';
 import CircleButton from '../components/CircleButton';
 import Header from '../components/Header';
+import Toast from '../components/Toast';
 
 export default function Home() {
   const [playerCount, setPlayerCount] = useState(0);
   const [isRewardShown, setIsRewardShown] = useState(false);
   const [isDonateShown, setIsDonateShown] = useState(false);
+  const [isLeaderboardShown, setIsLeaderboardShown] = useState(false);
+
   const requestTimeout = 1000;
+  const leaderboardTimeout = 2000;
 
   const setupIconEvents = () => {
     icons.map((icon) => {
@@ -42,6 +46,7 @@ export default function Home() {
 
   const onRewardClosed = () => setIsRewardShown(false);
   const onDonateClosed = () => setIsDonateShown(false);
+  const onLeaderboardClosed = () => setIsLeaderboardShown(false);
 
   setupIconEvents();
 
@@ -60,6 +65,10 @@ export default function Home() {
     const interval = setInterval(() => {
       getPlayers();
     }, requestTimeout);
+
+    setTimeout(() => {
+      setIsLeaderboardShown(true);
+    }, leaderboardTimeout);
 
     return () => clearInterval(interval);
   }, []);
@@ -105,6 +114,7 @@ export default function Home() {
 
       {isRewardShown && <Reward onClose={onRewardClosed} />}
       {isDonateShown && <Donate onClose={onDonateClosed} />}
+      {isLeaderboardShown && <Toast onClose={onLeaderboardClosed} />}
     </>
   );
 }
