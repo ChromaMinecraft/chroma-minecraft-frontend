@@ -9,15 +9,21 @@
     "export": "npm run build && npx next export"
   },
   "devDependencies": {
+    "compose-function": "^3.0.3",
     "postcss-flexbugs-fixes": "4.2.1",
     "postcss-preset-env": "^6.7.0"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.5.0",
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.3.0",
     "autoprefixer": "^9.8.6",
     "axios": "0.21.1",
     "copy-to-clipboard": "^3.3.1",
+    "dokz": "^2.0.7",
     "next": "^10.0.6",
     "next-google-fonts": "^1.2.1",
+    "next-seo": "^4.23.0",
     "nextjs-redirect": "^5.0.0",
     "postcss-import": "^12.0.1",
     "react": "16.13.1",
