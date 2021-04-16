@@ -54,15 +54,12 @@ const MyApp = ({ Component, pageProps }) => {
           }
           headerItems={[
             <Link href='/blog'>Blog</Link>,
-            <GithubLink
-              key='0'
-              url='https://github.com/ChromaMinecraft/'
-            />,
             <ColorModeSwitch key='1' />,
           ]}
           sidebarOrdering={{
             'index.mdx': true,
             docs: {
+              'index.mdx': true,
               rules: true,
               tutorial: true,
               'change log': {
