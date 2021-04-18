@@ -11,11 +11,13 @@ export default function CircleButton(props) {
     >
       <Flex flexDirection="row" w="auto" justifyContent="center">
         <Link
+          borderWidth="1px"
+          borderColor="white"
           borderStyle="solid"
           borderRadius="full"
           color="white"
           fontWeight="bold"
-          padding="5px"
+          padding="5"
           _hover={{
             backgroundColor: "white",
             color: "gray.800",
@@ -28,11 +30,12 @@ export default function CircleButton(props) {
           {props.icon.content}
         </Link>
       </Flex>
-      <Flex>
+      <Flex w="100%" justifyContent="center">
         <Heading
           as="h1"
           size={{ base: "xs", sm: "sm", md: "md", lg: "lg", xl: "xl" }}
           marginTop="1"
+          color="white"
         >
           {props.icon.text}
         </Heading>
