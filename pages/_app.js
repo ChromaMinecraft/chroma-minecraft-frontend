@@ -1,79 +1,110 @@
-import React from 'react';
-import Link from 'next/link';
-import { DokzProvider, GithubLink, DokzBlogProvider, ColorModeSwitch } from 'dokz';
-import { useRouter } from 'next/router';
-import { ChakraProvider } from '@chakra-ui/react';
+import "../styles/globals.css";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { DokzProvider, ColorModeSwitch, GithubLink, Link } from "dokz";
+import { ChakraProvider } from "@chakra-ui/react";
+import DiscordLink from "../components/DiscordLink";
+import theme from "../chakra.config";
 
-import '../styles/tailwind.css';
-
-const MyApp = ({ Component, pageProps }) => {
+function MyApp({ Component, pageProps }) {
   const { pathname } = useRouter();
 
-  if (pathname.startsWith('/blog')) {
+  if (pathname.startsWith("/wiki")) {
     return (
-      <ChakraProvider resetCSS>
-        <DokzBlogProvider
-          blogRootPath='pages/blog'
-          headerLogo={
-            <img
-              src='/img/logo.png'
-              style={{ opacity: 1 }}
-              width='50px'
-              height='50px'
-            />
-          }
-          headTitlePrefix='Chroma Minecraft Blog - '
-          headerItems={[
-            <Link href='/docs'>Docs</Link>,
-          ]}
-          sidebarOrdering={{
-            'index.mdx': true,
-          }}>
-          <Component {...pageProps} />
-        </DokzBlogProvider>
-      </ChakraProvider>
-    );
-  }
-
-  if (pathname.startsWith('/docs')) {
-    return (
-      <ChakraProvider resetCSS>
+      <ChakraProvider theme={theme}>
+        <Head>
+          <title>Chroma Minecraft</title>
+          <meta charSet="UTF-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+          <meta
+            property="og:title"
+            content="Chroma Minecraft"
+            key="meta-title"
+          />
+          <meta
+            property="og:description"
+            content="Server minecraft survival yang mendukung berbagai platform (Java / Bedrock / Pocket Edition)."
+            key="meta-description"
+          />
+          <meta property="og:image" content="/img/logo.png" />
+          <meta property="og:locale" content="id_ID" key="meta-locale" />
+          <meta
+            property="og:locale:alternate"
+            content="en_US"
+            key="meta-locale-alt"
+          />
+          <link
+            href="https://fonts.googleapis.com/css?family=Fira+Code"
+            rel="stylesheet"
+            key="google-font-Fira"
+          />
+        </Head>
         <DokzProvider
           animate
-          docsRootPath="pages/docs"
-          githubUrl='ChromaMinecraft/chroma-minecraft-frontend'
-          branch='master'
-          headTitlePrefix='Chroma Minecraft Docs - '
+          docsRootPath="pages/wiki"
+          headTitlePrefix="Chroma Minecraft Wiki - "
           headerLogo={
             <img
-              src='/img/logo.png'
+              src="/img/logo.png"
               style={{ opacity: 1 }}
-              width='50px'
-              height='50px'
+              width="50px"
+              height="50px"
             />
           }
           headerItems={[
-            <Link href='/blog'>Blog</Link>,
-            <ColorModeSwitch key='1' />,
+            <DiscordLink url="https://discord.chroma-gaming.xyz" />,
+            <GithubLink url="https://github.com/ChromaMinecraft" />,
+            <ColorModeSwitch key="1" />,
           ]}
           sidebarOrdering={{
-            'index.mdx': true,
-            docs: {
-              'index.mdx': true,
+            "index.mdx": true,
+            wiki: {
+              "index.mdx": true,
               rules: true,
               tutorial: true,
-              'change log': {
-                'version-1': true
-              },
-            }
-          }}>
+            },
+            more: true,
+          }}
+        >
           <Component {...pageProps} />
         </DokzProvider>
       </ChakraProvider>
     );
   }
 
-  return <Component {...pageProps} />;
-};
+  return (
+    <ChakraProvider>
+      <Head>
+        <title>Chroma Minecraft</title>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+        <meta property="og:title" content="Chroma Minecraft" key="meta-title" />
+        <meta
+          property="og:description"
+          content="Server minecraft survival yang mendukung berbagai platform (Java / Bedrock / Pocket Edition)."
+          key="meta-description"
+        />
+        <meta property="og:image" content="/img/logo.png" />
+        <meta property="og:locale" content="id_ID" key="meta-locale" />
+        <meta
+          property="og:locale:alternate"
+          content="en_US"
+          key="meta-locale-alt"
+        />
+        <link
+          href="https://fonts.googleapis.com/css?family=Fira+Code"
+          rel="stylesheet"
+          key="google-font-Fira"
+        />
+      </Head>
+      <Component {...pageProps} />
+    </ChakraProvider>
+  );
+}
 
 export default MyApp;

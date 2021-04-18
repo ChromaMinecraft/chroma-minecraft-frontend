@@ -1,0 +1,74 @@
+---
+name: Portable Gold Farm
+---
+
+<center>
+  <img src="/img/goldfarm-1.png" alt="Logo" width="400px" />
+</center>
+
+## Apa itu Portable Gold Farm
+
+Sebuah custom plugin dari Chroma Minecraft yang menghadirkan mekanisme baru yaitu Gold Farm yang memiliki mobilitas tinggi. Plugin ini menggantikan vanilla Gold Farm, sehingga vanilla Gold Farm dinonaktifkan pada server Chroma Minecraft untuk mengurangi kinerja server yang berlebihan pada vanilla Gold Farm.
+
+## Spesifikasi
+
+- Menggunakan sistem level dengan jumlah drop yang berbeda tiap levelnya.
+- Tiap level dapat dibeli menggunakan obsidian. Harga tiap level adalah 11279 obsidian.
+- Secara default, Portable Gold Farm akan berstatus Shared.
+- Tiap pemain hanya bisa memiliki 1 Portable Gold Farm.
+- Exp Booster dan Item Booster dapat dibeli melalui command **/donate**.
+
+## Menu
+
+<img src="/img/goldfarm-menu.png" alt="Logo" width="400px" />
+
+1. Deposit
+2. Withdraw
+3. Refresh
+4. Info
+5. Teleport
+6. Check Price
+7. Buy
+8. Switch Shared Status
+9. Reset Location
+
+## Cara Penggunaan
+
+<img src="/img/goldfarm-cara-1.png" alt="Logo" width="400px" />
+
+1. Pasang sign, kemudian ketik `[GOLD_FARM]` pada baris pertama.
+
+<img src="/img/goldfarm-cara-2.png" alt="Logo" width="400px" />
+
+2. Jika tidak ada error, maka block dibawah fence akan berubah menjadi Gold Ore.
+
+<img src="/img/goldfarm-cara-3.png" alt="Logo" width="400px" />
+
+3. Lakukan mining pada gold ore.
+
+## Drop Table
+
+Perhitungan drop item (Gold Nugget) dan exp adalah sebagai berikut (pembulatan ke atas):
+
+```
+item = level * 0.625
+exp = level * 5.1
+
+Level yang dimaksud adalah level Portable Gold Farm milikmu
+```
+
+Berikut adalah contoh perhitungan drop sampai level 5
+
+| Level | Drop Item (Gold Nugget) | Drop Exp | Harga (Total) |
+| ----- | ----------------------- | -------- | ------------- |
+| 1     | 0.625                   | 5.1      | 11279         |
+| 2     | 1.25                    | 10.2     | 22558         |
+| 3     | 1.875                   | 15.3     | 33837         |
+| 4     | 2.5                     | 20.4     | 45116         |
+| 5     | 3.125                   | 25.5     | 56395         |
+
+## Booster
+
+Booster memiliki kepada pemain untuk mendapatkan exp dan drop rate yang lebih tinggi pada Portable Gold Farm. Booster dapat diakses melalui command **/donate**.
+
+<img src="/img/goldfarm-booster.png" alt="Logo" width="400px" />

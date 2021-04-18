@@ -1,0 +1,247 @@
+---
+name: Survival
+author: Goldi, Fakhri19
+---
+
+<center>
+  <img src="/img/logo.png" alt="Logo" width="200" />
+</center>
+
+import Rules from "../../../components/RulesTab";
+
+# Aturan Bermain
+
+Chroma Minecraft memiliki beberapa aturan yang wajib dipatuhi oleh semua pemain di server ini. Aturan yang dibuat bersifat permanen yang mana apabila dilanggar akan dijatuhi hukuman sesuai dengan hukuman yang tertulis dibawah ini. Aturan ini akan berlaku terhadap seluruh pemain di server ini.
+
+> Dimohon untuk membaca seluruh aturan di bawah ini
+
+<br />
+
+## Chat
+
+### 1. Dilarang mengumpat / berkata kasar
+
+<Rules
+  description="Mengeluarkan umpat(an); memburuk-burukkan orang; mengeluarkan kata-kata keji (kotor) karena marah (jengkel, kecewa, dan sebagainya)"
+  example={["Ya kali masih dikasih contoh lagi"]}
+  punishment={["Mute selama 1 jam"]}
+/>
+
+### 2. Dilarang mengirim flood & spam.
+
+<Rules
+  description="Flood adalah penggunaan huruf yang ditulis berulang sehingga memenuhi chat. Spam adalah pesan-pesan yang tidak bermakna."
+  example={[
+    <Text>
+      A: Haloooooooooo gaisssss. <br />
+      A: Kembali lagi bersama sayaaaaaaaaaa
+    </Text>,
+    <Text>
+      A: Bagi item dong. Aku pemain baru nih. <br />
+      A: Bagi item dong. Aku pemain baru nih.
+    </Text>,
+  ]}
+  punishment={[
+    <Text>
+      <b>Flood</b>
+      <br />
+      Mute selama 1 jam <br />
+      <br />
+      <b>Spam</b> <br />
+      Mute selama 1 jam <br />
+      <br />
+      <b>Flood & Spam</b> <br />
+      Mute selama 2 jam
+    </Text>,
+  ]}
+/>
+
+### 3. Dilarang membahas hal yang berhubungan dengan SARA dan pornografi.
+
+<Rules
+  description="SARA adalah kepanjangan dari Suku, Ras, Agama dan Antar golongan. Pornografi adalah konten dewasa yang membangkitkan nafsu"
+  example={["Ya kali masih dikasih contoh lagi"]}
+  punishment={["Mute selama 1 jam"]}
+/>
+
+### 4. Menggunakan huruf kapital secukupnya
+
+<Rules
+  description="Penggunaan huruf kapital tidak akan dipermasalahkan jika digunakan sewajarnya."
+  example={["A: JUAL ITEM HASIL MINING MURAH MERIAH. MINAT? PM"]}
+  punishment={["Mute selama 1 jam"]}
+/>
+
+### 5. Dilarang advertising / mempromosikan server lain
+
+<Rules
+  description="Menyebutkan nama server / IP / mengajak seseorang untuk bermain di server lain."
+  example={[
+    "A: Kuy main di server x yuk",
+    "A: Mending kita main di server lain aja ip: 172.0.0.1",
+  ]}
+  punishment={[
+    <Text>
+      Ban selama 1 hari
+      <br />
+      <br />
+      <b>Menggunakan akun baru untuk promosi</b>
+      <br />
+      Ban permanen
+    </Text>,
+  ]}
+/>
+
+## Command
+
+### 1. Dilarang menggunakan kata kasar di username / nickname
+
+<Rules
+  description="Menggunakan username / nickname yang tidak menyalahi chat rules."
+  example={["Ya kali masih dikasih contoh lagi"]}
+  punishment={[
+    <Text>
+      Diberi peringatan, jika nickname atau username tetap tidak diganti, ban
+      selama 3 hari.
+      <br />
+      <br />
+      <b>Mengunakan akun baru dengan username</b>
+      <br />
+      Ban permanen
+    </Text>,
+  ]}
+/>
+
+### 2. Dilarang spam command /afk
+
+<Rules
+  description="Menggunakan command /afk secara berulang dalam waktu singkat karena akan memunculkan spam notifikasi di public chat."
+  example={["-"]}
+  punishment={["Ban selama 30 menit"]}
+/>
+
+### 3. Menggunakan /me hanya untuk transaksi jual beli terkait Chroma Minecraft
+
+<Rules
+  description="/me hanya boleh digunakan untuk transaksi terkait jual beli item ingame dan akun di Chroma Minecraft. Promosi seperti channel youtube, akun instagram, online shop, dan promosi jenis lain dilarang"
+  example={["-"]}
+  punishment={["Mute selama 1 jam"]}
+/>
+
+## Gameplay
+
+### 1. Dilarang menggunakan hack-client
+
+<Rules
+  description="Segala bentuk hack-client dilarang."
+  example={["-"]}
+  punishment={["Ban selama 7 hari"]}
+/>
+
+### 2. Dilarang membuat mesin redstone yang berlebihan.
+
+<Rules
+  description="/me hanya boleh digunakan untuk transaksi terkait jual beli item ingame dan akun di Chroma Minecraft. Promosi seperti channel youtube, akun instagram, online shop, dan promosi jenis lain dilarang"
+  example={["-"]}
+  punishment={[
+    <Text>
+      <b>Ringan</b>
+      <br />
+      Mesin dihapus dan tidak ada refund
+      <br />
+      <br />
+      <b>Berat</b>
+      <br />
+      Ban selama 30 hari, mesin dihapus, dan tidak ada refund
+      <br />
+    </Text>,
+  ]}
+/>
+
+### 3. Dilarang membuat mob farm yang berlebihan
+
+<Rules
+  description="Mesin redstone yang berlebihan adalah mesin yang dapat membuat lag server. Tingkat hukuman berdasarkan unsur kesengajaan player dan ukuran mesin"
+  example={["0 tick farm", "Mesin redstone dalam skala terlalu besar"]}
+  punishment={[
+    <Text>
+      <b>Ringan</b>
+      <br />
+      Mob farm dihapus dan tidak ada refund
+      <br />
+      <br />
+      <b>Berat</b>
+      <br />
+      Ban selama 30 hari, mob farm dihapus, dan tidak ada refund
+      <br />
+    </Text>,
+  ]}
+/>
+
+### 4. Dilarang melakukan griefing terhadap player lain
+
+<Rules
+  description={
+    <Text>
+      Griefing disini adalah segala perbuatan yang merugikan player lain. Pelaku
+      akan dihukum jika korban merasa dirugikan dan melaporkan kepada staff.{" "}
+      <br />
+      <br />
+      Jika pelaku hanya berniat iseng namun korban tidak terima dan melaporkan
+      ke staff, maka pelaku dapat dikenai hukuman.
+      <br />
+      <br />
+      <b>
+        Aturan ini tidak berlaku jika lokasi kejadian terjadi didalam RP dan
+        pelaku beserta korban menjadi member didalam RP tersebut. Pastikan kamu
+        hanya mengundang player yang kamu percayai untuk menjadi member RPmu.
+      </b>
+    </Text>
+  }
+  example={[
+    "Mencuri barang milik orang lain",
+    "Mengklaim bangunan milik orang lain",
+    "Merusak bangunan milik orang lain",
+    "Merusak pemandangan / memblokir jalan sekitar RP orang lain",
+  ]}
+  punishment={["Ban selama 7 hari"]}
+/>
+
+### 5. Dilarang memanfaatkan bug atau glitch
+
+<Rules
+  description="Bug adalah kesalahan yang terjadi pada sistem dan yang tidak berjalan sesuai dengan semestinya sehingga menyebabkan error. Jika menemukan bug, harap lapor kepada staff, meskipun itu menguntungkan. Jika kalian tertangkap menggunakan bug untuk keuntungan kalian sendiri, kalian akan diberi hukuman."
+  example={[
+    "Menggunakan bug dupe (duplikat) menggunakan sistem vanilla minecraft / plugins yang terpasang di server.",
+  ]}
+  punishment={["Ban permanen"]}
+/>
+
+## Lain-lain
+
+### 1. Dilarang bermain lebih dari 2 akun dalam 1 IP, kecuali jam 23.00 - 05.00
+
+<Rules
+  description="Pembuatan akun baru yang dibuat hanya untuk bot vote, claim land, dll adalah sesuatu yang dilarang."
+  example={["-"]}
+  punishment={["Ban permanen akun yang lain"]}
+/>
+
+### 2. Tidak mencari celah atau menantang rules.
+
+<Rules
+  description="Mencari celah pada rules adalah mencari alasan agar bisa melanggar rules. Menantang rules adalah sikap tidak peduli pada rules dan melakukan pelanggaran rules dengan sengaja."
+  example={[
+    "Player A melakukan pelanggaran kemudian dia membela dirinya sendiri dengan menyebutkan bahwa di rules tidak ada. Padahal di rules sudah ada yang mencakup hal tersebut.",
+    "Player A mencuri barang milik player lain, namun keliatan oleh player B. B: Weh lu jangan nyuri. A: Bodo amat, kan cuma di ban doang",
+  ]}
+  punishment={["Ban permanen"]}
+/>
+
+### 3. Dilarang membuat bangunan di sekitar marketplace sejauh jangkaun mata
+
+<Rules
+  description="Membuat bangunan di dekat /warp marketplace dengan tujuan agar bangunanmu mudah dilihat oleh orang."
+  example={["-"]}
+  punishment={["Bangunan di hancurkan dan tidak ada refund"]}
+/>

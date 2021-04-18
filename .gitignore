@@ -33,5 +33,5 @@ yarn-error.log*
 # vercel
 .vercel
 
-# sidebar dokz
-sidebar.json
+# mdx generated file
+/sidebar.json
