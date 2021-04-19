@@ -6,7 +6,13 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
 } from "@chakra-ui/react";
+import DonateForm from "../DonateForm";
 
 export default function DonateModal(props) {
   return (
@@ -16,17 +22,21 @@ export default function DonateModal(props) {
         <ModalHeader>Donate</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          fringilla consectetur magna, in ullamcorper purus consectetur sed.
-          Proin eget tincidunt lorem. Nulla at dui nec tellus ultricies porta.
-          Aenean sit amet tellus vulputate, commodo nunc non, sagittis mi.
-          Maecenas tempor, nunc id ultrices auctor, diam nulla mattis ante, in
-          cursus quam libero vel ipsum. Curabitur fringilla augue eu enim
-          lobortis condimentum eu non elit. Phasellus ultricies quam sem, vitae
-          laoreet orci accumsan in. Nulla mollis enim vel ligula blandit
-          venenatis.
+          <Tabs>
+            <TabList>
+              <Tab>Buy</Tab>
+              <Tab>Check Transaction</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <DonateForm />
+              </TabPanel>
+              <TabPanel>
+                <p>Transaction history will be here.</p>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </ModalBody>
-
         <ModalFooter></ModalFooter>
       </ModalContent>
     </Modal>
