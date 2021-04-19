@@ -1,6 +1,7 @@
 import { Box, Text, Center, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Axios from "axios";
+import copy from "copy-to-clipboard";
 
 import { LIST_URL, ICONS } from "../utils/constant";
 
@@ -19,14 +20,6 @@ export default function Home() {
             e.preventDefault();
             const isCopied = copy("mc.chroma-gaming.xyz");
             if (isCopied) alert("Link telah berhasil dicopy");
-            break;
-          case "donate":
-            e.preventDefault();
-            setIsDonateShown(true);
-            break;
-          case "vote-reward":
-            e.preventDefault();
-            setIsRewardShown(true);
             break;
           default:
             break;
