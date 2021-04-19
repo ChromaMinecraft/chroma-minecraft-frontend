@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { DokzProvider, ColorModeSwitch, GithubLink, Link } from "dokz";
 import { ChakraProvider } from "@chakra-ui/react";
 import DiscordLink from "../components/DiscordLink";
+import { GoogleFonts } from "next-google-fonts";
 import theme from "../chakra.config";
 
 function MyApp({ Component, pageProps }) {
@@ -11,7 +12,7 @@ function MyApp({ Component, pageProps }) {
 
   if (pathname.startsWith("/wiki")) {
     return (
-      <ChakraProvider theme={theme}>
+      <ChakraProvider>
         <Head>
           <title>Chroma Minecraft</title>
           <meta charSet="UTF-8" />
@@ -77,7 +78,7 @@ function MyApp({ Component, pageProps }) {
   }
 
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Head>
         <title>Chroma Minecraft</title>
         <meta charSet="UTF-8" />
@@ -96,12 +97,11 @@ function MyApp({ Component, pageProps }) {
           content="en_US"
           key="meta-locale-alt"
         />
-        <link
-          href="https://fonts.googleapis.com/css?family=Fira+Code"
-          rel="stylesheet"
-          key="google-font-Fira"
-        />
       </Head>
+      <GoogleFonts
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
       <Component {...pageProps} />
     </ChakraProvider>
   );
