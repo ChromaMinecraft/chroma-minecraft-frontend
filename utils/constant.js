@@ -48,9 +48,9 @@ export const ICONS = [
   },
   {
     text: "Wiki",
-    id: "vote-reward",
-    url: "#",
-    target: "_self",
+    id: "wiki",
+    url: "/wiki",
+    target: "_blank",
     key: "link-introduction-vote-reward",
     content: <FaAward />,
     events: {},

@@ -1,13 +1,19 @@
-import { Box, Text, Center, Flex } from "@chakra-ui/react";
+import { Box, Text, Center, Flex, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 
 import { LIST_URL, ICONS } from "../utils/constant";
 
 import CircleButton from "../components/CircleButton";
+import DonateModal from "../components/DonateModal";
 
 export default function Home() {
-  const [playerCount, setPlayerCount] = useState(0);
+  const [playerCount, setPlayerCount] = useState("-");
+  const {
+    isOpen: isDonateModalOpen,
+    onOpen: onDonateModalOpen,
+    onClose: onDonateModalClose,
+  } = useDisclosure();
 
   const requestTimeout = 1000;
 
@@ -22,11 +28,8 @@ export default function Home() {
             break;
           case "donate":
             e.preventDefault();
-            setIsDonateShown(true);
-            break;
-          case "vote-reward":
-            e.preventDefault();
-            setIsRewardShown(true);
+            console.log("clicked");
+            onDonateModalOpen();
             break;
           default:
             break;
@@ -136,6 +139,7 @@ export default function Home() {
             <Text fontWeight="light" color="white" align="center" mt="2">
               Gunakan tombol dibawah ini untuk memulai
             </Text>
+            <DonateModal />
           </Center>
           <Flex
             flexWrap="wrap"
@@ -153,6 +157,7 @@ export default function Home() {
           </Flex>
         </Flex>
       </Box>
+      <DonateModal status={isDonateModalOpen} event={onDonateModalClose} />
     </>
   );
 }
