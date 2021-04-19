@@ -1,7 +1,12 @@
 import { extendTheme } from "@chakra-ui/react";
 const config = {
-  initialColorMode: "light",
-  useSystemColorMode: false,
+  styles: {
+    global: {
+      body: {
+        fontFamily: "'Poppins', sans-serif",
+      },
+    },
+  },
 };
-const theme = extendTheme({ config });
+const theme = extendTheme(config);
 export default theme;

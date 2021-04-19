@@ -1,14 +1,19 @@
-import { Box, Text, Center, Flex } from "@chakra-ui/react";
+import { Box, Text, Center, Flex, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Axios from "axios";
-import copy from "copy-to-clipboard";
 
 import { LIST_URL, ICONS } from "../utils/constant";
 
 import CircleButton from "../components/CircleButton";
+import DonateModal from "../components/DonateModal";
 
 export default function Home() {
-  const [playerCount, setPlayerCount] = useState(0);
+  const [playerCount, setPlayerCount] = useState("-");
+  const {
+    isOpen: isDonateModalOpen,
+    onOpen: onDonateModalOpen,
+    onClose: onDonateModalClose,
+  } = useDisclosure();
 
   const requestTimeout = 1000;
 
@@ -20,6 +25,10 @@ export default function Home() {
             e.preventDefault();
             const isCopied = copy("mc.chroma-gaming.xyz");
             if (isCopied) alert("Link telah berhasil dicopy");
+            break;
+          case "donate":
+            e.preventDefault();
+            onDonateModalOpen();
             break;
           default:
             break;
@@ -76,7 +85,6 @@ export default function Home() {
           alignItems="center"
           justifyContent="center"
           px={{ base: 10, sm: 16 }}
-          fontFamily="'Poppins', sans-serif"
         >
           <Text
             fontWeight="semibold"
@@ -129,6 +137,7 @@ export default function Home() {
             <Text fontWeight="light" color="white" align="center" mt="2">
               Gunakan tombol dibawah ini untuk memulai
             </Text>
+            <DonateModal />
           </Center>
           <Flex
             flexWrap="wrap"
@@ -146,6 +155,7 @@ export default function Home() {
           </Flex>
         </Flex>
       </Box>
+      <DonateModal status={isDonateModalOpen} event={onDonateModalClose} />
     </>
   );
 }

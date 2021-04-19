@@ -20,6 +20,15 @@ export const ICONS = [
     events: {},
   },
   {
+    text: "Donasi",
+    id: "donate",
+    url: "#",
+    target: "_blank",
+    key: "link-introduction-donate",
+    content: <FaDonate />,
+    events: {},
+  },
+  {
     text: "Play",
     id: "play",
     url: "#",
