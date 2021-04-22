@@ -14,8 +14,8 @@ Here's how to submit a Pull Request (PR):
    * [Sync your fork][sync-fork] with the upstream.
 2. Clone your fork of the repository to your local computer.
 3. Create a branch with descriptive name to work 
-  - feature: `git checkout -b feature/add-feature-x` push into `staging` branch.
-  - bugfix: `git checkout -b bugfix/missing-arguments` push into `staging` branch.
+  - feature: `git checkout -b feature/add-feature-x` push into `development` branch.
+  - bugfix: `git checkout -b bugfix/missing-arguments` push into `development` branch.
 4. Make changes, commit them, and push the branch to your repository fork.
 5. Writing unit test would be appreciated.
 6. [Submit a pull request][pull-req] to the master branch.
