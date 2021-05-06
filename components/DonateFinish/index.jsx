@@ -6,7 +6,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Flex,
   Text,
   Button,
 } from '@chakra-ui/react';
@@ -19,24 +18,22 @@ export default function DonateFinish(props) {
         <ModalHeader>Donasi</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {/* <Flex direction='row'> */}
           <Text>
             Terimakasih telah melakukan pembayaran. Silahkan tunggu hingga
             sistem memverifikasi pembayaranmu, dan Chroma Cashmu akan dikirim
             otomatis oleh sistem.
           </Text>
           <Button
+            as='a'
             mt='4'
             colorScheme='blue'
             w='100%'
             type='submit'
-            // leftIcon={<FaMoneyBillWave />}
             fontSize='lg'
-            onClick={props.event}
+            href='/'
           >
             Tutup
           </Button>
-          {/* </Flex> */}
         </ModalBody>
         <ModalFooter></ModalFooter>
       </ModalContent>

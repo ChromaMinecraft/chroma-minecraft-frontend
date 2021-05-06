@@ -70,11 +70,12 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  // useEffect(() => {
-  //   if (router.query.tes) {
-  //     onDonateFinishOpen();
-  //   }
-  // }, [router.query]);
+  useEffect(() => {
+    console.log(router.query);
+    if (router.query.tripay_reference) {
+      onDonateFinishOpen();
+    }
+  }, [router.query]);
 
   return (
     <>
