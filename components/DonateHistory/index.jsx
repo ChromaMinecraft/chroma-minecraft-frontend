@@ -25,18 +25,14 @@ export default function DonateHistory(props) {
         method: 'GET',
       });
       setDonationHistory(res.data.data);
-      setAlertStatus('success');
-      setAlertMessage(res.data.message);
+      // setAlertStatus('success');
+      // setAlertMessage(res.data.message);
     } catch (error) {
       setAlertStatus('error');
       setAlertMessage(error.response.data.message);
+      setIsAlertShown(true);
     }
-    setIsAlertShown(true);
   };
-
-  // useEffect(() => {
-
-  // }, [])
 
   return (
     <>
@@ -59,7 +55,11 @@ export default function DonateHistory(props) {
           </Button>
         </Flex>
       </FormControl>
-      <DonateHistoryTable data={donationHistory} />
+      <DonateHistoryTable
+        data={donationHistory}
+        setIsDetail={props.setIsDetail}
+        setDetail={props.setDetail}
+      />
     </>
   );
 }

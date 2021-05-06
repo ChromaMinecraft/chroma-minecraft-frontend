@@ -7,9 +7,14 @@ import {
   Th,
   Td,
   Badge,
+  Button,
 } from '@chakra-ui/react';
 
+import { useState, useEffect } from 'react';
+import { FaAngleRight } from 'react-icons/fa';
+
 export default function DonateHistoryTable(props) {
+  const [selectedDonation, setSelectedDonation] = useState({});
   const checkStatusRender = (status) => {
     let color;
     switch (status) {
@@ -36,15 +41,22 @@ export default function DonateHistoryTable(props) {
     );
   };
 
+  const handleButtonClick = (data) => {
+    console.log(data);
+    props.setIsDetail(true);
+    props.setDetail(data);
+  };
+
   return (
     <>
-      <Table variant='simple'>
+      <Table variant='simple' size='sm' mt='2'>
         <Thead>
           <Tr>
             <Th>#</Th>
             <Th>Waktu</Th>
-            <Th>Jumlah</Th>
+            <Th isNumeric>Jumlah</Th>
             <Th>Status</Th>
+            <Th></Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -54,11 +66,24 @@ export default function DonateHistoryTable(props) {
                 background: 'green.100',
                 cursor: 'pointer',
               }}
+              onClick={() => handleButtonClick(data)}
             >
               <Td>{i + 1}</Td>
               <Td>{data.created_at}</Td>
-              <Td>{data.amount}</Td>
+              <Td isNumeric>{data.amount}</Td>
               <Td>{checkStatusRender(data.donation_status)}</Td>
+              <Td>
+                <FaAngleRight />
+              </Td>
+              {/* <Td>
+                <Button
+                  onClick={() => handleButtonClick(data)}
+                  size='xs'
+                  colorScheme='blue'
+                >
+                  Detail
+                </Button>
+              </Td> */}
             </Tr>
           ))}
         </Tbody>

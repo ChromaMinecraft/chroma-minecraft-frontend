@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default async function handler(req, res) {
   const { quantity, username, email, payment_method } = req.body;
-  const return_url = 'https://web.mc.chroma-gaming.xyz/';
+  const return_url = process.env.BASE_URL;
   try {
     const result = await axios.post(
       `http://${process.env.BACKEND_IP}:${process.env.BACKEND_PORT}/donate`,
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       data: { message },
     } = error.response;
     if (status === 500) {
-      return res.status(status).json({ message: 'Username tidak ditemukan' });
+      return res.status(status).json({ message });
     }
 
     if (status === 400) {
