@@ -32,7 +32,9 @@ export default function DonateModal(props) {
               <TabPanel>
                 <DonateForm />
               </TabPanel>
-              <TabPanel>{/* <DonateHistory /> */}</TabPanel>
+              <TabPanel>
+                <DonateHistory />
+              </TabPanel>
             </TabPanels>
           </Tabs>
         </ModalBody>
