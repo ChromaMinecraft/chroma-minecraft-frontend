@@ -11,13 +11,19 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-} from "@chakra-ui/react";
-import DonateForm from "../DonateForm";
-import DonateHistory from "../DonateHistory";
+} from '@chakra-ui/react';
+import DonateForm from '../DonateForm';
+import DonateHistory from '../DonateHistory';
 
 export default function DonateModal(props) {
   return (
-    <Modal size="xl" isOpen={props.status} onClose={props.event}>
+    <Modal
+      size='xl'
+      isOpen={props.status}
+      onClose={props.event}
+      scrollBehavior='inside'
+      // isCentered
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Donasi</ModalHeader>

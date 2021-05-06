@@ -55,7 +55,7 @@ export default function DonateForm(props) {
       window.location.href = result.data.checkout_url;
       console.log(result);
       setAlertStatus('success');
-      setAlertMessage(res.data.message);
+      setAlertMessage('Kamu akan segera diarahkan ke halaman pembayaran');
     } catch (error) {
       console.log(error.response.data);
       result = error.response.data;
@@ -186,7 +186,7 @@ export default function DonateForm(props) {
               onChange={handleUsernameChange}
             />
             <Button colorScheme='blue' onClick={checkUsername}>
-              Check
+              Cek
             </Button>
           </Flex>
         </FormControl>
@@ -212,7 +212,7 @@ export default function DonateForm(props) {
             </NumberInputStepper>
           </NumberInput>
         </FormControl>
-        <FormControl id='amount' isRequired mt='2'>
+        <FormControl id='paymentMethod' isRequired mt='2'>
           <FormLabel>Pilih Metode Pembayaran</FormLabel>
           <Select onChange={handlePaymentChange}>
             {paymentList.map((payment, i) => (

@@ -11,6 +11,6 @@ export default async function handler(req, res) {
       status,
       data: { message },
     } = error.response;
-    return res.status(status).json({ messsage: message });
+    return res.status(status).json({ message: message });
   }
 }

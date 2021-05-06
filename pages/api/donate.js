@@ -14,20 +14,22 @@ export default async function handler(req, res) {
         return_url,
       }
     );
-    console.log(result.data);
     return res.status(200).json(result.data);
   } catch (error) {
     const {
       status,
       data: { message },
     } = error.response;
-    console.log(message);
-    return res.status(status).json({ messsage: message });
-  }
-  if (username == 'error')
-    return res.status(400).json({ message: 'Unknown username' });
+    if (status === 500) {
+      return res.status(status).json({ message: 'Username tidak ditemukan' });
+    }
 
-  return res
-    .status(200)
-    .json({ message: 'This should redirect to payment gateway' });
+    if (status === 400) {
+      return res.status(status).json({
+        message: 'Jumlah donasi minimal 10 Chroma Cash',
+      });
+    }
+
+    return res.status(status).json({ message });
+  }
 }
