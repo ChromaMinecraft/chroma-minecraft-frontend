@@ -25,8 +25,6 @@ export default function DonateHistory(props) {
         method: 'GET',
       });
       setDonationHistory(res.data.data);
-      // setAlertStatus('success');
-      // setAlertMessage(res.data.message);
     } catch (error) {
       setAlertStatus('error');
       setAlertMessage(error.response.data.message);
@@ -37,29 +35,31 @@ export default function DonateHistory(props) {
   return (
     <>
       {isAlertShown && (
-        <DonateAlert status={alertStatus} message={alertMessage} mb='1' />
+        <DonateAlert status={alertStatus} message={alertMessage} mb="1" />
       )}
-      <FormControl id='username' isRequired>
+      <FormControl id="username" isRequired>
         <FormLabel>Username Minecraft</FormLabel>
-        <Flex direction='row'>
+        <Flex direction="row">
           <Input
-            type='text'
-            placeholder='Masukkan username minecraft.'
-            marginRight='1'
-            name='username'
+            type="text"
+            placeholder="Masukkan username minecraft."
+            marginRight="1"
+            name="username"
             value={username}
             onChange={handleUsernameChange}
           />
-          <Button colorScheme='blue' onClick={getDonationHistory}>
+          <Button colorScheme="blue" onClick={getDonationHistory}>
             <FaSearch />
           </Button>
         </Flex>
       </FormControl>
-      <DonateHistoryTable
-        data={donationHistory}
-        setIsDetail={props.setIsDetail}
-        setDetail={props.setDetail}
-      />
+      {donationHistory.length > 0 && (
+        <DonateHistoryTable
+          data={donationHistory}
+          setIsDetail={props.setIsDetail}
+          setDetail={props.setDetail}
+        />
+      )}
     </>
   );
 }
