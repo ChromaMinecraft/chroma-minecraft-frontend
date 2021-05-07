@@ -22,7 +22,7 @@ import RupiahFormat from '../RupiahFormat';
 export default function DonateForm(props) {
   const [isAlertShown, setIsAlertShown] = useState(false);
   const [isSubmitButtonLoading, setIsSubmitButtonLoading] = useState(false);
-  const [isUsernameValidated, setIsUsernameValidated] = useState(false);
+  const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
   const [isCheckButtonLoading, setIsCheckButtonLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertStatus, setAlertStatus] = useState('');
@@ -39,6 +39,8 @@ export default function DonateForm(props) {
   const payDonation = async (e) => {
     setIsAlertShown(false);
     e.preventDefault();
+    setIsSubmitButtonLoading(true);
+    setIsSubmitButtonDisabled(true);
     try {
       const result = await Axios({
         url: '/api/donate',
@@ -53,15 +55,18 @@ export default function DonateForm(props) {
           'Content-Type': 'application/json',
         },
       });
-      window.location.href = result.data.data.checkout_url;
-      console.log(result);
       setAlertStatus('success');
       setAlertMessage('Kamu akan segera diarahkan ke halaman pembayaran');
+      setTimeout(() => {
+        window.location.href = result.data.data.checkout_url;
+      }, 2000);
     } catch (error) {
       setAlertMessage(error.response.data.message);
       setAlertStatus('error');
     }
     setIsAlertShown(true);
+    setIsSubmitButtonLoading(false);
+    setIsSubmitButtonDisabled(false);
   };
 
   const checkUsername = async (e) => {
@@ -86,9 +91,9 @@ export default function DonateForm(props) {
       });
       if (result.status == 203) {
         setAlertStatus('error');
-        setIsUsernameValidated(false);
+        setIsSubmitButtonDisabled(true);
       } else {
-        setIsUsernameValidated(true);
+        setIsSubmitButtonDisabled(false);
         setAlertStatus('success');
       }
       setAlertMessage(result.data.message);
@@ -129,6 +134,7 @@ export default function DonateForm(props) {
   useEffect(() => {
     const getPaymentList = async () => {
       setIsSubmitButtonLoading(true);
+      setIsSubmitButtonDisabled(true);
       setIsCheckButtonLoading(true);
       try {
         const result = await Axios({
@@ -280,7 +286,7 @@ export default function DonateForm(props) {
           type="submit"
           leftIcon={<FaMoneyBillWave />}
           fontSize="lg"
-          disabled={!isUsernameValidated}
+          disabled={isSubmitButtonDisabled}
           isLoading={isSubmitButtonLoading}
           loadingText="Proses"
         >
