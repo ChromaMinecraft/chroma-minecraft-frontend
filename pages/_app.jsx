@@ -1,16 +1,16 @@
-import "../styles/globals.css";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { DokzProvider, ColorModeSwitch, GithubLink, Link } from "dokz";
-import { ChakraProvider } from "@chakra-ui/react";
-import DiscordLink from "../components/DiscordLink";
-import { GoogleFonts } from "next-google-fonts";
-import theme from "../chakra.config";
+import '../styles/globals.css';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { DokzProvider, ColorModeSwitch, GithubLink, Link } from 'dokz';
+import { ChakraProvider } from '@chakra-ui/react';
+import DiscordLink from '../components/DiscordLink';
+import { GoogleFonts } from 'next-google-fonts';
+import theme from '../chakra.config';
 
 function MyApp({ Component, pageProps }) {
   const { pathname } = useRouter();
 
-  if (pathname.startsWith("/wiki")) {
+  if (pathname.startsWith('/wiki')) {
     return (
       <ChakraProvider>
         <Head>
@@ -62,9 +62,9 @@ function MyApp({ Component, pageProps }) {
             <ColorModeSwitch key="1" />,
           ]}
           sidebarOrdering={{
-            "index.mdx": true,
+            'index.mdx': true,
             wiki: {
-              "index.mdx": true,
+              'index.mdx': true,
               rules: true,
               tutorial: true,
             },
