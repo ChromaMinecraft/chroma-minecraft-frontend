@@ -7,14 +7,14 @@ import {
   Th,
   Td,
   Badge,
-  Button,
 } from '@chakra-ui/react';
-
-import { useState, useEffect } from 'react';
 import { FaAngleRight } from 'react-icons/fa';
 
+import DonateHistoryPaginator from '../DonateHistoryPaginator';
+
 export default function DonateHistoryTable(props) {
-  const [selectedDonation, setSelectedDonation] = useState({});
+  const numberPlus = (props.currentPage - 1) * 10;
+
   const checkStatusRender = (status) => {
     let color;
     switch (status) {
@@ -42,7 +42,6 @@ export default function DonateHistoryTable(props) {
   };
 
   const handleButtonClick = (data) => {
-    console.log(data);
     props.setIsDetail(true);
     props.setDetail(data);
   };
@@ -68,26 +67,21 @@ export default function DonateHistoryTable(props) {
               }}
               onClick={() => handleButtonClick(data)}
             >
-              <Td>{i + 1}</Td>
+              <Td>{i + 1 + numberPlus}</Td>
               <Td>{data.created_at}</Td>
               <Td isNumeric>{data.amount}</Td>
               <Td>{checkStatusRender(data.donation_status)}</Td>
               <Td>
                 <FaAngleRight />
               </Td>
-              {/* <Td>
-                <Button
-                  onClick={() => handleButtonClick(data)}
-                  size='xs'
-                  colorScheme='blue'
-                >
-                  Detail
-                </Button>
-              </Td> */}
             </Tr>
           ))}
         </Tbody>
       </Table>
+      <DonateHistoryPaginator
+        getDonationHistory={props.getDonationHistory}
+        pageQuantity={props.meta.total_page}
+      />
     </>
   );
 }

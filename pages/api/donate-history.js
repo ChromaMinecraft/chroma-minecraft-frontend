@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 export default async function handler(req, res) {
-  const { username } = req.query;
+  const { username, page } = req.query;
   try {
     const result = await axios.get(
-      `http://${process.env.BACKEND_IP}:${process.env.BACKEND_PORT}/donate/history?username=${username}`
+      `http://${process.env.BACKEND_IP}:${process.env.BACKEND_PORT}/donate/history?username=${username}&page=${page}`
     );
     return res.status(200).json(result.data);
   } catch (error) {

@@ -181,22 +181,22 @@ export default function DonateForm(props) {
   return (
     <>
       {isAlertShown && (
-        <DonateAlert status={alertStatus} message={alertMessage} mb="1" />
+        <DonateAlert status={alertStatus} message={alertMessage} mb='1' />
       )}
       <form onSubmit={payDonation}>
         <FormControl isRequired>
           <FormLabel>Username Minecraft</FormLabel>
-          <Flex direction="row">
+          <Flex direction='row'>
             <Input
-              type="text"
-              placeholder="Masukkan username minecraft."
-              marginRight="1"
-              name="username"
+              type='text'
+              placeholder='Masukkan username minecraft.'
+              marginRight='1'
+              name='username'
               value={username}
               onChange={handleUsernameChange}
             />
             <Button
-              colorScheme="blue"
+              colorScheme='blue'
               onClick={checkUsername}
               isLoading={isCheckButtonLoading}
             >
@@ -204,19 +204,19 @@ export default function DonateForm(props) {
             </Button>
           </Flex>
         </FormControl>
-        <FormControl isRequired mt="2">
+        <FormControl isRequired mt='2'>
           <FormLabel>Email</FormLabel>
-          <Flex direction="row">
+          <Flex direction='row'>
             <Input
-              type="email"
-              placeholder="Masukkan emailmu"
-              name="email"
+              type='email'
+              placeholder='Masukkan emailmu'
+              name='email'
               value={email}
               onChange={handleEmailChange}
             />
           </Flex>
         </FormControl>
-        <FormControl id="amount" isRequired mt="2">
+        <FormControl id='amount' isRequired mt='2'>
           <FormLabel>Jumlah Chroma Cash</FormLabel>
           <NumberInput defaultValue={1} min={1} onChange={handleAmountChange}>
             <NumberInputField />
@@ -226,9 +226,9 @@ export default function DonateForm(props) {
             </NumberInputStepper>
           </NumberInput>
         </FormControl>
-        <FormControl id="paymentMethod" isRequired mt="2">
+        <FormControl id='paymentMethod' isRequired mt='2'>
           <FormLabel>Pilih Metode Pembayaran</FormLabel>
-          <Select onChange={handlePaymentChange}>
+          <Select onChange={() => handlePaymentChange()}>
             {paymentList.map((payment, i) => (
               <option
                 key={i}
@@ -242,16 +242,16 @@ export default function DonateForm(props) {
           </Select>
         </FormControl>
         <Flex
-          w="100%"
-          bgColor="yellow.200"
-          color="yellow.800"
-          fontWeight="semibold"
-          fontSize="lg"
-          px="4"
-          py="2"
-          mt="3"
-          borderRadius="sm"
-          direction="column"
+          w='100%'
+          bgColor='yellow.200'
+          color='yellow.800'
+          fontWeight='semibold'
+          fontSize='lg'
+          px='4'
+          py='2'
+          mt='3'
+          borderRadius='sm'
+          direction='column'
         >
           <Flex>
             <Text>Subtotal</Text>
@@ -265,30 +265,29 @@ export default function DonateForm(props) {
           </Flex>
         </Flex>
         <Flex
-          w="100%"
-          bgColor="green.200"
-          color="green.800"
-          fontWeight="semibold"
-          fontSize="lg"
-          px="4"
-          py="2"
-          mt="3"
-          borderRadius="sm"
+          w='100%'
+          bgColor='green.200'
+          color='green.800'
+          fontWeight='semibold'
+          fontSize='lg'
+          px='4'
+          py='2'
+          mt='3'
+          borderRadius='sm'
         >
           <Text>Total</Text>
           <Spacer />
           <RupiahFormat value={totalPrice} />
         </Flex>
         <Button
-          mt="4"
-          colorScheme="blue"
-          w="100%"
-          type="submit"
+          mt='4'
+          colorScheme='blue'
+          w='100%'
+          type='submit'
           leftIcon={<FaMoneyBillWave />}
-          fontSize="lg"
+          fontSize='lg'
           disabled={isSubmitButtonDisabled}
           isLoading={isSubmitButtonLoading}
-          loadingText="Proses"
         >
           Bayar
         </Button>

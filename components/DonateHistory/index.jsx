@@ -7,55 +7,78 @@ import DonateHistoryTable from '../DonateHistoryTable';
 import DonateAlert from '../DonateAlert';
 
 export default function DonateHistory(props) {
+  const [currentPage, setCurrentPage] = useState(1);
   const [isAlertShown, setIsAlertShown] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertStatus, setAlertStatus] = useState('');
   const [username, setUsername] = useState(null);
-  const [donationHistory, setDonationHistory] = useState([]);
+  const [donationHistoryData, setDonationHistoryData] = useState(null);
+  const [donationHistoryMeta, setDonationHistoryMeta] = useState({});
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   const handleUsernameChange = (e) => {
+    console.log(`Username changed into ${e.target.value}`);
     setUsername(e.target.value);
   };
 
-  const getDonationHistory = async () => {
+  const getDonationHistory = async (currentPage) => {
+    setCurrentPage(currentPage);
     setIsAlertShown(false);
+    setIsButtonLoading(true);
+    console.log(username);
+    console.log(currentPage);
     try {
-      const res = await Axios({
-        url: `/api/donate-history?username=${username}`,
+      const result = await Axios({
+        url: `/api/donate-history?username=${username}&page=${currentPage}`,
         method: 'GET',
       });
-      setDonationHistory(res.data.data);
+      setDonationHistoryData(result.data.data);
+      setDonationHistoryMeta(result.data.meta);
+      if (!result.data.data.length) {
+        setAlertStatus('warning');
+        setAlertMessage('Data kosong');
+        setIsAlertShown(true);
+      }
     } catch (error) {
+      setDonationHistoryData([]);
       setAlertStatus('error');
       setAlertMessage(error.response.data.message);
       setIsAlertShown(true);
     }
+    setIsButtonLoading(false);
   };
 
   return (
     <>
       {isAlertShown && (
-        <DonateAlert status={alertStatus} message={alertMessage} mb="1" />
+        <DonateAlert status={alertStatus} message={alertMessage} mb='1' />
       )}
-      <FormControl id="username" isRequired>
+      <FormControl id='username' isRequired>
         <FormLabel>Username Minecraft</FormLabel>
-        <Flex direction="row">
+        <Flex direction='row'>
           <Input
-            type="text"
-            placeholder="Masukkan username minecraft."
-            marginRight="1"
-            name="username"
+            type='text'
+            placeholder='Masukkan username minecraft.'
+            marginRight='1'
+            name='username'
             value={username}
-            onChange={handleUsernameChange}
+            onChange={(e) => handleUsernameChange(e)}
           />
-          <Button colorScheme="blue" onClick={getDonationHistory}>
+          <Button
+            colorScheme='blue'
+            isLoading={isButtonLoading}
+            onClick={() => getDonationHistory(1)}
+          >
             <FaSearch />
           </Button>
         </Flex>
       </FormControl>
-      {donationHistory.length > 0 && (
+      {donationHistoryData && (
         <DonateHistoryTable
-          data={donationHistory}
+          data={donationHistoryData}
+          meta={donationHistoryMeta}
+          getDonationHistory={getDonationHistory}
+          currentPage={currentPage}
           setIsDetail={props.setIsDetail}
           setDetail={props.setDetail}
         />
