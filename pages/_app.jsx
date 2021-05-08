@@ -3,14 +3,27 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { DokzProvider, ColorModeSwitch, GithubLink, Link } from 'dokz';
 import { ChakraProvider } from '@chakra-ui/react';
-import DiscordLink from '../components/DiscordLink';
 import { GoogleFonts } from 'next-google-fonts';
+import { useEffect } from 'react';
+
+import DiscordLink from '../components/DiscordLink';
+
 import theme from '../chakra.config';
+import * as gtag from '../lib/gtag';
 
 function MyApp({ Component, pageProps }) {
-  const { pathname } = useRouter();
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
-  if (pathname.startsWith('/wiki')) {
+  if (router.pathname.startsWith('/wiki')) {
     return (
       <ChakraProvider>
         <Head>
