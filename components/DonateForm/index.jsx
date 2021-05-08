@@ -228,7 +228,7 @@ export default function DonateForm(props) {
         </FormControl>
         <FormControl id='paymentMethod' isRequired mt='2'>
           <FormLabel>Pilih Metode Pembayaran</FormLabel>
-          <Select onChange={() => handlePaymentChange()}>
+          <Select onChange={(e) => handlePaymentChange(e)}>
             {paymentList.map((payment, i) => (
               <option
                 key={i}

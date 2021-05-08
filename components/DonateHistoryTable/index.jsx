@@ -7,6 +7,7 @@ import {
   Th,
   Td,
   Badge,
+  useColorMode,
 } from '@chakra-ui/react';
 import { FaAngleRight } from 'react-icons/fa';
 
@@ -14,6 +15,7 @@ import DonateHistoryPaginator from '../DonateHistoryPaginator';
 
 export default function DonateHistoryTable(props) {
   const numberPlus = (props.currentPage - 1) * 10;
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const checkStatusRender = (status) => {
     let color;
@@ -35,7 +37,7 @@ export default function DonateHistoryTable(props) {
         break;
     }
     return (
-      <Badge colorScheme={color} variant='outline'>
+      <Badge colorScheme={color} variant='solid'>
         {status}
       </Badge>
     );
@@ -48,7 +50,7 @@ export default function DonateHistoryTable(props) {
 
   return (
     <>
-      <Table variant='simple' size='sm' mt='2'>
+      <Table variant='simple' size='sm' mt='5'>
         <Thead>
           <Tr>
             <Th>#</Th>
@@ -62,8 +64,9 @@ export default function DonateHistoryTable(props) {
           {props.data.map((data, i) => (
             <Tr
               _hover={{
-                background: 'green.100',
+                background: colorMode === 'dark' ? 'gray.600' : 'gray.300',
                 cursor: 'pointer',
+                color: colorMode === 'dark' ? 'white' : 'black',
               }}
               onClick={() => handleButtonClick(data)}
             >
@@ -80,7 +83,8 @@ export default function DonateHistoryTable(props) {
       </Table>
       <DonateHistoryPaginator
         getDonationHistory={props.getDonationHistory}
-        pageQuantity={props.meta.total_page}
+        setCurrentPage={props.setCurrentPage}
+        totalPage={props.meta.total_page}
       />
     </>
   );

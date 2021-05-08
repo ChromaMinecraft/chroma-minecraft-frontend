@@ -1,6 +1,6 @@
 import { FormControl, FormLabel, Input, Button, Flex } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Axios from 'axios';
 
 import DonateHistoryTable from '../DonateHistoryTable';
@@ -21,12 +21,12 @@ export default function DonateHistory(props) {
     setUsername(e.target.value);
   };
 
-  const getDonationHistory = async (currentPage) => {
-    setCurrentPage(currentPage);
+  const getDonationHistory = async () => {
     setIsAlertShown(false);
     setIsButtonLoading(true);
-    console.log(username);
-    console.log(currentPage);
+    console.log(`username: ${username}`);
+    console.log(`currentPage: ${currentPage}`);
+    setDonationHistoryData([]);
     try {
       const result = await Axios({
         url: `/api/donate-history?username=${username}&page=${currentPage}`,
@@ -48,6 +48,16 @@ export default function DonateHistory(props) {
     setIsButtonLoading(false);
   };
 
+  const initialRender = useRef(true);
+
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else {
+      getDonationHistory();
+    }
+  }, [currentPage]);
+
   return (
     <>
       {isAlertShown && (
@@ -67,7 +77,7 @@ export default function DonateHistory(props) {
           <Button
             colorScheme='blue'
             isLoading={isButtonLoading}
-            onClick={() => getDonationHistory(1)}
+            onClick={() => getDonationHistory()}
           >
             <FaSearch />
           </Button>
@@ -77,7 +87,8 @@ export default function DonateHistory(props) {
         <DonateHistoryTable
           data={donationHistoryData}
           meta={donationHistoryMeta}
-          getDonationHistory={getDonationHistory}
+          // getDonationHistory={getDonationHistory}
+          setCurrentPage={setCurrentPage}
           currentPage={currentPage}
           setIsDetail={props.setIsDetail}
           setDetail={props.setDetail}
