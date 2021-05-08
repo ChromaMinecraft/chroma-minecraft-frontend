@@ -41,7 +41,6 @@ export default function DonateHistoryPaginator(props) {
   const handlePageChange = (nextPage) => {
     setCurrentPage(nextPage);
     props.setCurrentPage(nextPage);
-    // props.getDonationHistory(nextPage);
   };
 
   return (

@@ -15,23 +15,23 @@ export default function DonateHistory(props) {
   const [donationHistoryData, setDonationHistoryData] = useState(null);
   const [donationHistoryMeta, setDonationHistoryMeta] = useState({});
   const [isButtonLoading, setIsButtonLoading] = useState(false);
+  const [sortBy, setSortBy] = useState('desc');
+  const [orderBy, setOrderBy] = useState('');
 
   const handleUsernameChange = (e) => {
-    console.log(`Username changed into ${e.target.value}`);
     setUsername(e.target.value);
   };
 
   const getDonationHistory = async () => {
     setIsAlertShown(false);
     setIsButtonLoading(true);
-    console.log(`username: ${username}`);
-    console.log(`currentPage: ${currentPage}`);
     setDonationHistoryData([]);
     try {
       const result = await Axios({
-        url: `/api/donate-history?username=${username}&page=${currentPage}`,
+        url: `/api/donate-history?username=${username}&page=${currentPage}&sort_by=${sortBy}&order_by=${orderBy}`,
         method: 'GET',
       });
+      console.log(result.data.data);
       setDonationHistoryData(result.data.data);
       setDonationHistoryMeta(result.data.meta);
       if (!result.data.data.length) {
@@ -56,7 +56,7 @@ export default function DonateHistory(props) {
     } else {
       getDonationHistory();
     }
-  }, [currentPage]);
+  }, [currentPage, sortBy, orderBy]);
 
   return (
     <>
@@ -87,11 +87,13 @@ export default function DonateHistory(props) {
         <DonateHistoryTable
           data={donationHistoryData}
           meta={donationHistoryMeta}
-          // getDonationHistory={getDonationHistory}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
           setIsDetail={props.setIsDetail}
           setDetail={props.setDetail}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          setOrderBy={setOrderBy}
         />
       )}
     </>

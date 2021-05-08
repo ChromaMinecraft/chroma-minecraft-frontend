@@ -8,14 +8,43 @@ import {
   Td,
   Badge,
   useColorMode,
+  Flex,
+  chakra,
+  HStack,
+  Text,
 } from '@chakra-ui/react';
-import { FaAngleRight } from 'react-icons/fa';
-
+import { FaAngleRight, FaSort, FaSortDown, FaSortUp } from 'react-icons/fa';
+import { useTable, useSortBy } from 'react-table';
+import { useState } from 'react';
 import DonateHistoryPaginator from '../DonateHistoryPaginator';
 
 export default function DonateHistoryTable(props) {
   const numberPlus = (props.currentPage - 1) * 10;
   const { colorMode, toggleColorMode } = useColorMode();
+  const [isOrderByTime, setIsOrderByTime] = useState(true);
+  const [isOrderByStatus, setIsOrderByStatus] = useState(false);
+
+  const handleTimeHeaderClick = () => {
+    setIsOrderByTime(true);
+    setIsOrderByStatus(false);
+    props.setOrderBy('created_at');
+    if (props.sortBy === 'asc') {
+      props.setSortBy('desc');
+    } else {
+      props.setSortBy('asc');
+    }
+  };
+
+  const handleStatusHeaderClick = () => {
+    setIsOrderByTime(false);
+    setIsOrderByStatus(true);
+    props.setOrderBy('status');
+    if (props.sortBy === 'asc') {
+      props.setSortBy('desc');
+    } else {
+      props.setSortBy('asc');
+    }
+  };
 
   const checkStatusRender = (status) => {
     let color;
@@ -54,9 +83,41 @@ export default function DonateHistoryTable(props) {
         <Thead>
           <Tr>
             <Th>#</Th>
-            <Th>Waktu</Th>
+            <Th
+              onClick={() => handleTimeHeaderClick()}
+              _hover={{
+                cursor: 'pointer',
+              }}
+            >
+              <HStack>
+                <Text>Waktu</Text>{' '}
+                {!isOrderByTime ? (
+                  <FaSort />
+                ) : props.sortBy === 'asc' ? (
+                  <FaSortUp />
+                ) : (
+                  <FaSortDown />
+                )}
+              </HStack>
+            </Th>
             <Th isNumeric>Jumlah</Th>
-            <Th>Status</Th>
+            <Th
+              onClick={() => handleStatusHeaderClick()}
+              _hover={{
+                cursor: 'pointer',
+              }}
+            >
+              <HStack>
+                <Text>Status</Text>{' '}
+                {!isOrderByStatus ? (
+                  <FaSort />
+                ) : props.sortBy === 'asc' ? (
+                  <FaSortUp />
+                ) : (
+                  <FaSortDown />
+                )}
+              </HStack>
+            </Th>
             <Th></Th>
           </Tr>
         </Thead>
