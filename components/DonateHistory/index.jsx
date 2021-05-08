@@ -12,8 +12,8 @@ export default function DonateHistory(props) {
   const [isAlertShown, setIsAlertShown] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertStatus, setAlertStatus] = useState('');
-  const [username, setUsername] = useState(null);
-  const [donationHistoryData, setDonationHistoryData] = useState(null);
+  const [username, setUsername] = useState('');
+  const [donationHistoryData, setDonationHistoryData] = useState('');
   const [donationHistoryMeta, setDonationHistoryMeta] = useState({});
   const [isButtonLoading, setIsButtonLoading] = useState(false);
   const [sortBy, setSortBy] = useState('desc');
@@ -76,19 +76,19 @@ export default function DonateHistory(props) {
       {isAlertShown && (
         <DonateAlert status={alertStatus} message={alertMessage} />
       )}
-      <FormControl id='username' isRequired>
+      <FormControl id="username" isRequired>
         <FormLabel>Username Minecraft</FormLabel>
-        <Flex direction='row'>
+        <Flex direction="row">
           <Input
-            type='text'
-            placeholder='Masukkan username minecraft.'
-            marginRight='1'
-            name='username'
+            type="text"
+            placeholder="Masukkan username minecraft."
+            marginRight="1"
+            name="username"
             value={username}
             onChange={(e) => handleUsernameChange(e)}
           />
           <Button
-            colorScheme='blue'
+            colorScheme="blue"
             isLoading={isButtonLoading}
             onClick={() => getDonationHistory()}
           >

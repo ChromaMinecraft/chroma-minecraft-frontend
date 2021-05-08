@@ -10,7 +10,7 @@ import { useState } from 'react';
 export default function DonateHistoryPaginator(props) {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPage = props.totalPage;
+  const totalPage = props.totalPage || 1;
   const outerLimit = 1;
   const innerLimit = 2;
 
@@ -54,9 +54,9 @@ export default function DonateHistoryPaginator(props) {
         pagesQuantity={totalPage}
         onPageChange={handlePageChange}
       >
-        <Container align='center' justify='space-between' w='full' p={4}>
+        <Container align="center" justify="space-between" w="full" p={4}>
           <Previous>Previous</Previous>
-          <PageGroup isInline align='center' />
+          <PageGroup isInline align="center" />
           <Next>Next</Next>
         </Container>
       </Paginator>

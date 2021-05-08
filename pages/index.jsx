@@ -93,7 +93,7 @@ export default function Home() {
           w='100vw'
           bgColor='gray.800'
           opacity='0.5'
-        ></Flex>
+        />
         <Flex
           zIndex='3'
           position='absolute'
@@ -148,14 +148,16 @@ export default function Home() {
             Temukan keseruan sensasi berpetualang di dunia minecraft yang penuh
             dengan misteri, harta karun, village, dan lainnya.
           </Text>
-          <Center as='Flex' flexDirection='column' mt='5'>
-            <Text fontWeight='light' color='white' align='center'>
-              <b>{playerCount} Pemain</b> sedang bermain.
-            </Text>
-            <Text fontWeight='light' color='white' align='center' mt='2'>
-              Gunakan tombol dibawah ini untuk memulai
-            </Text>
-            <DonateModal />
+          <Center>
+            <Flex flexDirection='column' mt='5'>
+              <Text fontWeight='light' color='white' align='center'>
+                <b>{playerCount} Pemain</b> sedang bermain.
+              </Text>
+              <Text fontWeight='light' color='white' align='center' mt='2'>
+                Gunakan tombol dibawah ini untuk memulai
+              </Text>
+              <DonateModal />
+            </Flex>
           </Center>
           <Flex
             flexWrap='wrap'

@@ -66,7 +66,7 @@ export default function DonateHistoryTable(props) {
         break;
     }
     return (
-      <Badge colorScheme={color} variant='solid'>
+      <Badge colorScheme={color} variant="solid">
         {status}
       </Badge>
     );
@@ -79,7 +79,7 @@ export default function DonateHistoryTable(props) {
 
   return (
     <>
-      <Table variant='simple' size='sm' mt='5'>
+      <Table variant="simple" size="sm" mt="5">
         <Thead>
           <Tr>
             <Th>#</Th>
@@ -130,6 +130,7 @@ export default function DonateHistoryTable(props) {
                 color: colorMode === 'dark' ? 'white' : 'black',
               }}
               onClick={() => handleButtonClick(data)}
+              key={`donate-history-${i}`}
             >
               <Td>{i + 1 + numberPlus}</Td>
               <Td>{data.created_at}</Td>
