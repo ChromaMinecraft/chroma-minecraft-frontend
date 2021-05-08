@@ -4,16 +4,20 @@ export default async function handler(req, res) {
   const { quantity, username, email, payment_method } = req.body;
   const return_url = process.env.BASE_URL;
   try {
-    const result = await axios.post(
-      `http://${process.env.BACKEND_IP}:${process.env.BACKEND_PORT}/donate`,
-      {
+    const result = await axios({
+      url: `http://${process.env.BACKEND_IP}:${process.env.BACKEND_PORT}/donate`,
+      method: 'POST',
+      data: {
         quantity,
         username,
         email,
         payment_method,
         return_url,
-      }
-    );
+      },
+      headers: {
+        'Accept-Language': 'id',
+      },
+    });
     return res.status(200).json(result.data);
   } catch (error) {
     const {

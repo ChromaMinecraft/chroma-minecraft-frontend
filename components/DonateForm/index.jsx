@@ -66,10 +66,10 @@ export default function DonateForm(props) {
     } catch (error) {
       setAlertMessage(error.response.data.message);
       setAlertStatus('error');
+      setIsSubmitButtonLoading(false);
+      setIsSubmitButtonDisabled(false);
     }
     setIsAlertShown(true);
-    setIsSubmitButtonLoading(false);
-    setIsSubmitButtonDisabled(false);
   };
 
   const checkUsername = async (e) => {
