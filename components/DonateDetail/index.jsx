@@ -38,7 +38,7 @@ export default function DonateDetail(props) {
           <Tr>
             <Td>ٍFee</Td>
             <Td>
-              : <RupiahFormat value={detail.total - detail.amount * 1000} />
+              : <RupiahFormat value={detail.total_fee} />
             </Td>
           </Tr>
           <Tr>

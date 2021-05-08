@@ -71,7 +71,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    console.log(router.query);
     if (router.query.tripay_reference) {
       onDonateFinishOpen();
     }

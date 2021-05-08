@@ -21,6 +21,7 @@ import RupiahFormat from '../RupiahFormat';
 
 export default function DonateForm(props) {
   const [isAlertShown, setIsAlertShown] = useState(false);
+  const [showFirstAlert, setShowFirstAlert] = useState(true);
   const [isSubmitButtonLoading, setIsSubmitButtonLoading] = useState(false);
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
   const [isCheckButtonLoading, setIsCheckButtonLoading] = useState(false);
@@ -35,6 +36,8 @@ export default function DonateForm(props) {
   const [subTotal, setSubTotal] = useState(0);
   const [totalFee, setTotalFee] = useState(0);
   const [totalPrice, setTotalPrice] = useState(1000);
+
+  const offlinePayment = ['Alfamart', 'Alfamidi'];
 
   const payDonation = async (e) => {
     setIsAlertShown(false);
@@ -70,6 +73,7 @@ export default function DonateForm(props) {
   };
 
   const checkUsername = async (e) => {
+    setShowFirstAlert(false);
     setIsAlertShown(false);
     if (!username) {
       setAlertStatus('error');
@@ -106,6 +110,7 @@ export default function DonateForm(props) {
   };
 
   const handleUsernameChange = (e) => {
+    setIsSubmitButtonDisabled(true);
     setUsername(e.target.value);
   };
 
@@ -128,6 +133,7 @@ export default function DonateForm(props) {
       feeFlat: feeFlat,
       feePercent: feePercent,
       method: e.target.value,
+      name: e.target[event.target.selectedIndex].text,
     });
   };
 
@@ -181,8 +187,15 @@ export default function DonateForm(props) {
   return (
     <>
       {isAlertShown && (
-        <DonateAlert status={alertStatus} message={alertMessage} mb='1' />
+        <DonateAlert status={alertStatus} message={alertMessage} />
       )}
+      {showFirstAlert && (
+        <DonateAlert
+          status='warning'
+          message='Periksa username terlebih dahulu sebelum melakukan pembayaran'
+        />
+      )}
+
       <form onSubmit={payDonation}>
         <FormControl isRequired>
           <FormLabel>Username Minecraft</FormLabel>
@@ -241,16 +254,22 @@ export default function DonateForm(props) {
             ))}
           </Select>
         </FormControl>
+        {offlinePayment.includes(selectedPayment.name) && (
+          <Flex w='100%' mt='2' fontSize='sm' direction='column'>
+            <Flex>
+              <Text>
+                * Terdapat biaya administrasi tambahan untuk Alfamart / Alfamidi
+              </Text>
+            </Flex>
+          </Flex>
+        )}
         <Flex
           w='100%'
-          bgColor='yellow.200'
-          color='yellow.800'
           fontWeight='semibold'
           fontSize='lg'
           px='4'
           py='2'
           mt='3'
-          borderRadius='sm'
           direction='column'
         >
           <Flex>
@@ -266,8 +285,8 @@ export default function DonateForm(props) {
         </Flex>
         <Flex
           w='100%'
-          bgColor='green.200'
-          color='green.800'
+          bgColor='gray.200'
+          color='black'
           fontWeight='semibold'
           fontSize='lg'
           px='4'

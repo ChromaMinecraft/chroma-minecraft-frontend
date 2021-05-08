@@ -31,7 +31,6 @@ export default function DonateHistory(props) {
         url: `/api/donate-history?username=${username}&page=${currentPage}&sort_by=${sortBy}&order_by=${orderBy}`,
         method: 'GET',
       });
-      console.log(result.data.data);
       setDonationHistoryData(result.data.data);
       setDonationHistoryMeta(result.data.meta);
       if (!result.data.data.length) {

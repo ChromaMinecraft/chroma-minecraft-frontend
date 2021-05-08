@@ -11,7 +11,6 @@ export default async function handler(req, res) {
     }
     return res.status(203).json({ message: 'Username tidak ditemukan' });
   } catch (error) {
-    console.log(error);
     const {
       status,
       data: { message },

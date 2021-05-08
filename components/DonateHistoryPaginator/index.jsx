@@ -14,7 +14,7 @@ export default function DonateHistoryPaginator(props) {
 
   const totalPage = props.totalPage;
   const outerLimit = 1;
-  const innerLimit = 1;
+  const innerLimit = 2;
 
   const baseStyles = {
     w: 7,
@@ -29,7 +29,8 @@ export default function DonateHistoryPaginator(props) {
 
   const activeStyles = {
     ...baseStyles,
-    bg: 'gray.500',
+    bg: 'blue.500',
+    color: 'white',
   };
 
   const separatorStyles = {
@@ -56,11 +57,9 @@ export default function DonateHistoryPaginator(props) {
         onPageChange={handlePageChange}
       >
         <Container align='center' justify='space-between' w='full' p={4}>
-          <Text>
-            Halaman <b>{currentPage}</b>/<b>{totalPage}</b>
-          </Text>
-          <Spacer />
+          <Previous>Previous</Previous>
           <PageGroup isInline align='center' />
+          <Next>Next</Next>
         </Container>
       </Paginator>
     </>
