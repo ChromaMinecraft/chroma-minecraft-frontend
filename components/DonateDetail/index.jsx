@@ -1,10 +1,31 @@
-import { Table, Tbody, Tr, Td, Button, Flex, Spacer } from '@chakra-ui/react';
+import {
+  Table,
+  Tbody,
+  Tr,
+  Td,
+  Button,
+  Flex,
+  Spacer,
+  Link,
+  HStack,
+  Text,
+} from '@chakra-ui/react';
 import { FaAngleLeft, FaMoneyBillWave } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 
 import RupiahFormat from '../RupiahFormat';
 
 export default function DonateDetail(props) {
   const { detail } = props;
+  const router = useRouter();
+
+  const handleBackButton = (e) => {
+    e.preventDefault();
+    props.setIsDetail(false);
+    props.setIsRedirectedFromDetail(true);
+    router.push(`/?username=${detail.username}`);
+  };
+
   return (
     <>
       <Table size='sm'>
@@ -62,21 +83,17 @@ export default function DonateDetail(props) {
         </Tbody>
       </Table>
       <Flex>
-        <Button
-          onClick={() => props.setIsDetail(false)}
-          colorScheme='blue'
-          mt='2'
-          size='sm'
-          leftIcon={<FaAngleLeft />}
-        >
-          Kembali
-        </Button>
+        <Link mt='7' onClick={(e) => handleBackButton(e)}>
+          <HStack>
+            <FaAngleLeft /> <Text>Kembali</Text>
+          </HStack>
+        </Link>
         <Spacer />
         {detail.donation_status === 'UNPAID' && (
           <Button
             as='a'
             colorScheme='green'
-            mt='2'
+            mt='6'
             size='sm'
             href={detail.checkout_url}
             target='_blank'

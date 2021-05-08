@@ -2,6 +2,7 @@ import { FormControl, FormLabel, Input, Button, Flex } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
 import { useState, useEffect, useRef } from 'react';
 import Axios from 'axios';
+import { useRouter } from 'next/router';
 
 import DonateHistoryTable from '../DonateHistoryTable';
 import DonateAlert from '../DonateAlert';
@@ -18,17 +19,24 @@ export default function DonateHistory(props) {
   const [sortBy, setSortBy] = useState('desc');
   const [orderBy, setOrderBy] = useState('');
 
+  const router = useRouter();
+
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
 
-  const getDonationHistory = async () => {
+  const getDonationHistory = async (usernameParam = '') => {
     setIsAlertShown(false);
     setIsButtonLoading(true);
     setDonationHistoryData([]);
+    if (usernameParam) {
+      setUsername(usernameParam);
+    }
     try {
       const result = await Axios({
-        url: `/api/donate-history?username=${username}&page=${currentPage}&sort_by=${sortBy}&order_by=${orderBy}`,
+        url: `/api/donate-history?username=${
+          usernameParam === '' ? username : usernameParam
+        }&page=${currentPage}&sort_by=${sortBy}&order_by=${orderBy}`,
         method: 'GET',
       });
       setDonationHistoryData(result.data.data);
@@ -57,10 +65,16 @@ export default function DonateHistory(props) {
     }
   }, [currentPage, sortBy, orderBy]);
 
+  useEffect(() => {
+    if (router.query.username != null) {
+      getDonationHistory(router.query.username);
+    }
+  }, [router.query.username]);
+
   return (
     <>
       {isAlertShown && (
-        <DonateAlert status={alertStatus} message={alertMessage} mb='1' />
+        <DonateAlert status={alertStatus} message={alertMessage} />
       )}
       <FormControl id='username' isRequired>
         <FormLabel>Username Minecraft</FormLabel>

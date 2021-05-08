@@ -1,4 +1,3 @@
-import { Spacer, Text } from '@chakra-ui/layout';
 import {
   Paginator,
   Previous,
@@ -6,7 +5,6 @@ import {
   PageGroup,
   Container,
 } from 'chakra-paginator';
-
 import { useState } from 'react';
 
 export default function DonateHistoryPaginator(props) {
