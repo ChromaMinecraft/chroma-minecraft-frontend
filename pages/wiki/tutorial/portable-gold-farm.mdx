@@ -48,27 +48,56 @@ Sebuah custom plugin dari Chroma Minecraft yang menghadirkan mekanisme baru yait
 
 ## Drop Table
 
-Perhitungan drop item (Gold Nugget) dan exp adalah sebagai berikut (pembulatan ke atas):
+Perhitungan drop item dan exp adalah sebagai berikut (pembulatan):
 
 ```
 item = level * 0.625
 exp = level * 5.1
+harga = level * 11279
 
-Level yang dimaksud adalah level Portable Gold Farm milikmu
+gold block  = ⌊ item / 81 ⌋
+gold ingot  = ⌊ ⌊ item % 81 ⌋ / 9 ⌋
+gold nugget = ⌊ ( item % 81 ) % 9 ⌉
 ```
 
-Berikut adalah contoh perhitungan drop sampai level 5
+Notes:
 
-| Level | Drop Item (Gold Nugget) | Drop Exp | Harga (Total) |
-| ----- | ----------------------- | -------- | ------------- |
-| 1     | 0.625                   | 5.1      | 11279         |
-| 2     | 1.25                    | 10.2     | 22558         |
-| 3     | 1.875                   | 15.3     | 33837         |
-| 4     | 2.5                     | 20.4     | 45116         |
-| 5     | 3.125                   | 25.5     | 56395         |
+1. Perhitungan `gold block` akan drop apabila Portable Gold Farm memiliki level >= 130
+2. Perhitungan `gold ingot` akan drop apabila Portable Gold Farm memiliki level >= 15
+3. Perhitungan `gold nugget` akan drop apabila Portable Gold Farm memiliki level >= 1
+4. Perhitungan `item` akan digunakan untuk nilai dasar drop
+5. Perhitungan `exp` akan digunakan untuk drop experience
+6. Perhitungan `harga` akan digunakan untuk harga jual gold farm pada level x
+7. Level yang dimaksud adalah level Portable Gold Farm milikmu saat ini
+
+Symbol:
+
+1. ⌊x⌉ = Pembulatan nilai x (round)
+2. ⌊x⌋ = Pembulatan nilai x ke bawah (floor)
+3. ⌈x⌉ = Pembulatan nilai x ke atas (ceil)
+
+Berikut adalah contoh perhitungan drop berdasarkan level
+
+| Level | Nilai Item | Drop Gold Nugget | Drop Gold Ingot | Drop Gold Block | Drop Exp | Harga (Total) |
+| ----- | ---------- | ---------------- | --------------- | --------------- | -------- | ------------- |
+| 1     | 0.625      | 1                | 0               | 0               | 5.1      | 11279         |
+| 2     | 1.25       | 1                | 0               | 0               | 10.2     | 22558         |
+| 3     | 1.875      | 2                | 0               | 0               | 15.3     | 33837         |
+| 4     | 2.5        | 3                | 0               | 0               | 20.4     | 45116         |
+| 5     | 3.125      | 3                | 0               | 0               | 25.5     | 56395         |
+| 14    | 8.75       | 9                | 0               | 0               | 71.4     | 157906        |
+| 15    | 9.375      | 0                | 1               | 0               | 76.5     | 169185        |
+| 16    | 10         | 1                | 1               | 0               | 81.6     | 180464        |
+| 17    | 10.625     | 2                | 1               | 0               | 86.7     | 191743        |
+| 18    | 11.25      | 2                | 1               | 0               | 91.8     | 203022        |
+| 129   | 80.625     | 9                | 8               | 0               | 657.9    | 1454991       |
+| 130   | 81.25      | 0                | 0               | 1               | 663      | 1466270       |
+| 131   | 81.875     | 1                | 0               | 1               | 668.1    | 1477549       |
+| 132   | 82.5       | 2                | 0               | 1               | 673.2    | 1488828       |
+| 133   | 83.125     | 2                | 0               | 1               | 678.3    | 1500107       |
 
 ## Booster
 
-Booster memiliki kepada pemain untuk mendapatkan exp dan drop rate yang lebih tinggi pada Portable Gold Farm. Booster dapat diakses melalui command **/donate**.
+Booster memiliki kepada pemain untuk mendapatkan exp dan drop rate yang lebih tinggi pada Portable Gold Farm yang terhitung dalam pada perhitungan `item` pada rumus diatas. Booster dapat diakses melalui command **/donate**.
 
 <img src="/img/goldfarm-booster.png" alt="Logo" width="400px" />
