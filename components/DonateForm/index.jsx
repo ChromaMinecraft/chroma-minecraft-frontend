@@ -15,7 +15,8 @@ import {
 } from '@chakra-ui/react';
 import { FaMoneyBillWave } from 'react-icons/fa';
 import Axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import DonateAlert from '../DonateAlert';
 import RupiahFormat from '../RupiahFormat';
@@ -39,13 +40,24 @@ export default function DonateForm(props) {
   const [subTotal, setSubTotal] = useState(0);
   const [totalFee, setTotalFee] = useState(0);
   const [totalPrice, setTotalPrice] = useState(1000);
+  const recaptchaRef = useRef(null);
 
   const offlinePayment = ['Alfamart', 'Alfamidi'];
 
-  const payDonation = async () => {
+  const onFormDonationSubmit = (e) => {
+    e.preventDefault();
+    recaptchaRef.current.execute();
+  };
+
+  const payDonation = async (captchaCode) => {
     setIsAlertShown(false);
     setIsSubmitButtonLoading(true);
     setIsSubmitButtonDisabled(true);
+    gtag.event({
+      action: 'Donate Buy',
+      category: 'Donate',
+      label: 'Donate Label',
+    });
     try {
       const result = await Axios({
         url: '/api/donate',
@@ -55,6 +67,7 @@ export default function DonateForm(props) {
           username,
           email,
           payment_method: selectedPayment.method,
+          captchaCode,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -71,7 +84,15 @@ export default function DonateForm(props) {
       setIsSubmitButtonLoading(false);
       setIsSubmitButtonDisabled(false);
     }
+    recaptchaRef.current.reset();
     setIsAlertShown(true);
+  };
+
+  const onReCAPTCHAChange = async (captchaCode) => {
+    if (!captchaCode) {
+      return;
+    }
+    payDonation(captchaCode);
   };
 
   const checkUsername = async (e) => {
@@ -84,6 +105,11 @@ export default function DonateForm(props) {
       return;
     }
     setIsCheckButtonLoading(true);
+    gtag.event({
+      action: 'Donate Check Username',
+      category: 'Donate',
+      label: 'Donate Label',
+    });
     try {
       const result = await Axios({
         url: '/api/users',
@@ -160,7 +186,9 @@ export default function DonateForm(props) {
           method: code,
         });
       } catch (error) {
-        setAlertMessage('Terjadi error saat mengambil aftar Metode Pembayaran');
+        setAlertMessage(
+          'Terjadi error saat mengambil daftar Metode Pembayaran. Silahkan muat ulang halaman ini'
+        );
         setAlertStatus('error');
         setIsAlertShown(true);
       }
@@ -197,121 +225,132 @@ export default function DonateForm(props) {
           message='Periksa username terlebih dahulu sebelum melakukan pembayaran'
         />
       )}
-
-      <FormControl isRequired>
-        <FormLabel>Username Minecraft</FormLabel>
-        <Flex direction='row'>
-          <Input
-            type='text'
-            placeholder='Masukkan username minecraft.'
-            marginRight='1'
-            name='username'
-            value={username}
-            onChange={handleUsernameChange}
-          />
-          <Button
-            colorScheme='blue'
-            onClick={checkUsername}
-            isLoading={isCheckButtonLoading}
-          >
-            Cek
-          </Button>
-        </Flex>
-      </FormControl>
-      <FormControl isRequired mt='2'>
-        <FormLabel>Email</FormLabel>
-        <Flex direction='row'>
-          <Input
-            type='email'
-            placeholder='Masukkan emailmu'
-            name='email'
-            value={email}
-            onChange={handleEmailChange}
-          />
-        </Flex>
-      </FormControl>
-      <FormControl id='amount' isRequired mt='2'>
-        <FormLabel>Jumlah Chroma Cash</FormLabel>
-        <NumberInput defaultValue={1} min={1} onChange={handleAmountChange}>
-          <NumberInputField />
-          <NumberInputStepper>
-            <NumberIncrementStepper />
-            <NumberDecrementStepper />
-          </NumberInputStepper>
-        </NumberInput>
-      </FormControl>
-      <FormControl id='paymentMethod' isRequired mt='2'>
-        <FormLabel>Pilih Metode Pembayaran</FormLabel>
-        <Select onChange={(e) => handlePaymentChange(e)}>
-          {paymentList.map((payment, i) => (
-            <option
-              key={i}
-              value={payment.code}
-              data-fee-flat={payment.fee_customer.flat}
-              data-fee-percent={payment.fee_customer.percent}
+      <form onSubmit={(e) => onFormDonationSubmit(e)}>
+        <FormControl isRequired>
+          <FormLabel>Username Minecraft</FormLabel>
+          <Flex direction='row'>
+            <Input
+              type='text'
+              placeholder='Masukkan username minecraft.'
+              marginRight='1'
+              name='username'
+              value={username}
+              onChange={handleUsernameChange}
+            />
+            <Button
+              colorScheme='blue'
+              onClick={checkUsername}
+              isLoading={isCheckButtonLoading}
             >
-              {payment.name}
-            </option>
-          ))}
-        </Select>
-      </FormControl>
-      {offlinePayment.includes(selectedPayment.name) && (
-        <Flex w='100%' mt='2' fontSize='sm' direction='column'>
+              Cek
+            </Button>
+          </Flex>
+        </FormControl>
+        <FormControl isRequired mt='2'>
+          <FormLabel>Email</FormLabel>
+          <Flex direction='row'>
+            <Input
+              type='email'
+              placeholder='Masukkan emailmu'
+              name='email'
+              value={email}
+              onChange={handleEmailChange}
+            />
+          </Flex>
+        </FormControl>
+        <FormControl id='amount' isRequired mt='2'>
+          <FormLabel>Jumlah Chroma Cash</FormLabel>
+          <NumberInput
+            defaultValue={donationAmount}
+            min={1}
+            onChange={handleAmountChange}
+          >
+            <NumberInputField />
+            <NumberInputStepper>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          </NumberInput>
+        </FormControl>
+        <FormControl id='paymentMethod' isRequired mt='2'>
+          <FormLabel>Pilih Metode Pembayaran</FormLabel>
+          <Select onChange={(e) => handlePaymentChange(e)}>
+            {paymentList.map((payment, i) => (
+              <option
+                key={i}
+                value={payment.code}
+                data-fee-flat={payment.fee_customer.flat}
+                data-fee-percent={payment.fee_customer.percent}
+              >
+                {payment.name}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
+        {offlinePayment.includes(selectedPayment.name) && (
+          <Flex w='100%' mt='2' fontSize='sm' direction='column'>
+            <Flex>
+              <Text>
+                * Terdapat biaya administrasi tambahan untuk Alfamart / Alfamidi
+              </Text>
+            </Flex>
+          </Flex>
+        )}
+        <Flex
+          w='100%'
+          fontWeight='semibold'
+          fontSize='lg'
+          px='4'
+          py='2'
+          mt='3'
+          direction='column'
+        >
           <Flex>
-            <Text>
-              * Terdapat biaya administrasi tambahan untuk Alfamart / Alfamidi
-            </Text>
+            <Text>Subtotal</Text>
+            <Spacer />
+            <RupiahFormat value={subTotal} />
+          </Flex>
+          <Flex>
+            <Text>Fee</Text>
+            <Spacer />
+            <RupiahFormat value={totalFee} />
           </Flex>
         </Flex>
-      )}
-      <Flex
-        w='100%'
-        fontWeight='semibold'
-        fontSize='lg'
-        px='4'
-        py='2'
-        mt='3'
-        direction='column'
-      >
-        <Flex>
-          <Text>Subtotal</Text>
+        <Flex
+          w='100%'
+          bgColor='gray.200'
+          color='black'
+          fontWeight='semibold'
+          fontSize='lg'
+          px='4'
+          py='2'
+          mt='3'
+          borderRadius='sm'
+        >
+          <Text>Total</Text>
           <Spacer />
-          <RupiahFormat value={subTotal} />
+          <RupiahFormat value={totalPrice} />
         </Flex>
-        <Flex>
-          <Text>Fee</Text>
-          <Spacer />
-          <RupiahFormat value={totalFee} />
-        </Flex>
-      </Flex>
-      <Flex
-        w='100%'
-        bgColor='gray.200'
-        color='black'
-        fontWeight='semibold'
-        fontSize='lg'
-        px='4'
-        py='2'
-        mt='3'
-        borderRadius='sm'
-      >
-        <Text>Total</Text>
-        <Spacer />
-        <RupiahFormat value={totalPrice} />
-      </Flex>
-      <Button
-        mt='4'
-        colorScheme='blue'
-        w='100%'
-        type='submit'
-        leftIcon={<FaMoneyBillWave />}
-        fontSize='lg'
-        disabled={isSubmitButtonDisabled}
-        isLoading={isSubmitButtonLoading}
-        onClick={() => payDonation()}
-      >
-        Bayar
-      </Button>
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          size='invisible'
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+          onChange={onReCAPTCHAChange}
+        />
+        <Button
+          mt='4'
+          colorScheme='blue'
+          w='100%'
+          type='submit'
+          leftIcon={<FaMoneyBillWave />}
+          fontSize='lg'
+          disabled={isSubmitButtonDisabled}
+          isLoading={isSubmitButtonLoading}
+          // onClick={() => submitButtonDonation()}
+        >
+          Bayar
+        </Button>
+      </form>
     </>
   );
 }

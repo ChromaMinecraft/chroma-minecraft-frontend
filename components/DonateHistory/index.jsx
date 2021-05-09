@@ -32,6 +32,11 @@ export default function DonateHistory(props) {
     if (usernameParam) {
       setUsername(usernameParam);
     }
+    gtag.event({
+      action: 'Donate Check History',
+      category: 'Donate',
+      label: 'Donate Label',
+    });
     try {
       const result = await Axios({
         url: `/api/donate-history?username=${
@@ -76,19 +81,19 @@ export default function DonateHistory(props) {
       {isAlertShown && (
         <DonateAlert status={alertStatus} message={alertMessage} />
       )}
-      <FormControl id="username" isRequired>
+      <FormControl id='username' isRequired>
         <FormLabel>Username Minecraft</FormLabel>
-        <Flex direction="row">
+        <Flex direction='row'>
           <Input
-            type="text"
-            placeholder="Masukkan username minecraft."
-            marginRight="1"
-            name="username"
+            type='text'
+            placeholder='Masukkan username minecraft.'
+            marginRight='1'
+            name='username'
             value={username}
             onChange={(e) => handleUsernameChange(e)}
           />
           <Button
-            colorScheme="blue"
+            colorScheme='blue'
             isLoading={isButtonLoading}
             onClick={() => getDonationHistory()}
           >
