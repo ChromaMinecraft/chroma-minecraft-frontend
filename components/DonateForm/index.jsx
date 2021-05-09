@@ -35,7 +35,7 @@ export default function DonateForm(props) {
   const [selectedPayment, setSelectedPayment] = useState({});
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [donationAmount, setDonationAmount] = useState(1);
+  const [donationAmount, setDonationAmount] = useState(10);
   const [donationPrice, setDonationPrice] = useState(1000);
   const [subTotal, setSubTotal] = useState(0);
   const [totalFee, setTotalFee] = useState(0);
@@ -43,6 +43,8 @@ export default function DonateForm(props) {
   const recaptchaRef = useRef(null);
 
   const offlinePayment = ['Alfamart', 'Alfamidi'];
+  const maxDonationAmount = 2000;
+  const minDonationAmount = 10;
 
   const onFormDonationSubmit = (e) => {
     e.preventDefault();
@@ -262,7 +264,8 @@ export default function DonateForm(props) {
           <FormLabel>Jumlah Chroma Cash</FormLabel>
           <NumberInput
             defaultValue={donationAmount}
-            min={1}
+            min={minDonationAmount}
+            max={maxDonationAmount}
             onChange={handleAmountChange}
           >
             <NumberInputField />
