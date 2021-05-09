@@ -26,10 +26,10 @@ export default function DonateModal(props) {
 
   return (
     <Modal
-      size="xl"
+      size='xl'
       isOpen={props.status}
       onClose={props.event}
-      scrollBehavior="inside"
+      scrollBehavior='inside'
     >
       <ModalOverlay />
       <ModalContent>

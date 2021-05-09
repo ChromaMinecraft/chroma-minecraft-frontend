@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { FaAngleLeft, FaMoneyBillWave } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+import NumberFormat from 'react-number-format';
 
 import RupiahFormat from '../RupiahFormat';
 
@@ -48,16 +49,27 @@ export default function DonateDetail(props) {
           </Tr>
           <Tr>
             <Td>Jumlah Chroma Cash</Td>
-            <Td>: {detail.amount}</Td>
+            <Td>
+              :{' '}
+              <NumberFormat
+                value={detail.amount}
+                displayType={'text'}
+                thousandSeparator={'.'}
+                decimalSeparator={','}
+                decimalScale={0}
+                fixedDecimalScale={true}
+                fontSize={['sm', 'md']}
+              />
+            </Td>
           </Tr>
           <Tr>
-            <Td>ٍSubtotal</Td>
+            <Td>Subtotal</Td>
             <Td>
               : <RupiahFormat value={detail.amount * 1000} />
             </Td>
           </Tr>
           <Tr>
-            <Td>ٍFee</Td>
+            <Td>Fee</Td>
             <Td>
               : <RupiahFormat value={detail.total_fee} />
             </Td>
@@ -85,7 +97,7 @@ export default function DonateDetail(props) {
       <Flex>
         <Link mt='7' onClick={(e) => handleBackButton(e)}>
           <HStack>
-            <FaAngleLeft /> <Text>Kembali</Text>
+            <FaAngleLeft /> <Text fontSize={['sm', 'md']}>Kembali</Text>
           </HStack>
         </Link>
         <Spacer />
@@ -98,6 +110,7 @@ export default function DonateDetail(props) {
             href={detail.checkout_url}
             target='_blank'
             leftIcon={<FaMoneyBillWave />}
+            fontSize={['sm', 'md']}
           >
             Bayar
           </Button>

@@ -7,6 +7,7 @@ import { LIST_URL, ICONS } from '../utils/constant';
 import CircleButton from '../components/CircleButton';
 import DonateModal from '../components/DonateModal';
 import DonateFinish from '../components/DonateFinish';
+import DarkModeButton from '../components/DarkModeButton';
 
 import { useRouter } from 'next/router';
 
@@ -78,6 +79,7 @@ export default function Home() {
 
   return (
     <>
+      <DarkModeButton />
       <Box
         zIndex='1'
         h='100vh'

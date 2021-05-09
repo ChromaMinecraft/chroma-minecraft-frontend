@@ -229,7 +229,7 @@ export default function DonateForm(props) {
       )}
       <form onSubmit={(e) => onFormDonationSubmit(e)}>
         <FormControl isRequired>
-          <FormLabel>Username Minecraft</FormLabel>
+          <FormLabel fontSize={['sm', 'md']}>Username Minecraft</FormLabel>
           <Flex direction='row'>
             <Input
               type='text'
@@ -238,18 +238,20 @@ export default function DonateForm(props) {
               name='username'
               value={username}
               onChange={handleUsernameChange}
+              fontSize={['sm', 'md']}
             />
             <Button
               colorScheme='blue'
               onClick={checkUsername}
               isLoading={isCheckButtonLoading}
+              fontSize={['sm', 'md']}
             >
               Cek
             </Button>
           </Flex>
         </FormControl>
         <FormControl isRequired mt='2'>
-          <FormLabel>Email</FormLabel>
+          <FormLabel fontSize={['sm', 'md']}>Email</FormLabel>
           <Flex direction='row'>
             <Input
               type='email'
@@ -257,18 +259,20 @@ export default function DonateForm(props) {
               name='email'
               value={email}
               onChange={handleEmailChange}
+              fontSize={['sm', 'md']}
             />
           </Flex>
         </FormControl>
         <FormControl id='amount' isRequired mt='2'>
-          <FormLabel>Jumlah Chroma Cash</FormLabel>
+          <FormLabel fontSize={['sm', 'md']}>Jumlah Chroma Cash</FormLabel>
           <NumberInput
             defaultValue={donationAmount}
             min={minDonationAmount}
             max={maxDonationAmount}
             onChange={handleAmountChange}
+            fontSize={['sm', 'md']}
           >
-            <NumberInputField />
+            <NumberInputField fontSize={['sm', 'md']} />
             <NumberInputStepper>
               <NumberIncrementStepper />
               <NumberDecrementStepper />
@@ -276,8 +280,11 @@ export default function DonateForm(props) {
           </NumberInput>
         </FormControl>
         <FormControl id='paymentMethod' isRequired mt='2'>
-          <FormLabel>Pilih Metode Pembayaran</FormLabel>
-          <Select onChange={(e) => handlePaymentChange(e)}>
+          <FormLabel fontSize={['sm', 'md']}>Pilih Metode Pembayaran</FormLabel>
+          <Select
+            onChange={(e) => handlePaymentChange(e)}
+            fontSize={['sm', 'md']}
+          >
             {paymentList.map((payment, i) => (
               <option
                 key={i}
@@ -302,11 +309,11 @@ export default function DonateForm(props) {
         <Flex
           w='100%'
           fontWeight='semibold'
-          fontSize='lg'
           px='4'
           py='2'
           mt='3'
           direction='column'
+          fontSize={['md', 'lg']}
         >
           <Flex>
             <Text>Subtotal</Text>
@@ -324,11 +331,11 @@ export default function DonateForm(props) {
           bgColor='gray.200'
           color='black'
           fontWeight='semibold'
-          fontSize='lg'
           px='4'
           py='2'
           mt='3'
           borderRadius='sm'
+          fontSize='lg'
         >
           <Text>Total</Text>
           <Spacer />
@@ -349,7 +356,7 @@ export default function DonateForm(props) {
           fontSize='lg'
           disabled={isSubmitButtonDisabled}
           isLoading={isSubmitButtonLoading}
-          // onClick={() => submitButtonDonation()}
+          fontSize={['sm', 'md']}
         >
           Bayar
         </Button>

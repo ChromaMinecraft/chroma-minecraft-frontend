@@ -66,7 +66,7 @@ export default function DonateHistoryTable(props) {
         break;
     }
     return (
-      <Badge colorScheme={color} variant="solid">
+      <Badge colorScheme={color} variant='solid'>
         {status}
       </Badge>
     );
@@ -79,7 +79,7 @@ export default function DonateHistoryTable(props) {
 
   return (
     <>
-      <Table variant="simple" size="sm" mt="5">
+      <Table variant='simple' size='sm' mt='5'>
         <Thead>
           <Tr>
             <Th>#</Th>

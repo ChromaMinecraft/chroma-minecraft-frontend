@@ -7,6 +7,8 @@ import { useRouter } from 'next/router';
 import DonateHistoryTable from '../DonateHistoryTable';
 import DonateAlert from '../DonateAlert';
 
+import * as gtag from '../../lib/gtag';
+
 export default function DonateHistory(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [isAlertShown, setIsAlertShown] = useState(false);
@@ -82,7 +84,7 @@ export default function DonateHistory(props) {
         <DonateAlert status={alertStatus} message={alertMessage} />
       )}
       <FormControl id='username' isRequired>
-        <FormLabel>Username Minecraft</FormLabel>
+        <FormLabel fontSize={['sm', 'md']}>Username Minecraft</FormLabel>
         <Flex direction='row'>
           <Input
             type='text'
@@ -91,11 +93,13 @@ export default function DonateHistory(props) {
             name='username'
             value={username}
             onChange={(e) => handleUsernameChange(e)}
+            fontSize={['sm', 'md']}
           />
           <Button
             colorScheme='blue'
             isLoading={isButtonLoading}
             onClick={() => getDonationHistory()}
+            fontSize={['sm', 'md']}
           >
             <FaSearch />
           </Button>
