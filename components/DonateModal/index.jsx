@@ -13,7 +13,7 @@ import {
   TabPanel,
   Button,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import DonateForm from '../DonateForm';
 import DonateHistory from '../DonateHistory';

@@ -7,13 +7,15 @@ import { useRouter } from 'next/router';
 import DonateHistoryTable from '../DonateHistoryTable';
 import DonateAlert from '../DonateAlert';
 
+import * as gtag from '../../lib/gtag';
+
 export default function DonateHistory(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [isAlertShown, setIsAlertShown] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertStatus, setAlertStatus] = useState('');
-  const [username, setUsername] = useState(null);
-  const [donationHistoryData, setDonationHistoryData] = useState(null);
+  const [username, setUsername] = useState('');
+  const [donationHistoryData, setDonationHistoryData] = useState('');
   const [donationHistoryMeta, setDonationHistoryMeta] = useState({});
   const [isButtonLoading, setIsButtonLoading] = useState(false);
   const [sortBy, setSortBy] = useState('desc');
@@ -32,6 +34,11 @@ export default function DonateHistory(props) {
     if (usernameParam) {
       setUsername(usernameParam);
     }
+    gtag.event({
+      action: 'Donate Check History',
+      category: 'Donate',
+      label: 'Donate Label',
+    });
     try {
       const result = await Axios({
         url: `/api/donate-history?username=${
@@ -77,7 +84,7 @@ export default function DonateHistory(props) {
         <DonateAlert status={alertStatus} message={alertMessage} />
       )}
       <FormControl id='username' isRequired>
-        <FormLabel>Username Minecraft</FormLabel>
+        <FormLabel fontSize={['sm', 'md']}>Username Minecraft</FormLabel>
         <Flex direction='row'>
           <Input
             type='text'
@@ -86,11 +93,13 @@ export default function DonateHistory(props) {
             name='username'
             value={username}
             onChange={(e) => handleUsernameChange(e)}
+            fontSize={['sm', 'md']}
           />
           <Button
             colorScheme='blue'
             isLoading={isButtonLoading}
             onClick={() => getDonationHistory()}
+            fontSize={['sm', 'md']}
           >
             <FaSearch />
           </Button>

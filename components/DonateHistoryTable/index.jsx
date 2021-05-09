@@ -130,6 +130,7 @@ export default function DonateHistoryTable(props) {
                 color: colorMode === 'dark' ? 'white' : 'black',
               }}
               onClick={() => handleButtonClick(data)}
+              key={`donate-history-${i}`}
             >
               <Td>{i + 1 + numberPlus}</Td>
               <Td>{data.created_at}</Td>

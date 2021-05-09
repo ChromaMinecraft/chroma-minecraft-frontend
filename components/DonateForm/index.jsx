@@ -15,9 +15,13 @@ import {
 } from '@chakra-ui/react';
 import { FaMoneyBillWave } from 'react-icons/fa';
 import Axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+
 import DonateAlert from '../DonateAlert';
 import RupiahFormat from '../RupiahFormat';
+
+import * as gtag from '../../lib/gtag';
 
 export default function DonateForm(props) {
   const [isAlertShown, setIsAlertShown] = useState(false);
@@ -29,21 +33,33 @@ export default function DonateForm(props) {
   const [alertStatus, setAlertStatus] = useState('');
   const [paymentList, setPaymentList] = useState([]);
   const [selectedPayment, setSelectedPayment] = useState({});
-  const [username, setUsername] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [donationAmount, setDonationAmount] = useState(1);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [donationAmount, setDonationAmount] = useState(10);
   const [donationPrice, setDonationPrice] = useState(1000);
   const [subTotal, setSubTotal] = useState(0);
   const [totalFee, setTotalFee] = useState(0);
   const [totalPrice, setTotalPrice] = useState(1000);
+  const recaptchaRef = useRef(null);
 
   const offlinePayment = ['Alfamart', 'Alfamidi'];
+  const maxDonationAmount = 2000;
+  const minDonationAmount = 10;
 
-  const payDonation = async (e) => {
-    setIsAlertShown(false);
+  const onFormDonationSubmit = (e) => {
     e.preventDefault();
+    recaptchaRef.current.execute();
+  };
+
+  const payDonation = async (captchaCode) => {
+    setIsAlertShown(false);
     setIsSubmitButtonLoading(true);
     setIsSubmitButtonDisabled(true);
+    gtag.event({
+      action: 'Donate Buy',
+      category: 'Donate',
+      label: 'Donate Label',
+    });
     try {
       const result = await Axios({
         url: '/api/donate',
@@ -53,6 +69,7 @@ export default function DonateForm(props) {
           username,
           email,
           payment_method: selectedPayment.method,
+          captchaCode,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -69,7 +86,15 @@ export default function DonateForm(props) {
       setIsSubmitButtonLoading(false);
       setIsSubmitButtonDisabled(false);
     }
+    recaptchaRef.current.reset();
     setIsAlertShown(true);
+  };
+
+  const onReCAPTCHAChange = async (captchaCode) => {
+    if (!captchaCode) {
+      return;
+    }
+    payDonation(captchaCode);
   };
 
   const checkUsername = async (e) => {
@@ -82,6 +107,11 @@ export default function DonateForm(props) {
       return;
     }
     setIsCheckButtonLoading(true);
+    gtag.event({
+      action: 'Donate Check Username',
+      category: 'Donate',
+      label: 'Donate Label',
+    });
     try {
       const result = await Axios({
         url: '/api/users',
@@ -158,7 +188,9 @@ export default function DonateForm(props) {
           method: code,
         });
       } catch (error) {
-        setAlertMessage('Terjadi error saat mengambil aftar Metode Pembayaran');
+        setAlertMessage(
+          'Terjadi error saat mengambil daftar Metode Pembayaran. Silahkan muat ulang halaman ini'
+        );
         setAlertStatus('error');
         setIsAlertShown(true);
       }
@@ -195,10 +227,9 @@ export default function DonateForm(props) {
           message='Periksa username terlebih dahulu sebelum melakukan pembayaran'
         />
       )}
-
-      <form onSubmit={payDonation}>
+      <form onSubmit={(e) => onFormDonationSubmit(e)}>
         <FormControl isRequired>
-          <FormLabel>Username Minecraft</FormLabel>
+          <FormLabel fontSize={['sm', 'md']}>Username Minecraft</FormLabel>
           <Flex direction='row'>
             <Input
               type='text'
@@ -207,18 +238,20 @@ export default function DonateForm(props) {
               name='username'
               value={username}
               onChange={handleUsernameChange}
+              fontSize={['sm', 'md']}
             />
             <Button
               colorScheme='blue'
               onClick={checkUsername}
               isLoading={isCheckButtonLoading}
+              fontSize={['sm', 'md']}
             >
               Cek
             </Button>
           </Flex>
         </FormControl>
         <FormControl isRequired mt='2'>
-          <FormLabel>Email</FormLabel>
+          <FormLabel fontSize={['sm', 'md']}>Email</FormLabel>
           <Flex direction='row'>
             <Input
               type='email'
@@ -226,13 +259,20 @@ export default function DonateForm(props) {
               name='email'
               value={email}
               onChange={handleEmailChange}
+              fontSize={['sm', 'md']}
             />
           </Flex>
         </FormControl>
         <FormControl id='amount' isRequired mt='2'>
-          <FormLabel>Jumlah Chroma Cash</FormLabel>
-          <NumberInput defaultValue={1} min={1} onChange={handleAmountChange}>
-            <NumberInputField />
+          <FormLabel fontSize={['sm', 'md']}>Jumlah Chroma Cash</FormLabel>
+          <NumberInput
+            defaultValue={donationAmount}
+            min={minDonationAmount}
+            max={maxDonationAmount}
+            onChange={handleAmountChange}
+            fontSize={['sm', 'md']}
+          >
+            <NumberInputField fontSize={['sm', 'md']} />
             <NumberInputStepper>
               <NumberIncrementStepper />
               <NumberDecrementStepper />
@@ -240,8 +280,11 @@ export default function DonateForm(props) {
           </NumberInput>
         </FormControl>
         <FormControl id='paymentMethod' isRequired mt='2'>
-          <FormLabel>Pilih Metode Pembayaran</FormLabel>
-          <Select onChange={(e) => handlePaymentChange(e)}>
+          <FormLabel fontSize={['sm', 'md']}>Pilih Metode Pembayaran</FormLabel>
+          <Select
+            onChange={(e) => handlePaymentChange(e)}
+            fontSize={['sm', 'md']}
+          >
             {paymentList.map((payment, i) => (
               <option
                 key={i}
@@ -266,11 +309,11 @@ export default function DonateForm(props) {
         <Flex
           w='100%'
           fontWeight='semibold'
-          fontSize='lg'
           px='4'
           py='2'
           mt='3'
           direction='column'
+          fontSize={['md', 'lg']}
         >
           <Flex>
             <Text>Subtotal</Text>
@@ -288,16 +331,22 @@ export default function DonateForm(props) {
           bgColor='gray.200'
           color='black'
           fontWeight='semibold'
-          fontSize='lg'
           px='4'
           py='2'
           mt='3'
           borderRadius='sm'
+          fontSize='lg'
         >
           <Text>Total</Text>
           <Spacer />
           <RupiahFormat value={totalPrice} />
         </Flex>
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          size='invisible'
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+          onChange={onReCAPTCHAChange}
+        />
         <Button
           mt='4'
           colorScheme='blue'
@@ -307,6 +356,7 @@ export default function DonateForm(props) {
           fontSize='lg'
           disabled={isSubmitButtonDisabled}
           isLoading={isSubmitButtonLoading}
+          fontSize={['sm', 'md']}
         >
           Bayar
         </Button>
