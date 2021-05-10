@@ -1,6 +1,7 @@
 import { Box, Text, Center, Flex, useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
+import copy from 'copy-to-clipboard';
 
 import { LIST_URL, ICONS } from '../utils/constant';
 
