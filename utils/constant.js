@@ -11,7 +11,7 @@ export const ICONS = [
   {
     text: 'Discord',
     id: 'discord',
-    url: LIST_URL.SERVER,
+    url: LIST_URL.DISCORD,
     target: '_blank',
     key: 'link-introduction-discord',
     content: <FaDiscord />,
