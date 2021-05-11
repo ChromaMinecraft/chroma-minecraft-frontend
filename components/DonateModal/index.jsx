@@ -11,13 +11,14 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  Button,
+  Text,
 } from '@chakra-ui/react';
 import React, { useState, useEffect, useRef } from 'react';
 
 import DonateForm from '../DonateForm';
 import DonateHistory from '../DonateHistory';
 import DonateDetail from '../DonateDetail';
+import { Link } from 'dokz';
 
 export default function DonateModal(props) {
   const [isDetail, setIsDetail] = useState(false);
@@ -33,7 +34,9 @@ export default function DonateModal(props) {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Donasi</ModalHeader>
+        <ModalHeader>
+          <Text>Donasi</Text>
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           {isDetail && (

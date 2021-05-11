@@ -27,6 +27,10 @@ export default function DonateHistory(props) {
     setUsername(e.target.value);
   };
 
+  const handleUsernameKeyPress = (e) => {
+    if (e.key === 'Enter') getDonationHistory();
+  };
+
   const getDonationHistory = async (usernameParam = '') => {
     setIsAlertShown(false);
     setIsButtonLoading(true);
@@ -93,6 +97,7 @@ export default function DonateHistory(props) {
             name='username'
             value={username}
             onChange={(e) => handleUsernameChange(e)}
+            onKeyPress={(e) => handleUsernameKeyPress(e)}
             fontSize={['sm', 'md']}
           />
           <Button

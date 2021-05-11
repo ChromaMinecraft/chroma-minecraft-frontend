@@ -18,9 +18,9 @@ export default function DonateFinish(props) {
         <ModalHeader>Donasi</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text>
+          <Text fontSize={['sm', 'md']}>
             Terimakasih telah melakukan pembayaran. Silahkan tunggu hingga
-            sistem memverifikasi pembayaranmu, dan Chroma Cashmu akan dikirim
+            sistem memverifikasi pembayaranmu, dan kode CCmu akan dikirim
             otomatis oleh sistem.
           </Text>
           <Button
@@ -31,6 +31,7 @@ export default function DonateFinish(props) {
             type='submit'
             fontSize='lg'
             href='/'
+            fontSize={['sm', 'md']}
           >
             Tutup
           </Button>
