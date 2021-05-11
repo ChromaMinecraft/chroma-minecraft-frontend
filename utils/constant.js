@@ -1,12 +1,10 @@
 import { FaDiscord, FaPlay, FaPoll, FaAward, FaDonate } from 'react-icons/fa';
 
 export const LIST_URL = {
-  DONATE: 'https://discord.gg/hDrwCsfWqq',
   STATUS: 'https://api.mcsrvstat.us/2/mc.chroma-gaming.xyz',
-  SERVER: 'https://discord.chroma-gaming.xyz',
+  DISCORD: 'https://discord.chroma-gaming.xyz',
   VOTE: 'https://minecraft-mp.com/server/268676/vote/',
-  LEADERBOARD:
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTWSqDNAbqLY2t3pVX-nFeA3604PtzZMvelCeRdZqx4cVnVNQlXaFL66yJ3ajld4oTAd6CUHX_UKqGh/pubchart?oid=25596175&amp;format=interactive',
+  WIKI: '/wiki',
 };
 
 export const ICONS = [
@@ -49,7 +47,7 @@ export const ICONS = [
   {
     text: 'Wiki',
     id: 'wiki',
-    url: '/wiki',
+    url: LIST_URL.WIKI,
     target: '_blank',
     key: 'link-introduction-vote-reward',
     content: <FaAward />,

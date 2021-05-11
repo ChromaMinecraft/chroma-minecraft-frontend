@@ -9,10 +9,12 @@ import {
   Link,
   HStack,
   Text,
+  Icon,
 } from '@chakra-ui/react';
-import { FaAngleLeft, FaMoneyBillWave } from 'react-icons/fa';
+import { FaAngleLeft, FaMoneyBillWave, FaCopy } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import NumberFormat from 'react-number-format';
+import copy from 'copy-to-clipboard';
 
 import RupiahFormat from '../RupiahFormat';
 
@@ -20,11 +22,16 @@ export default function DonateDetail(props) {
   const { detail } = props;
   const router = useRouter();
 
-  const handleBackButton = (e) => {
+  const handleBackButtonClick = (e) => {
     e.preventDefault();
     props.setIsDetail(false);
     props.setIsRedirectedFromDetail(true);
     router.push(`/?username=${detail.username}`);
+  };
+
+  const handleCopyButtonClick = (code) => {
+    const isCopied = copy(code);
+    if (isCopied) alert('Kodemu telah berhasil dicopy');
   };
 
   return (
@@ -90,12 +97,28 @@ export default function DonateDetail(props) {
           </Tr>
           <Tr>
             <Td>Kode</Td>
-            <Td>: {detail.redeem_code ? detail.redeem_code : '-'}</Td>
+            <Td>
+              <HStack>
+                <Text>:</Text>
+                {detail.redeem_code ? (
+                  <Flex
+                    _hover={{
+                      cursor: 'pointer',
+                    }}
+                    onClick={() => handleCopyButtonClick(detail.redeem_code)}
+                  >
+                    <Text>{detail.redeem_code}</Text> <Icon as={FaCopy} />
+                  </Flex>
+                ) : (
+                  <Text>-</Text>
+                )}
+              </HStack>
+            </Td>
           </Tr>
         </Tbody>
       </Table>
       <Flex>
-        <Link mt='7' onClick={(e) => handleBackButton(e)}>
+        <Link mt='7' onClick={(e) => handleBackButtonClick(e)}>
           <HStack>
             <FaAngleLeft /> <Text fontSize={['sm', 'md']}>Kembali</Text>
           </HStack>

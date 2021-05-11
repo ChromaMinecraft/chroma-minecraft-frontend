@@ -74,6 +74,9 @@ function MyApp({ Component, pageProps }) {
             'index.mdx': true,
             wiki: {
               'index.mdx': true,
+              donasi: {
+                'index.mdx': true,
+              },
               rules: true,
               tutorial: true,
             },

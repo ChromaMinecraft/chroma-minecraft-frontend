@@ -12,6 +12,7 @@ import {
   Flex,
   Spacer,
   Text,
+  Link,
 } from '@chakra-ui/react';
 import { FaMoneyBillWave } from 'react-icons/fa';
 import Axios from 'axios';
@@ -227,6 +228,16 @@ export default function DonateForm(props) {
           message='Periksa username terlebih dahulu sebelum melakukan pembayaran'
         />
       )}
+      <Link
+        fontSize='xs'
+        my='2'
+        fontWeight='bold'
+        href='/wiki/donasi/new'
+        target='_blank'
+        color='blue.500'
+      >
+        Panduan Donasi Klik Ini
+      </Link>
       <form onSubmit={(e) => onFormDonationSubmit(e)}>
         <FormControl isRequired>
           <FormLabel fontSize={['sm', 'md']}>Username Minecraft</FormLabel>
