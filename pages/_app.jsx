@@ -14,13 +14,9 @@ import * as gtag from '../lib/gtag';
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   useEffect(() => {
-    const handleRouteChange = (url) => {
-      gtag.pageview(url);
-    };
-    router.events.on('routeChangeComplete', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
+    if (router.pathname.length === 1)
+      return gtag.pageview(router.pathname, 'Chroma Minecraft');
+    gtag.pageview(router.pathname);
   }, [router.events]);
 
   if (router.pathname.startsWith('/wiki')) {
@@ -78,6 +74,9 @@ function MyApp({ Component, pageProps }) {
             'index.mdx': true,
             wiki: {
               'index.mdx': true,
+              donasi: {
+                'index.mdx': true,
+              },
               rules: true,
               tutorial: true,
             },
