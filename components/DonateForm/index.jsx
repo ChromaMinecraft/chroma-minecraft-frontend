@@ -228,16 +228,6 @@ export default function DonateForm(props) {
           message='Periksa username terlebih dahulu sebelum melakukan pembayaran'
         />
       )}
-      <Link
-        fontSize='xs'
-        my='2'
-        fontWeight='bold'
-        href='/wiki/donasi/new'
-        target='_blank'
-        color='blue.500'
-      >
-        Panduan Donasi Klik Ini
-      </Link>
       <form onSubmit={(e) => onFormDonationSubmit(e)}>
         <FormControl isRequired>
           <FormLabel fontSize={['sm', 'md']}>Username Minecraft</FormLabel>
@@ -370,6 +360,19 @@ export default function DonateForm(props) {
           fontSize={['sm', 'md']}
         >
           Bayar
+        </Button>
+        <Button
+          mt='4'
+          p='2'
+          href='/wiki/donasi/new'
+          colorScheme='blue'
+          w='100%'
+          variant='ghost'
+          fontSize='lg'
+          fontSize={['sm', 'md']}
+          onClick={() => (window.location.href = '/wiki/donasi/new')}
+        >
+          Butuh Bantuan?
         </Button>
       </form>
     </>
