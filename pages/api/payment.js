@@ -9,6 +9,7 @@ export default async function handler(req, res) {
         'Accept-Language': 'id',
       },
     });
+    result.data.data = result.data.data.reverse();
     return res.status(200).json(result.data);
   } catch (error) {
     const {
