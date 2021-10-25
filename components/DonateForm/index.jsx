@@ -43,7 +43,7 @@ export default function DonateForm(props) {
   const [totalPrice, setTotalPrice] = useState(1000);
   const recaptchaRef = useRef(null);
 
-  const offlinePayment = ['Alfamart', 'Alfamidi'];
+  const offlinePayment = ['Alfamart', 'Alfamidi', 'Indomaret'];
   const maxDonationAmount = 2000;
   const minDonationAmount = 10;
 
@@ -302,7 +302,7 @@ export default function DonateForm(props) {
           <Flex w='100%' mt='2' fontSize='sm' direction='column'>
             <Flex>
               <Text>
-                * Terdapat biaya administrasi tambahan untuk Alfamart / Alfamidi
+                * Terdapat biaya administrasi tambahan untuk pembayaran ini.
               </Text>
             </Flex>
           </Flex>

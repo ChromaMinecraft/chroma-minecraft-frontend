@@ -133,8 +133,8 @@ export default function Home() {
             }}
             align='center'
           >
-            Server minecraft survival yang mendukung berbagai platform (Java /
-            Bedrock / Pocket Edition)
+            Server minecraft yang mendukung berbagai platform (Java / Bedrock /
+            Pocket Edition)
           </Text>
           <Text
             fontWeight='light'

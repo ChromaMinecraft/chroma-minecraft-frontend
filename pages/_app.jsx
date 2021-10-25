@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }) {
           />
           <meta
             property='og:description'
-            content='Server minecraft survival yang mendukung berbagai platform (Java / Bedrock / Pocket Edition).'
+            content='Server minecraft yang mendukung berbagai platform (Java / Bedrock / Pocket Edition).'
             key='meta-description'
           />
           <meta property='og:image' content='/img/logo.png' />
@@ -100,7 +100,7 @@ function MyApp({ Component, pageProps }) {
         <meta property='og:title' content='Chroma Minecraft' key='meta-title' />
         <meta
           property='og:description'
-          content='Server minecraft survival yang mendukung berbagai platform (Java / Bedrock / Pocket Edition).'
+          content='Server minecraft yang mendukung berbagai platform (Java / Bedrock / Pocket Edition).'
           key='meta-description'
         />
         <meta property='og:image' content='/img/logo.png' />
