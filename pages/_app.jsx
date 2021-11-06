@@ -4,6 +4,7 @@ import { DokzProvider, ColorModeSwitch, GithubLink, Link } from 'dokz';
 import { ChakraProvider } from '@chakra-ui/react';
 import { GoogleFonts } from 'next-google-fonts';
 import { useEffect } from 'react';
+import Head from 'next/head';
 
 import DiscordLink from '../components/DiscordLink';
 
@@ -21,6 +22,13 @@ function MyApp({ Component, pageProps }) {
   if (router.pathname.startsWith('/wiki')) {
     return (
       <ChakraProvider>
+        <Head>
+          <title>Chroma Minecraft</title>
+          <meta
+            name='viewport'
+            content='width=device-width, initial-scale=1.0'
+          />
+        </Head>
         <DokzProvider
           animate
           docsRootPath='pages/wiki'
@@ -60,6 +68,10 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <ChakraProvider theme={theme}>
+      <Head>
+        <title>Chroma Minecraft</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+      </Head>
       <GoogleFonts
         href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap'
         rel='stylesheet'
