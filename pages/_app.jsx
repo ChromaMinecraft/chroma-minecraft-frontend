@@ -17,12 +17,14 @@ function MyApp({ Component, pageProps }) {
     if (router.pathname.length === 1)
       return gtag.pageview(router.pathname, 'Chroma Minecraft');
     gtag.pageview(router.pathname);
+  }, [router.events]);
 
+  useEffect(() => {
     hotjar.initialize(
       process.env.NEXT_PUBLIC_HOTJAR_ID,
       process.env.NEXT_PUBLIC_HOTJAR_VERSION
     );
-  }, [router.events]);
+  }, []);
 
   if (router.pathname.startsWith('/wiki')) {
     return (
