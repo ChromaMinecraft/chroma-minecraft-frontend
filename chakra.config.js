@@ -3,7 +3,7 @@ const config = {
   styles: {
     global: {
       body: {
-        fontFamily: "'Poppins', sans-serif",
+        fontFamily: "'Inter', sans-serif",
       },
     },
   },
