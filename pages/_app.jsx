@@ -6,7 +6,7 @@ import { GoogleFonts } from 'next-google-fonts';
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { hotjar } from 'react-hotjar';
-import DiscordLink from '../components/DiscordLink';
+import DiscordLink from '../components/WikiPage/DiscordLink';
 
 import theme from '../chakra.config';
 import * as gtag from '../lib/gtag';

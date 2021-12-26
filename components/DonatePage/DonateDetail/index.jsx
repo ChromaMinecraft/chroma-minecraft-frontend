@@ -16,7 +16,7 @@ import { useRouter } from 'next/router';
 import NumberFormat from 'react-number-format';
 import copy from 'copy-to-clipboard';
 
-import RupiahFormat from '../RupiahFormat';
+import RupiahFormat from '../../BaseComponents/RupiahFormat';
 
 export default function DonateDetail(props) {
   const { detail } = props;

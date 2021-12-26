@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import DonateHistoryTable from '../DonateHistoryTable';
 import DonateAlert from '../DonateAlert';
 
-import * as gtag from '../../lib/gtag';
+import * as gtag from '../../../lib/gtag';
 
 export default function DonateHistory(props) {
   const [currentPage, setCurrentPage] = useState(1);
