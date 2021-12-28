@@ -27,12 +27,12 @@ const Links = [
     link: '#nav-donate',
   },
   {
-    label: 'Laporan',
-    link: '#nav-report',
-  },
-  {
     label: 'Bantuan',
     link: '#nav-help',
+  },
+  {
+    label: 'Laporan',
+    link: '#nav-report',
   },
 ];
 
