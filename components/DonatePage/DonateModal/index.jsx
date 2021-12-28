@@ -46,11 +46,16 @@ export default function DonateModal(props) {
       scrollBehavior='inside'
     >
       <ModalOverlay bg='#15151fb3' />
-      <ModalContent bg='#15151F' color='white'>
+      <ModalContent
+        bg='#15151F'
+        color='white'
+        boxShadow='0px 0px 20px 5px #F0375B'
+        borderRadius='8'
+      >
         <ModalHeader>
           <Text>Donasi</Text>
         </ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton _focus={{ outline: 'none' }} />
         <PerfectScrollbar>
           <ModalBody>
             {isDetail && (
