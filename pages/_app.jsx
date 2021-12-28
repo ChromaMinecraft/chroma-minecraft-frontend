@@ -6,7 +6,7 @@ import { GoogleFonts } from 'next-google-fonts';
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { hotjar } from 'react-hotjar';
-import DiscordLink from '../components/DiscordLink';
+import DiscordLink from '../components/WikiPage/DiscordLink';
 
 import theme from '../chakra.config';
 import * as gtag from '../lib/gtag';
@@ -80,7 +80,7 @@ function MyApp({ Component, pageProps }) {
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       </Head>
       <GoogleFonts
-        href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap'
+        href='https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap'
         rel='stylesheet'
       />
       <Component {...pageProps} />
