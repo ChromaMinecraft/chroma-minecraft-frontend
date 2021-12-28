@@ -100,7 +100,7 @@ const NavigationSection = () => {
                   marginRight={{ md: '2' }}
                 />
                 <Box display={{ base: 'none', md: 'flex' }}>
-                  <Text fontSize={'lg'} fontWeight='light'>
+                  <Text fontSize={'lg'} fontWeight='light' as='a' href='/'>
                     <strong>Chroma</strong> Minecraft
                   </Text>
                 </Box>

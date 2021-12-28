@@ -1,6 +1,7 @@
 import { Box, useColorMode } from '@chakra-ui/react';
 import { FiMoon, FiSun } from 'react-icons/fi';
-export default function DarkModeButton(props) {
+
+export default function DarkModeButton() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Box

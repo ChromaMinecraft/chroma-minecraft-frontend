@@ -82,7 +82,7 @@ export default function DonateHistoryTable(props) {
       <Table variant='simple' size='sm' mt='5'>
         <Thead>
           <Tr>
-            <Th>#</Th>
+            <Th color='white'>#</Th>
             <Th
               onClick={() => handleTimeHeaderClick()}
               _hover={{
@@ -90,17 +90,19 @@ export default function DonateHistoryTable(props) {
               }}
             >
               <HStack>
-                <Text>Waktu</Text>{' '}
+                <Text color='white'>Waktu</Text>{' '}
                 {!isOrderByTime ? (
-                  <FaSort />
+                  <FaSort color='white' />
                 ) : props.sortBy === 'asc' ? (
-                  <FaSortUp />
+                  <FaSortUp color='white' />
                 ) : (
-                  <FaSortDown />
+                  <FaSortDown color='white' />
                 )}
               </HStack>
             </Th>
-            <Th isNumeric>Jumlah</Th>
+            <Th isNumeric color='white'>
+              Jumlah
+            </Th>
             <Th
               onClick={() => handleStatusHeaderClick()}
               _hover={{
@@ -108,13 +110,13 @@ export default function DonateHistoryTable(props) {
               }}
             >
               <HStack>
-                <Text>Status</Text>{' '}
+                <Text color='white'>Status</Text>{' '}
                 {!isOrderByStatus ? (
-                  <FaSort />
+                  <FaSort color='white' />
                 ) : props.sortBy === 'asc' ? (
-                  <FaSortUp />
+                  <FaSortUp color='white' />
                 ) : (
-                  <FaSortDown />
+                  <FaSortDown color='white' />
                 )}
               </HStack>
             </Th>
@@ -125,12 +127,13 @@ export default function DonateHistoryTable(props) {
           {props.data.map((data, i) => (
             <Tr
               _hover={{
-                background: colorMode === 'dark' ? 'gray.600' : 'gray.300',
+                background: '#24242980',
                 cursor: 'pointer',
-                color: colorMode === 'dark' ? 'white' : 'black',
+                color: 'white',
               }}
               onClick={() => handleButtonClick(data)}
               key={`donate-history-${i}`}
+              fontWeight='light'
             >
               <Td>{i + 1 + numberPlus}</Td>
               <Td>{data.created_at}</Td>

@@ -67,7 +67,7 @@ const BannerSection = () => {
                           Link berhasil dicopy
                         </Text>
                         <Text fontSize='sm' fontWeight='light'>
-                          Periksa clipboardmu
+                          Periksa clipboardmu - mc.chroma-gaming.xyz
                         </Text>
                       </Box>
                     );

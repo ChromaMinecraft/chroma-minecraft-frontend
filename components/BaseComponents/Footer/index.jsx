@@ -42,7 +42,12 @@ const Footer = () => {
                       marginRight='2'
                     />
                     <Box>
-                      <Text fontSize={['lg']} fontWeight='light'>
+                      <Text
+                        fontSize={['lg']}
+                        fontWeight='light'
+                        as='a'
+                        href='/'
+                      >
                         <strong>Chroma</strong> Minecraft
                       </Text>
                     </Box>
@@ -54,12 +59,8 @@ const Footer = () => {
                     harta karun, dan creeper tentunya.
                   </Text>
                 </Box>
-                <Button
-                  as='a'
-                  href='minecraft://mc.chroma-gaming.xyz'
-                  colorScheme='white'
-                  variant='link'
-                  _focus={{ outline: 'none' }}
+                <ChromaButton
+                  types={typesList.link}
                   onClick={(e) => {
                     e.preventDefault();
                     copy('mc.chroma-gaming.xyz');
@@ -81,7 +82,7 @@ const Footer = () => {
                               Link berhasil dicopy
                             </Text>
                             <Text fontSize='sm' fontWeight='light'>
-                              Periksa clipboardmu
+                              Periksa clipboardmu - mc.chroma-gaming.xyz
                             </Text>
                           </Box>
                         );
@@ -90,20 +91,20 @@ const Footer = () => {
                   }}
                 >
                   Mainkan Sekarang &#129122;
-                </Button>
+                </ChromaButton>
               </Flex>
               <Stack align={'flex-start'}>
-                <Text fontWeight='bold' fontSize={'lg'}>
+                <Text fontWeight='bold' fontSize={'lg'} marginBottom='4'>
                   Navigasi
                 </Text>
-                <Link href={'/#nav-home'} fontSize='sm' fontWeight='light'>
-                  Beranda
-                </Link>
                 <Link href={'/#nav-gamemode'} fontSize='sm' fontWeight='light'>
                   Mode Permainan
                 </Link>
                 <Link href={'/#nav-donate'} fontSize='sm' fontWeight='light'>
                   Donasi
+                </Link>
+                <Link href={'/#nav-donate'} fontSize='sm' fontWeight='light'>
+                  Vote
                 </Link>
                 <Link href={'/#nav-help'} fontSize='sm' fontWeight='light'>
                   Bantuan
@@ -117,15 +118,16 @@ const Footer = () => {
                 justifyContent='space-between'
                 flexDirection='column'
               >
-                <Text fontWeight='bold' fontSize={'lg'}>
-                  Skuy lah mabar!
-                </Text>
-                <Text fontSize='sm' fontWeight='light' marginY='4'>
-                  Berbeda perangkat dengan temanmu, bukan masalah! Temukan
-                  banyak keseruan dengan plugin original kami, serta event-event
-                  menarik untukmu dan temanmu. Bersama misteri, harta karun, dan
-                  creeper tentunya.
-                </Text>
+                <Stack align={'flex-start'} marginBottom='4'>
+                  <Text fontWeight='bold' fontSize={'lg'} marginBottom='4'>
+                    Skuy lah mabar!
+                  </Text>
+                  <Text fontSize='sm' fontWeight='light'>
+                    Nyari temen main, mau tanya-tanya admin, jual barang-barang
+                    hasil mining, semuanya bisa. Skuy gasken join discord kita
+                    aja
+                  </Text>
+                </Stack>
                 <ChromaButton
                   types={typesList.secondary}
                   as='a'

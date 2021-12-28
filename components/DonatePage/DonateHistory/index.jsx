@@ -88,11 +88,14 @@ export default function DonateHistory(props) {
         <DonateAlert status={alertStatus} message={alertMessage} />
       )}
       <FormControl id='username' isRequired>
-        <FormLabel fontSize={['sm', 'md']}>Username Minecraft</FormLabel>
+        <FormLabel fontSize={['sm', 'md']} color='#ADADAD' fontWeight='light'>
+          Username Minecraft
+        </FormLabel>
         <Flex direction='row'>
           <Input
+            backgroundColor='#24242980'
             type='text'
-            placeholder='Masukkan username minecraft.'
+            placeholder='Masukkan username minecraft'
             marginRight='1'
             name='username'
             value={username}
@@ -101,7 +104,7 @@ export default function DonateHistory(props) {
             fontSize={['sm', 'md']}
           />
           <Button
-            colorScheme='blue'
+            backgroundColor='#F0375B'
             isLoading={isButtonLoading}
             onClick={() => getDonationHistory()}
             fontSize={['sm', 'md']}
