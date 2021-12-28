@@ -16,7 +16,7 @@ const DonateSection = () => {
       bgBlendMode='overlay'
       backgroundSize={{ base: 'cover' }}
       backgroundRepeat='no-repeat'
-      backgroundPosition={{ base: 'bottom', md: 'center', lg: 'bottom' }}
+      backgroundPosition={{ base: 'bottom', md: 'bottom' }}
       id='nav-donate'
     >
       <DonateModal status={isOpen} event={onClose} />
@@ -58,7 +58,6 @@ const DonateSection = () => {
                 Donasi mulai dari 10.000 untuk nikmati fitur-fitur eksklusif
                 dari kami. Atau beri vote dan dapatkan random drop setiap hari.
               </Text>
-              {/* TODO: move this button below into component */}
               <Flex
                 alignItems={{ base: 'left', md: 'center', lg: 'center' }}
                 flexDirection={{ base: 'column', md: 'row', lg: 'row' }}

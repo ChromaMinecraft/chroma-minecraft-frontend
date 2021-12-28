@@ -37,7 +37,7 @@ export default function DonateDetail(props) {
   return (
     <>
       <Table size='sm'>
-        <Tbody>
+        <Tbody fontWeight='light'>
           <Tr>
             <Td>No Transaksi</Td>
             <Td>: {detail.order_id}</Td>
@@ -107,7 +107,8 @@ export default function DonateDetail(props) {
                     }}
                     onClick={() => handleCopyButtonClick(detail.redeem_code)}
                   >
-                    <Text>{detail.redeem_code}</Text> <Icon as={FaCopy} />
+                    <Text>{detail.redeem_code}</Text>
+                    <Icon as={FaCopy} marginLeft='4' />
                   </Flex>
                 ) : (
                   <Text>-</Text>
@@ -120,14 +121,17 @@ export default function DonateDetail(props) {
       <Flex>
         <Link mt='7' onClick={(e) => handleBackButtonClick(e)}>
           <HStack>
-            <FaAngleLeft /> <Text fontSize={['sm', 'md']}>Kembali</Text>
+            <FaAngleLeft />{' '}
+            <Text fontSize={['sm', 'md']} fontWeight='light'>
+              Kembali
+            </Text>
           </HStack>
         </Link>
         <Spacer />
         {detail.donation_status === 'UNPAID' && (
           <Button
             as='a'
-            colorScheme='green'
+            bg='#F0375B'
             mt='6'
             size='sm'
             href={detail.checkout_url}

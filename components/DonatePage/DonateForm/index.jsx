@@ -12,7 +12,7 @@ import {
   Flex,
   Spacer,
   Text,
-  Link,
+  Divider,
 } from '@chakra-ui/react';
 import { FaMoneyBillWave } from 'react-icons/fa';
 import Axios from 'axios';
@@ -23,8 +23,9 @@ import DonateAlert from '../DonateAlert';
 import RupiahFormat from '../../BaseComponents/RupiahFormat';
 
 import * as gtag from '../../../lib/gtag';
+import { ChromaButton, typesList } from '../../BaseComponents/ChromaButton';
 
-export default function DonateForm(props) {
+export default function DonateForm() {
   const [isAlertShown, setIsAlertShown] = useState(false);
   const [showFirstAlert, setShowFirstAlert] = useState(true);
   const [isSubmitButtonLoading, setIsSubmitButtonLoading] = useState(false);
@@ -230,11 +231,14 @@ export default function DonateForm(props) {
       )}
       <form onSubmit={(e) => onFormDonationSubmit(e)}>
         <FormControl isRequired>
-          <FormLabel fontSize={['sm', 'md']}>Username Minecraft</FormLabel>
+          <FormLabel fontSize={['sm', 'md']} color='#ADADAD' fontWeight='light'>
+            Username Minecraft
+          </FormLabel>
           <Flex direction='row'>
             <Input
+              backgroundColor='#24242980'
               type='text'
-              placeholder='Masukkan username minecraft.'
+              placeholder='Masukkan username minecraft'
               marginRight='1'
               name='username'
               value={username}
@@ -242,7 +246,7 @@ export default function DonateForm(props) {
               fontSize={['sm', 'md']}
             />
             <Button
-              colorScheme='blue'
+              backgroundColor='#F0375B'
               onClick={checkUsername}
               isLoading={isCheckButtonLoading}
               fontSize={['sm', 'md']}
@@ -252,26 +256,32 @@ export default function DonateForm(props) {
           </Flex>
         </FormControl>
         <FormControl isRequired mt='2'>
-          <FormLabel fontSize={['sm', 'md']}>Email</FormLabel>
+          <FormLabel fontSize={['sm', 'md']} color='#ADADAD' fontWeight='light'>
+            Email
+          </FormLabel>
           <Flex direction='row'>
             <Input
               type='email'
-              placeholder='Masukkan emailmu'
+              placeholder='Masukkan email aktif'
               name='email'
               value={email}
               onChange={handleEmailChange}
               fontSize={['sm', 'md']}
+              backgroundColor='#24242980'
             />
           </Flex>
         </FormControl>
         <FormControl id='amount' isRequired mt='2'>
-          <FormLabel fontSize={['sm', 'md']}>Jumlah Chroma Cash</FormLabel>
+          <FormLabel fontSize={['sm', 'md']} color='#ADADAD' fontWeight='light'>
+            Jumlah Chroma Cash
+          </FormLabel>
           <NumberInput
             defaultValue={donationAmount}
             min={minDonationAmount}
             max={maxDonationAmount}
             onChange={handleAmountChange}
             fontSize={['sm', 'md']}
+            backgroundColor='#24242980'
           >
             <NumberInputField fontSize={['sm', 'md']} />
             <NumberInputStepper>
@@ -281,10 +291,13 @@ export default function DonateForm(props) {
           </NumberInput>
         </FormControl>
         <FormControl id='paymentMethod' isRequired mt='2'>
-          <FormLabel fontSize={['sm', 'md']}>Pilih Metode Pembayaran</FormLabel>
+          <FormLabel fontSize={['sm', 'md']} color='#ADADAD' fontWeight='light'>
+            Pilih Metode Pembayaran
+          </FormLabel>
           <Select
             onChange={(e) => handlePaymentChange(e)}
             fontSize={['sm', 'md']}
+            backgroundColor='#24242980'
           >
             {paymentList.map((payment, i) => (
               <option
@@ -292,6 +305,7 @@ export default function DonateForm(props) {
                 value={payment.code}
                 data-fee-flat={payment.fee_customer.flat}
                 data-fee-percent={payment.fee_customer.percent}
+                style={{ backgroundColor: '#24242980' }}
               >
                 {payment.name}
               </option>
@@ -301,7 +315,7 @@ export default function DonateForm(props) {
         {offlinePayment.includes(selectedPayment.name) && (
           <Flex w='100%' mt='2' fontSize='sm' direction='column'>
             <Flex>
-              <Text>
+              <Text fontWeight='light'>
                 * Terdapat biaya administrasi tambahan untuk pembayaran ini.
               </Text>
             </Flex>
@@ -327,10 +341,10 @@ export default function DonateForm(props) {
             <RupiahFormat value={totalFee} />
           </Flex>
         </Flex>
+        <Divider mt='4' />
         <Flex
           w='100%'
-          bgColor='gray.200'
-          color='black'
+          color='white'
           fontWeight='semibold'
           px='4'
           py='2'
@@ -350,32 +364,28 @@ export default function DonateForm(props) {
         />
         <Button
           mt='4'
-          colorScheme='blue'
+          backgroundColor={
+            !isSubmitButtonDisabled ? '#F0375B' : 'rgba(240, 55, 91, 0.25)'
+          }
           w='100%'
           type='submit'
           leftIcon={<FaMoneyBillWave />}
-          fontSize='lg'
           disabled={isSubmitButtonDisabled}
           isLoading={isSubmitButtonLoading}
           fontSize={['sm', 'md']}
         >
           Bayar
         </Button>
-        <Button
+        <ChromaButton
+          types={typesList.link}
           as='a'
           href='/wiki/donasi/new'
           target='_blank'
+          width='100%'
           mt='4'
-          p='2'
-          colorScheme='blue'
-          w='100%'
-          variant='ghost'
-          fontSize='lg'
-          fontSize={['sm', 'md']}
-          // onClick={() => (window.location.href = '/wiki/donasi/new')}
         >
           Butuh Bantuan?
-        </Button>
+        </ChromaButton>
       </form>
     </>
   );

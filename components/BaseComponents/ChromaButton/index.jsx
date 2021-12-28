@@ -13,9 +13,11 @@ const ChromaButton = ({ types, onClick, children, ...rest }) => {
     setActive(true);
     if (onClick) onClick();
 
-    setTimeout(() => {
-      setActive(false);
-    }, 750);
+    if (types != typesList.link) {
+      setTimeout(() => {
+        setActive(false);
+      }, 750);
+    }
   };
 
   const typesMap = {
@@ -52,46 +54,34 @@ const ChromaButton = ({ types, onClick, children, ...rest }) => {
 
   const Secondary = () => {
     return (
-      <Box>
-        <Button
-          {...rest}
-          color='white'
-          size={['lg']}
-          backgroundColor='transparent'
-          borderRadius='8px'
-          border='2px solid #F0375B'
-          _hover={{ bg: '#E7BAC2', borderColor: '#F0375B' }}
-          _active={{ bg: '#F0375B' }}
-          _focus={{ outline: 'none' }}
-          width={{ base: '100%', md: 'fit-content' }}
-          onClick={clicked}
-        >
-          {children}
-        </Button>
-      </Box>
+      <Button
+        {...rest}
+        color='white'
+        size={['lg']}
+        backgroundColor='transparent'
+        borderRadius='8px'
+        border='2px solid #F0375B'
+        _hover={{ bg: '#E7BAC2', borderColor: '#F0375B' }}
+        _active={{ bg: '#F0375B' }}
+        _focus={{ outline: 'none' }}
+        width={{ base: '100%', md: 'fit-content' }}
+        onClick={clicked}
+      >
+        {children}
+      </Button>
     );
   };
 
   const Link = () => {
     return (
       <Button
-        as='a'
-        href='minecraft://mc.chroma-gaming.xyz'
+        {...rest}
         colorScheme='white'
         variant='link'
         _focus={{ outline: 'none' }}
-        onClick={(e) => {
-          e.preventDefault();
-          copy('mc.chroma-gaming.xyz');
-          toast({
-            title: 'Link berhasil dicopy',
-            description: 'Periksa clipboardmu',
-            status: 'info',
-            duration: 1000,
-          });
-        }}
+        onClick={onClick}
       >
-        Mainkan Sekarang &#129122;
+        {children}
       </Button>
     );
   };

@@ -22,19 +22,20 @@ export default function DonateHistoryPaginator(props) {
 
   const normalStyles = {
     ...baseStyles,
-    bg: 'gray.100',
+    bg: '#24242980',
+    color: 'white',
   };
 
   const activeStyles = {
     ...baseStyles,
-    bg: 'blue.500',
+    bg: '#F0375B',
     color: 'white',
   };
 
   const separatorStyles = {
     w: 7,
-    bg: 'gray.200',
-    color: 'black',
+    bg: '#24242980',
+    color: 'white',
   };
 
   const handlePageChange = (nextPage) => {
@@ -54,10 +55,10 @@ export default function DonateHistoryPaginator(props) {
         pagesQuantity={totalPage}
         onPageChange={handlePageChange}
       >
-        <Container align="center" justify="space-between" w="full" p={4}>
-          <Previous>Previous</Previous>
-          <PageGroup isInline align="center" />
-          <Next>Next</Next>
+        <Container align='center' justify='space-between' w='full' p={4}>
+          <Previous backgroundColor='#F0375B'>Previous</Previous>
+          <PageGroup isInline align='center' />
+          <Next backgroundColor='#F0375B'>Next</Next>
         </Container>
       </Paginator>
     </>

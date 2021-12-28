@@ -1,4 +1,5 @@
 import NumberFormat from 'react-number-format';
+
 export default function RupiahFormat(props) {
   return (
     <NumberFormat

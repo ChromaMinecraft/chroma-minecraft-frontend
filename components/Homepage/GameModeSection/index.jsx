@@ -6,7 +6,6 @@ import {
   Image,
   SimpleGrid,
   Text,
-  useDisclosure,
 } from '@chakra-ui/react';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -79,8 +78,6 @@ const GameModeSection = () => {
   const [maxPlayer, setMaxPlayer] = useState(0);
   const [changeContent, setChangeContent] = useState(false);
 
-  const { isOpen, onToggle } = useDisclosure();
-
   const fetchData = async () => {
     const result = await Axios({
       url: '/api/server',
@@ -89,10 +86,10 @@ const GameModeSection = () => {
         'Content-Type': 'application/json',
       },
     });
-    setServerRank(result.data.rank);
-    setVote(result.data.votes);
-    setPlayerOnline(result.data.players);
-    setMaxPlayer(result.data.maxplayers);
+    setServerRank(result.data.rank ?? 0);
+    setVote(result.data.votes ?? 0);
+    setPlayerOnline(result.data.players ?? 0);
+    setMaxPlayer(result.data.maxplayers ?? 0);
   };
 
   useEffect(() => {
