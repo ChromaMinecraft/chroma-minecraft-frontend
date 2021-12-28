@@ -19,6 +19,8 @@ import DonateForm from '../DonateForm';
 import DonateHistory from '../DonateHistory';
 import DonateDetail from '../DonateDetail';
 import { Link } from 'dokz';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 
 export default function DonateModal(props) {
   const [isDetail, setIsDetail] = useState(false);
@@ -38,40 +40,42 @@ export default function DonateModal(props) {
           <Text>Donasi</Text>
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
-          {isDetail && (
-            <Tabs isFitted>
-              <TabPanels>
-                <TabPanel>
-                  <DonateDetail
-                    setIsDetail={setIsDetail}
-                    detail={detail}
-                    setIsRedirectedFromDetail={setIsRedirectedFromDetail}
-                  />
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          )}
-          {!isDetail && (
-            <Tabs isFitted defaultIndex={isRedirectedFromDetail ? 1 : 0}>
-              <TabList>
-                <Tab>Beli</Tab>
-                <Tab>Cek Transaksi</Tab>
-              </TabList>
-              <TabPanels>
-                <TabPanel>
-                  <DonateForm />
-                </TabPanel>
-                <TabPanel>
-                  <DonateHistory
-                    setIsDetail={setIsDetail}
-                    setDetail={setDetail}
-                  />
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          )}
-        </ModalBody>
+        <PerfectScrollbar>
+          <ModalBody>
+            {isDetail && (
+              <Tabs isFitted>
+                <TabPanels>
+                  <TabPanel>
+                    <DonateDetail
+                      setIsDetail={setIsDetail}
+                      detail={detail}
+                      setIsRedirectedFromDetail={setIsRedirectedFromDetail}
+                    />
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            )}
+            {!isDetail && (
+              <Tabs isFitted defaultIndex={isRedirectedFromDetail ? 1 : 0}>
+                <TabList>
+                  <Tab>Beli</Tab>
+                  <Tab>Cek Transaksi</Tab>
+                </TabList>
+                <TabPanels>
+                  <TabPanel>
+                    <DonateForm />
+                  </TabPanel>
+                  <TabPanel>
+                    <DonateHistory
+                      setIsDetail={setIsDetail}
+                      setDetail={setDetail}
+                    />
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            )}
+          </ModalBody>
+        </PerfectScrollbar>
         <ModalFooter></ModalFooter>
       </ModalContent>
     </Modal>
