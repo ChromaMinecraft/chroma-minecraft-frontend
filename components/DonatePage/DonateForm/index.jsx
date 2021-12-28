@@ -20,9 +20,9 @@ import { useEffect, useState, useRef } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import DonateAlert from '../DonateAlert';
-import RupiahFormat from '../RupiahFormat';
+import RupiahFormat from '../../BaseComponents/RupiahFormat';
 
-import * as gtag from '../../lib/gtag';
+import * as gtag from '../../../lib/gtag';
 
 export default function DonateForm(props) {
   const [isAlertShown, setIsAlertShown] = useState(false);
@@ -43,7 +43,7 @@ export default function DonateForm(props) {
   const [totalPrice, setTotalPrice] = useState(1000);
   const recaptchaRef = useRef(null);
 
-  const offlinePayment = ['Alfamart', 'Alfamidi'];
+  const offlinePayment = ['Alfamart', 'Alfamidi', 'Indomaret'];
   const maxDonationAmount = 2000;
   const minDonationAmount = 10;
 
@@ -302,7 +302,7 @@ export default function DonateForm(props) {
           <Flex w='100%' mt='2' fontSize='sm' direction='column'>
             <Flex>
               <Text>
-                * Terdapat biaya administrasi tambahan untuk Alfamart / Alfamidi
+                * Terdapat biaya administrasi tambahan untuk pembayaran ini.
               </Text>
             </Flex>
           </Flex>
@@ -362,15 +362,17 @@ export default function DonateForm(props) {
           Bayar
         </Button>
         <Button
+          as='a'
+          href='/wiki/donasi/new'
+          target='_blank'
           mt='4'
           p='2'
-          href='/wiki/donasi/new'
           colorScheme='blue'
           w='100%'
           variant='ghost'
           fontSize='lg'
           fontSize={['sm', 'md']}
-          onClick={() => (window.location.href = '/wiki/donasi/new')}
+          // onClick={() => (window.location.href = '/wiki/donasi/new')}
         >
           Butuh Bantuan?
         </Button>

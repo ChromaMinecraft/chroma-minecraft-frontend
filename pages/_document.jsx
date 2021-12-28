@@ -20,6 +20,26 @@ export default class MyDocument extends Document {
               `,
             }}
           />
+          <meta charSet='UTF-8' />
+          <meta httpEquiv='x-ua-compatible' content='ie=edge' />
+          <meta
+            property='og:title'
+            content='Chroma Minecraft'
+            key='meta-title'
+          />
+          <meta
+            property='og:description'
+            content='Server minecraft yang mendukung berbagai platform (Java / Bedrock / Pocket Edition).'
+            key='meta-description'
+          />
+          <meta property='og:image' content='/img/logo.png' />
+          <meta property='og:locale' content='id_ID' key='meta-locale' />
+          <meta property='og:url' content='https://mc.chroma-gaming.xyz/' />
+          <meta
+            property='og:locale:alternate'
+            content='en_US'
+            key='meta-locale-alt'
+          />
         </Head>
         <body>
           <Main />
