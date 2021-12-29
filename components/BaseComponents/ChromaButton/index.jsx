@@ -32,13 +32,14 @@ const ChromaButton = ({ types, onClick, children, ...rest }) => {
         padding='12px'
         borderRadius='8px'
         backgroundColor={active ? '#F0375B' : 'rgba(240, 55, 91, 0.25)'}
-        width={{ base: '100%', md: 'fit-content' }}
+        width={rest.width ? rest.width : ''}
+        // width={{ base: '100%', md: 'fit-content' }}
         transition='all 0.5s ease-in-out'
       >
         <Button
           {...rest}
           color='white'
-          width={{ base: '100%', md: 'inherit' }}
+          // width={{ base: '100%', md: 'inherit' }}
           size={['lg']}
           backgroundColor='#F0375B'
           _hover={{ bg: '#F0375B' }}

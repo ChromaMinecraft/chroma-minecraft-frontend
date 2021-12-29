@@ -1,6 +1,7 @@
 import {
   FormControl,
   FormLabel,
+  FormHelperText,
   Input,
   NumberInput,
   NumberInputField,
@@ -29,7 +30,6 @@ export default function DonateForm() {
   const [isAlertShown, setIsAlertShown] = useState(false);
   const [showFirstAlert, setShowFirstAlert] = useState(true);
   const [isSubmitButtonLoading, setIsSubmitButtonLoading] = useState(false);
-  const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
   const [isCheckButtonLoading, setIsCheckButtonLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertStatus, setAlertStatus] = useState('');
@@ -56,7 +56,6 @@ export default function DonateForm() {
   const payDonation = async (captchaCode) => {
     setIsAlertShown(false);
     setIsSubmitButtonLoading(true);
-    setIsSubmitButtonDisabled(true);
     gtag.event({
       action: 'Donate Buy',
       category: 'Donate',
@@ -86,7 +85,6 @@ export default function DonateForm() {
       setAlertMessage(error.response.data.message);
       setAlertStatus('error');
       setIsSubmitButtonLoading(false);
-      setIsSubmitButtonDisabled(false);
     }
     recaptchaRef.current.reset();
     setIsAlertShown(true);
@@ -127,9 +125,7 @@ export default function DonateForm() {
       });
       if (result.status == 203) {
         setAlertStatus('error');
-        setIsSubmitButtonDisabled(true);
       } else {
-        setIsSubmitButtonDisabled(false);
         setAlertStatus('success');
       }
       setAlertMessage(result.data.message);
@@ -142,7 +138,6 @@ export default function DonateForm() {
   };
 
   const handleUsernameChange = (e) => {
-    setIsSubmitButtonDisabled(true);
     setUsername(e.target.value);
   };
 
@@ -172,7 +167,6 @@ export default function DonateForm() {
   useEffect(() => {
     const getPaymentList = async () => {
       setIsSubmitButtonLoading(true);
-      setIsSubmitButtonDisabled(true);
       setIsCheckButtonLoading(true);
       try {
         const result = await Axios({
@@ -196,6 +190,7 @@ export default function DonateForm() {
         setAlertStatus('error');
         setIsAlertShown(true);
       }
+      console.log('finish');
       setIsSubmitButtonLoading(false);
       setIsCheckButtonLoading(false);
     };
@@ -223,46 +218,15 @@ export default function DonateForm() {
       {isAlertShown && (
         <DonateAlert status={alertStatus} message={alertMessage} />
       )}
-      {showFirstAlert && (
-        <DonateAlert
-          status='warning'
-          message='Periksa username terlebih dahulu sebelum melakukan pembayaran'
-        />
-      )}
       <form onSubmit={(e) => onFormDonationSubmit(e)}>
-        <FormControl isRequired>
-          <FormLabel fontSize={['sm', 'md']} color='#ADADAD' fontWeight='light'>
-            Username Minecraft
-          </FormLabel>
-          <Flex direction='row'>
-            <Input
-              backgroundColor='#24242980'
-              type='text'
-              placeholder='Masukkan username minecraft'
-              marginRight='1'
-              name='username'
-              value={username}
-              onChange={handleUsernameChange}
-              fontSize={['sm', 'md']}
-            />
-            <Button
-              backgroundColor='#F0375B'
-              onClick={checkUsername}
-              isLoading={isCheckButtonLoading}
-              fontSize={['sm', 'md']}
-            >
-              Cek
-            </Button>
-          </Flex>
-        </FormControl>
         <FormControl isRequired mt='2'>
           <FormLabel fontSize={['sm', 'md']} color='#ADADAD' fontWeight='light'>
-            Email
+            Alamat Email
           </FormLabel>
           <Flex direction='row'>
             <Input
               type='email'
-              placeholder='Masukkan email aktif'
+              placeholder='Alamat email aktif'
               name='email'
               value={email}
               onChange={handleEmailChange}
@@ -289,6 +253,9 @@ export default function DonateForm() {
               <NumberDecrementStepper />
             </NumberInputStepper>
           </NumberInput>
+          <FormHelperText>
+            * Jumlah pembelian minimum CC adalah 10
+          </FormHelperText>
         </FormControl>
         <FormControl id='paymentMethod' isRequired mt='2'>
           <FormLabel fontSize={['sm', 'md']} color='#ADADAD' fontWeight='light'>
@@ -311,11 +278,14 @@ export default function DonateForm() {
               </option>
             ))}
           </Select>
+          <FormHelperText>
+            * Metode pembayaran telah diurutkan berdasarkan biaya admin terendah
+          </FormHelperText>
         </FormControl>
         {offlinePayment.includes(selectedPayment.name) && (
           <Flex w='100%' mt='2' fontSize='sm' direction='column'>
             <Flex>
-              <Text fontWeight='light'>
+              <Text color='whiteAlpha.600'>
                 * Terdapat biaya administrasi tambahan untuk pembayaran ini.
               </Text>
             </Flex>
@@ -324,7 +294,6 @@ export default function DonateForm() {
         <Flex
           w='100%'
           fontWeight='semibold'
-          px='4'
           py='2'
           mt='3'
           direction='column'
@@ -346,9 +315,9 @@ export default function DonateForm() {
           w='100%'
           color='white'
           fontWeight='semibold'
-          px='4'
           py='2'
           mt='3'
+          mb='5'
           borderRadius='sm'
           fontSize='lg'
         >
@@ -362,20 +331,16 @@ export default function DonateForm() {
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
           onChange={onReCAPTCHAChange}
         />
-        <Button
-          mt='4'
-          backgroundColor={
-            !isSubmitButtonDisabled ? '#F0375B' : 'rgba(240, 55, 91, 0.25)'
-          }
-          w='100%'
+        <ChromaButton
+          types={typesList.primary}
+          width='100%'
           type='submit'
-          leftIcon={<FaMoneyBillWave />}
-          disabled={isSubmitButtonDisabled}
           isLoading={isSubmitButtonLoading}
           fontSize={['sm', 'md']}
+          onClick={payDonation}
         >
           Bayar
-        </Button>
+        </ChromaButton>
         <ChromaButton
           types={typesList.link}
           as='a'

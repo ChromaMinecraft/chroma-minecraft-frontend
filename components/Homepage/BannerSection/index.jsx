@@ -47,6 +47,7 @@ const BannerSection = () => {
             </Text>
             <ChromaButton
               types={typesList.primary}
+              width={{ base: '100%', md: 'fit-content' }}
               onClick={() => {
                 copy('mc.chroma-gaming.xyz');
                 toast({
