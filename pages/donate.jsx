@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Container, Flex, Box, Text } from '@chakra-ui/react';
-import NavigationSection from '../components/Homepage/NavigationSection';
+import NavigationSection from '../components/BaseComponents/NavigationSection';
 import DonateTab from '../components/DonatePage/DonateTab';
 
 const Donate = () => {

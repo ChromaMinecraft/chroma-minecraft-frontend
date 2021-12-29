@@ -4,7 +4,7 @@ import GameModeSection from '../components/Homepage/GameModeSection';
 import DonateSection from '../components/Homepage/DonateSection';
 import HelpSection from '../components/Homepage/HelpSection';
 import ReportSection from '../components/Homepage/ReportSection';
-import NavigationSection from '../components/Homepage/NavigationSection';
+import NavigationSection from '../components/BaseComponents/NavigationSection';
 import FloatingActionButton from '../components/BaseComponents/FloatingActionButton';
 
 export default function Home() {
