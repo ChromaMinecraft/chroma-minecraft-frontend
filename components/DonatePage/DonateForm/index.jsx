@@ -15,7 +15,6 @@ import {
   Text,
   Divider,
 } from '@chakra-ui/react';
-import { FaMoneyBillWave } from 'react-icons/fa';
 import Axios from 'axios';
 import { useEffect, useState, useRef } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -28,17 +27,15 @@ import { ChromaButton, typesList } from '../../BaseComponents/ChromaButton';
 
 export default function DonateForm() {
   const [isAlertShown, setIsAlertShown] = useState(false);
-  const [showFirstAlert, setShowFirstAlert] = useState(true);
   const [isSubmitButtonLoading, setIsSubmitButtonLoading] = useState(false);
-  const [isCheckButtonLoading, setIsCheckButtonLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertStatus, setAlertStatus] = useState('');
   const [paymentList, setPaymentList] = useState([]);
   const [selectedPayment, setSelectedPayment] = useState({});
-  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [donationAmount, setDonationAmount] = useState(10);
   const [donationPrice, setDonationPrice] = useState(1000);
+  const [isSubmitButtonAllowed, setIsSubmitButtonAllowed] = useState(true);
   const [subTotal, setSubTotal] = useState(0);
   const [totalFee, setTotalFee] = useState(0);
   const [totalPrice, setTotalPrice] = useState(1000);
@@ -56,11 +53,22 @@ export default function DonateForm() {
   const payDonation = async (captchaCode) => {
     setIsAlertShown(false);
     setIsSubmitButtonLoading(true);
+
     gtag.event({
       action: 'Donate Buy',
       category: 'Donate',
       label: 'Donate Label',
     });
+
+    const username = localStorage.getItem('username');
+    if (!username) {
+      setAlertStatus('error');
+      setAlertMessage('Username cannot be empty');
+      setIsSubmitButtonLoading(false);
+      setIsAlertShown(true);
+      return;
+    }
+
     try {
       const result = await Axios({
         url: '/api/donate',
@@ -76,6 +84,7 @@ export default function DonateForm() {
           'Content-Type': 'application/json',
         },
       });
+
       setAlertStatus('success');
       setAlertMessage('Kamu akan segera diarahkan ke halaman pembayaran');
       setTimeout(() => {
@@ -86,63 +95,25 @@ export default function DonateForm() {
       setAlertStatus('error');
       setIsSubmitButtonLoading(false);
     }
+
     recaptchaRef.current.reset();
     setIsAlertShown(true);
   };
 
   const onReCAPTCHAChange = async (captchaCode) => {
-    if (!captchaCode) {
-      return;
-    }
+    if (!captchaCode) return;
     payDonation(captchaCode);
   };
 
-  const checkUsername = async (e) => {
-    setShowFirstAlert(false);
-    setIsAlertShown(false);
-    if (!username) {
-      setAlertStatus('error');
-      setAlertMessage('Username tidak boleh kosong.');
-      setIsAlertShown(true);
-      return;
-    }
-    setIsCheckButtonLoading(true);
-    gtag.event({
-      action: 'Donate Check Username',
-      category: 'Donate',
-      label: 'Donate Label',
-    });
-    try {
-      const result = await Axios({
-        url: '/api/users',
-        method: 'GET',
-        params: {
-          username: username,
-        },
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      if (result.status == 203) {
-        setAlertStatus('error');
-      } else {
-        setAlertStatus('success');
-      }
-      setAlertMessage(result.data.message);
-    } catch (error) {
-      setAlertStatus('error');
-      setAlertMessage(error.response.data.message);
-    }
-    setIsAlertShown(true);
-    setIsCheckButtonLoading(false);
-  };
-
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
-
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    const email = e.target.value;
+    setEmail(email);
+
+    if (email.length > 0) {
+      if (localStorage.getItem('username')) setIsSubmitButtonAllowed(false);
+    } else {
+      setIsSubmitButtonAllowed(true);
+    }
   };
 
   const handleAmountChange = (e) => {
@@ -167,7 +138,6 @@ export default function DonateForm() {
   useEffect(() => {
     const getPaymentList = async () => {
       setIsSubmitButtonLoading(true);
-      setIsCheckButtonLoading(true);
       try {
         const result = await Axios({
           url: '/api/payment',
@@ -178,6 +148,7 @@ export default function DonateForm() {
           code,
           fee_customer: { flat, percent },
         } = result.data.data[0];
+
         setSelectedPayment({
           feeFlat: flat,
           feePercent: percent,
@@ -190,9 +161,8 @@ export default function DonateForm() {
         setAlertStatus('error');
         setIsAlertShown(true);
       }
-      console.log('finish');
+
       setIsSubmitButtonLoading(false);
-      setIsCheckButtonLoading(false);
     };
 
     getPaymentList();
@@ -216,7 +186,7 @@ export default function DonateForm() {
   return (
     <>
       {isAlertShown && (
-        <DonateAlert status={alertStatus} message={alertMessage} />
+        <DonateAlert status={alertStatus}>{alertMessage}</DonateAlert>
       )}
       <form onSubmit={(e) => onFormDonationSubmit(e)}>
         <FormControl isRequired mt='2'>
@@ -337,7 +307,8 @@ export default function DonateForm() {
           type='submit'
           isLoading={isSubmitButtonLoading}
           fontSize={['sm', 'md']}
-          onClick={payDonation}
+          // onClick={payDonation}
+          disabled={isSubmitButtonAllowed}
         >
           Bayar
         </ChromaButton>

@@ -98,6 +98,7 @@ const ReportSection = () => {
               id='report-username'
               placeholder='Pakai yang terdaftar di Chroma Minecraft'
               backgroundColor='#24242980'
+              _focus={{ outline: 'none' }}
             ></Input>
           </FormControl>
           <FormControl marginTop='4'>
@@ -110,6 +111,7 @@ const ReportSection = () => {
               placeholder='Jangan panjang-panjang, biar gampang'
               backgroundColor='#24242980'
               resize='none'
+              _focus={{ outline: 'none' }}
             />
           </FormControl>
           <Box

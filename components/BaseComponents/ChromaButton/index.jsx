@@ -31,21 +31,29 @@ const ChromaButton = ({ types, onClick, children, ...rest }) => {
       <Box
         padding='12px'
         borderRadius='8px'
-        backgroundColor={active ? '#F0375B' : 'rgba(240, 55, 91, 0.25)'}
+        backgroundColor={
+          rest.disabled
+            ? 'rgba(36, 36, 41, 0.5)'
+            : active
+            ? '#F0375B'
+            : 'rgba(240, 55, 91, 0.25)'
+        }
         width={rest.width ? rest.width : ''}
-        // width={{ base: '100%', md: 'fit-content' }}
         transition='all 0.5s ease-in-out'
       >
         <Button
           {...rest}
           color='white'
-          // width={{ base: '100%', md: 'inherit' }}
           size={['lg']}
           backgroundColor='#F0375B'
           _hover={{ bg: '#F0375B' }}
           _focus={{ outline: 'none' }}
           _active={{ bg: '#F0375B' }}
           onClick={clicked}
+          _disabled={{
+            backgroundColor: '#242429',
+            color: '#606060',
+          }}
         >
           {children}
         </Button>

@@ -92,7 +92,7 @@ export default function DonateHistory(props) {
   return (
     <Box width='100%'>
       {isAlertShown && (
-        <DonateAlert status={alertStatus} message={alertMessage} />
+        <DonateAlert status={alertStatus}>{alertMessage}</DonateAlert>
       )}
       <FormControl id='username' isRequired>
         <FormLabel fontSize={['sm', 'md']} color='#ADADAD' fontWeight='light'>

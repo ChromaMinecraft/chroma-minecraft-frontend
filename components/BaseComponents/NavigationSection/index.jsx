@@ -87,6 +87,7 @@ const NavigationSection = () => {
           sm: isTransparent ? 'none' : 'rgb(0 0 0 / 25%) 0px 0.6rem 0.4rem',
           md: isTransparent ? 'none' : 'rgb(0 0 0 / 25%) 0px 0.6rem 0.4rem',
         }}
+        id='nav-bar'
       >
         <Container maxW='container.lg'>
           <Box py={2}>

@@ -16,8 +16,6 @@ import React, { useState } from 'react';
 
 import DonateForm from '../DonateForm';
 import DonateHistory from '../DonateHistory';
-import DonateDetail from '../DonateDetail';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
 const ModalTabItem = ({ children }) => {
@@ -27,7 +25,7 @@ const ModalTabItem = ({ children }) => {
       _selected={{ color: '#F0375B', borderColor: '#F0375B' }}
       _hover={{ bg: 'none' }}
       fontWeight='medium'
-      fontSize='2xl'
+      fontSize='xl'
     >
       {children}
     </Tab>

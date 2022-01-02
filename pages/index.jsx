@@ -10,14 +10,15 @@ import FloatingActionButton from '../components/BaseComponents/FloatingActionBut
 export default function Home() {
   return (
     <>
-      <NavigationSection />
-      <BannerSection />
-      <GameModeSection />
-      <DonateSection />
-      <HelpSection />
-      <ReportSection />
-      <Footer />
-      <FloatingActionButton href='/#nav-home' />
+      <FloatingActionButton>
+        <NavigationSection />
+        <BannerSection />
+        <GameModeSection />
+        <DonateSection />
+        <HelpSection />
+        <ReportSection />
+        <Footer />
+      </FloatingActionButton>
     </>
   );
 }
