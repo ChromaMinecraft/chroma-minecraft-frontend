@@ -16,7 +16,7 @@ import {
   Divider,
 } from '@chakra-ui/react';
 import Axios from 'axios';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import DonateAlert from '../DonateAlert';
@@ -24,6 +24,7 @@ import RupiahFormat from '../../BaseComponents/RupiahFormat';
 
 import * as gtag from '../../../lib/gtag';
 import { ChromaButton, typesList } from '../../BaseComponents/ChromaButton';
+import { DonateContext } from '../../../context/donate';
 
 export default function DonateForm() {
   const [isAlertShown, setIsAlertShown] = useState(false);
@@ -41,12 +42,14 @@ export default function DonateForm() {
   const [totalPrice, setTotalPrice] = useState(1000);
   const recaptchaRef = useRef(null);
 
+  const { username } = useContext(DonateContext);
+
   const offlinePayment = ['Alfamart', 'Alfamidi', 'Indomaret'];
   const maxDonationAmount = 2000;
   const minDonationAmount = 10;
 
   const onFormDonationSubmit = (e) => {
-    e.preventDefault();
+    e && e.preventDefault();
     recaptchaRef.current.execute();
   };
 
@@ -59,15 +62,6 @@ export default function DonateForm() {
       category: 'Donate',
       label: 'Donate Label',
     });
-
-    const username = localStorage.getItem('username');
-    if (!username) {
-      setAlertStatus('error');
-      setAlertMessage('Username cannot be empty');
-      setIsSubmitButtonLoading(false);
-      setIsAlertShown(true);
-      return;
-    }
 
     try {
       const result = await Axios({
@@ -307,7 +301,7 @@ export default function DonateForm() {
           type='submit'
           isLoading={isSubmitButtonLoading}
           fontSize={['sm', 'md']}
-          // onClick={payDonation}
+          onClick={onFormDonationSubmit}
           disabled={isSubmitButtonAllowed}
         >
           Bayar

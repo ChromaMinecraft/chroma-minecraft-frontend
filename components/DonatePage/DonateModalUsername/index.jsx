@@ -10,13 +10,14 @@ import {
   ModalFooter,
   ModalOverlay,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ChromaButton, typesList } from '../../BaseComponents/ChromaButton';
 import DonateAlert from '../DonateAlert';
 import InnerChildHTML from '../../BaseComponents/InnerChildHtml';
 
 import * as gtag from '../../../lib/gtag';
 import Axios from 'axios';
+import { DonateContext } from '../../../context/donate';
 
 const stateMessages = {
   info: {
@@ -49,7 +50,7 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
   const [alertMessage, setAlertMessage] = useState(stateMessages.info.message);
   const [alertType, setAlertType] = useState(stateTypes.info);
   const [isModalShown, setIsModalShown] = useState(true);
-  const [username, setUsername] = useState('');
+  const { username, setUsername } = useContext(DonateContext);
 
   const handleOnChangeUsername = (e) => {
     setUsername(e.target.value);
@@ -96,7 +97,7 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
         setAlertType(stateTypes.warning);
         setAlertMessage(result.data.message);
         setIsModalShown(false);
-        parentTake(username);
+        setUsername(username);
       }
     } catch (error) {
       setAlertType(stateTypes.error);
@@ -106,18 +107,14 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
 
   return (
     <>
-      <Modal isOpen={isModalShown} isCentered motionPreset='slideInBottom'>
+      <Modal
+        size='xl'
+        isOpen={isModalShown}
+        isCentered
+        motionPreset='slideInBottom'
+      >
         <ModalOverlay />
-        <ModalContent
-          bg='#2D2D36'
-          color='white'
-          maxWidth={{
-            base: '100%',
-            md: '60%',
-            lg: '50%',
-            xl: '40%',
-          }}
-        >
+        <ModalContent bg='#2D2D36' color='white'>
           <Flex flex='1' padding='2'>
             <DonateAlert status={alertType}>{alertMessage}</DonateAlert>
           </Flex>
