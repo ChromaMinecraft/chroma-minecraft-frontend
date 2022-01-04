@@ -9,8 +9,12 @@ const ChromaDropdown = ({ options, ...props }) => {
         backgroundColor='#24242980'
         _focus={{ outline: 'none' }}
       >
-        {options.map(({ value, label }) => (
-          <option value={value} style={{ backgroundColor: '#24242980' }}>
+        {options.map(({ value, label }, index) => (
+          <option
+            value={value}
+            style={{ backgroundColor: '#24242980' }}
+            key={index}
+          >
             {label}
           </option>
         ))}
