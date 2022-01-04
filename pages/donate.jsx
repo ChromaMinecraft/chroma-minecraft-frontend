@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Container, Flex, Box, Text } from '@chakra-ui/react';
 import NavigationSection from '../components/BaseComponents/NavigationSection';
 import DonateTab from '../components/DonatePage/DonateTab';
@@ -7,16 +7,8 @@ import FloatingActionButton from '../components/BaseComponents/FloatingActionBut
 import DonateModalUsername from '../components/DonatePage/DonateModalUsername';
 
 const Donate = () => {
-  const [name, setName] = useState(null);
+  const [name, setName] = useState('');
   const [modalUsernameShown, setModalUsernameShown] = useState(true);
-
-  useEffect(() => {
-    const lsName = localStorage.getItem('username');
-    if (lsName) {
-      setName(lsName);
-      setModalUsernameShown(false);
-    }
-  }, []);
 
   return (
     <>

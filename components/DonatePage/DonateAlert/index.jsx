@@ -8,7 +8,8 @@ export default function DonateAlert({ status, children, ...props }) {
       variant='solid'
       fontSize={{ base: 'xs', md: 'sm' }}
       fontWeight='light'
-      bg='#15151F'
+      bg='#2D2D36'
+      color='white'
     >
       <AlertIcon />
       <AlertDescription>{children}</AlertDescription>

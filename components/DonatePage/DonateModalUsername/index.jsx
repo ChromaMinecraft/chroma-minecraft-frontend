@@ -10,9 +10,10 @@ import {
   ModalFooter,
   ModalOverlay,
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ChromaButton, typesList } from '../../BaseComponents/ChromaButton';
 import DonateAlert from '../DonateAlert';
+import InnerChildHTML from '../../BaseComponents/InnerChildHtml';
 
 import * as gtag from '../../../lib/gtag';
 import Axios from 'axios';
@@ -54,7 +55,8 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
     setUsername(e.target.value);
   };
 
-  const handleOnClickCheckUsername = () => {
+  const handleOnClickCheckUsername = (e = null) => {
+    if (e) e.preventDefault();
     checkUsername(username);
   };
 
@@ -66,7 +68,7 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
     });
 
     if (!username) {
-      setAlertType(stateMessages.warning.type);
+      setAlertType(stateTypes.warning);
       setAlertMessage('Username tidak boleh kosong.');
       return;
     }
@@ -85,12 +87,15 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
 
       if (result.status == 203) {
         setAlertType(stateTypes.warning);
-        setAlertMessage(result.data.message);
+        setAlertMessage(
+          <InnerChildHTML
+            text={`Username <b>${username}</b> tidak ditemukan`}
+          />
+        );
       } else {
         setAlertType(stateTypes.warning);
         setAlertMessage(result.data.message);
         setIsModalShown(false);
-        localStorage.setItem('username', username);
         parentTake(username);
       }
     } catch (error) {
@@ -104,7 +109,7 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
       <Modal isOpen={isModalShown} isCentered motionPreset='slideInBottom'>
         <ModalOverlay />
         <ModalContent
-          bg='#15151F'
+          bg='#2D2D36'
           color='white'
           maxWidth={{
             base: '100%',
@@ -121,33 +126,35 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
             width='inherit'
             borderBottomWidth='2px'
           />
-          <ModalBody pb={6} mt='4'>
-            <FormControl>
-              <FormLabel
-                fontSize={['sm', 'md']}
-                color='#ADADAD'
-                fontWeight='light'
+          <form onSubmit={handleOnClickCheckUsername}>
+            <ModalBody pb={6} mt='4'>
+              <FormControl>
+                <FormLabel
+                  fontSize={['sm', 'md']}
+                  color='#ADADAD'
+                  fontWeight='light'
+                >
+                  Username Minecraftmu
+                </FormLabel>
+                <Input
+                  required
+                  backgroundColor='#24242980'
+                  placeholder='Pakai yang terdaftar di Chroma Minecraft'
+                  _focus={{ outline: 'none' }}
+                  onChange={handleOnChangeUsername}
+                />
+              </FormControl>
+            </ModalBody>
+            <ModalFooter mt='-4'>
+              <ChromaButton
+                width='100%'
+                types={typesList.primary}
+                onClick={handleOnClickCheckUsername}
               >
-                Username Minecraftmu
-              </FormLabel>
-              <Input
-                required
-                backgroundColor='#24242980'
-                placeholder='Pakai yang terdaftar di Chroma Minecraft'
-                _focus={{ outline: 'none' }}
-                onChange={handleOnChangeUsername}
-              />
-            </FormControl>
-          </ModalBody>
-          <ModalFooter mt='-4'>
-            <ChromaButton
-              width='100%'
-              types={typesList.primary}
-              onClick={handleOnClickCheckUsername}
-            >
-              Cek Username
-            </ChromaButton>
-          </ModalFooter>
+                Cek Username
+              </ChromaButton>
+            </ModalFooter>
+          </form>
         </ModalContent>
       </Modal>
     </>
