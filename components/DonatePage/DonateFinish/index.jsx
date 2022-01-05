@@ -20,7 +20,13 @@ export default function DonateFinish({ isOpen, onClose, ...props }) {
             sistem memverifikasi pembayaranmu dan kode CC mu akan dikirim
             otomatis oleh sistem pada email mu.
           </Text>
-          <ChromaButton as='a' href='/' width='100%' types={typesList.primary}>
+          <ChromaButton
+            as='a'
+            href='/'
+            width='100%'
+            types={typesList.primary}
+            mt='4'
+          >
             Tutup
           </ChromaButton>
         </ModalBody>

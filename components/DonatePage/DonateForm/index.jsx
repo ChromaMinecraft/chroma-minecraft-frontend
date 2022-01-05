@@ -8,12 +8,11 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  Button,
   Select,
   Flex,
   Spacer,
   Text,
-  Divider,
+  Box,
 } from '@chakra-ui/react';
 import Axios from 'axios';
 import { useEffect, useState, useRef, useContext } from 'react';
@@ -25,6 +24,7 @@ import RupiahFormat from '../../BaseComponents/RupiahFormat';
 import * as gtag from '../../../lib/gtag';
 import { ChromaButton, typesList } from '../../BaseComponents/ChromaButton';
 import { DonateContext } from '../../../context/donate';
+import { EMAIL_REGEX_PATTERN } from '../../../utils/constant';
 
 export default function DonateForm() {
   const [isAlertShown, setIsAlertShown] = useState(false);
@@ -47,6 +47,11 @@ export default function DonateForm() {
   const offlinePayment = ['Alfamart', 'Alfamidi', 'Indomaret'];
   const maxDonationAmount = 2000;
   const minDonationAmount = 10;
+
+  const onEmailChangeValidator = (email) => {
+    const pattern = new RegExp(EMAIL_REGEX_PATTERN);
+    return pattern.test(email);
+  };
 
   const onFormDonationSubmit = (e) => {
     e && e.preventDefault();
@@ -103,8 +108,8 @@ export default function DonateForm() {
     const email = e.target.value;
     setEmail(email);
 
-    if (email.length > 0) {
-      if (localStorage.getItem('username')) setIsSubmitButtonAllowed(false);
+    if (email.length > 0 && onEmailChangeValidator(email) && username) {
+      setIsSubmitButtonAllowed(false);
     } else {
       setIsSubmitButtonAllowed(true);
     }
@@ -196,6 +201,7 @@ export default function DonateForm() {
               onChange={handleEmailChange}
               fontSize={['sm', 'md']}
               backgroundColor='#24242980'
+              _focus={{ outline: 'none' }}
             />
           </Flex>
         </FormControl>
@@ -211,13 +217,16 @@ export default function DonateForm() {
             fontSize={['sm', 'md']}
             backgroundColor='#24242980'
           >
-            <NumberInputField fontSize={['sm', 'md']} />
+            <NumberInputField
+              fontSize={['sm', 'md']}
+              _focus={{ outline: 'none' }}
+            />
             <NumberInputStepper>
               <NumberIncrementStepper />
               <NumberDecrementStepper />
             </NumberInputStepper>
           </NumberInput>
-          <FormHelperText>
+          <FormHelperText color='whiteAlpha.600'>
             * Jumlah pembelian minimum CC adalah 10
           </FormHelperText>
         </FormControl>
@@ -229,6 +238,7 @@ export default function DonateForm() {
             onChange={(e) => handlePaymentChange(e)}
             fontSize={['sm', 'md']}
             backgroundColor='#24242980'
+            _focus={{ outline: 'none' }}
           >
             {paymentList.map((payment, i) => (
               <option
@@ -242,7 +252,7 @@ export default function DonateForm() {
               </option>
             ))}
           </Select>
-          <FormHelperText>
+          <FormHelperText color='whiteAlpha.600'>
             * Metode pembayaran telah diurutkan berdasarkan biaya admin terendah
           </FormHelperText>
         </FormControl>
@@ -264,17 +274,17 @@ export default function DonateForm() {
           fontSize={['md', 'lg']}
         >
           <Flex>
-            <Text>Subtotal</Text>
+            <Text fontWeight='light'>Sub Total</Text>
             <Spacer />
-            <RupiahFormat value={subTotal} />
+            <RupiahFormat value={subTotal} fontWeight='light' />
           </Flex>
           <Flex>
-            <Text>Fee</Text>
+            <Text fontWeight='light'>Fee</Text>
             <Spacer />
-            <RupiahFormat value={totalFee} />
+            <RupiahFormat value={totalFee} fontWeight='light' />
           </Flex>
         </Flex>
-        <Divider mt='4' />
+        <Box mt='4' />
         <Flex
           w='100%'
           color='white'
@@ -295,27 +305,28 @@ export default function DonateForm() {
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
           onChange={onReCAPTCHAChange}
         />
-        <ChromaButton
-          types={typesList.primary}
-          width='100%'
-          type='submit'
-          isLoading={isSubmitButtonLoading}
-          fontSize={['sm', 'md']}
-          onClick={onFormDonationSubmit}
-          disabled={isSubmitButtonAllowed}
-        >
-          Bayar
-        </ChromaButton>
-        <ChromaButton
-          types={typesList.link}
-          as='a'
-          href='/wiki/donasi/new'
-          target='_blank'
-          width='100%'
-          mt='4'
-        >
-          Butuh Bantuan?
-        </ChromaButton>
+        <Flex w='100%' justifyContent='space-between' direction='column'>
+          <ChromaButton
+            types={typesList.primary}
+            type='submit'
+            isLoading={isSubmitButtonLoading}
+            fontSize={['sm', 'md']}
+            onSubmit={onFormDonationSubmit}
+            disabled={isSubmitButtonAllowed}
+          >
+            Bayar
+          </ChromaButton>
+          <ChromaButton
+            types={typesList.link}
+            as='a'
+            href='/wiki/donasi/new'
+            target='_blank'
+            mt='2'
+            padding='4'
+          >
+            Butuh Bantuan?
+          </ChromaButton>
+        </Flex>
       </form>
     </>
   );

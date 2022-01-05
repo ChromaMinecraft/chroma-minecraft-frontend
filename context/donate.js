@@ -4,9 +4,14 @@ const DonateContext = createContext();
 
 const DonateProvider = ({ children }) => {
   const [username, setUsername] = useState('');
+  const [modalUsernameShown, setModalUsernameShown] = useState(true);
+
+  const values = {
+    username, setUsername, modalUsernameShown, setModalUsernameShown
+  };
 
   return (
-    <DonateContext.Provider value={{ username, setUsername }}>
+    <DonateContext.Provider value={values}>
       {children}
     </DonateContext.Provider>
   );

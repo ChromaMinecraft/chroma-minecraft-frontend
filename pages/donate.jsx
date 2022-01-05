@@ -9,12 +9,10 @@ import { DonateProvider } from '../context/donate';
 import DonateDescription from '../components/DonatePage/DonateDescription';
 
 const Donate = () => {
-  const [modalUsernameShown, setModalUsernameShown] = useState(true);
-
   return (
     <>
       <DonateProvider>
-        {modalUsernameShown && <DonateModalUsername />}
+        <DonateModalUsername />
         <FloatingActionButton>
           <NavigationSection />
           <Flex color='white' bg='#15151F'>

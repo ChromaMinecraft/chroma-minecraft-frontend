@@ -49,8 +49,8 @@ const stateTypes = {
 const DonateModalUsername = ({ parentTake, ...props }) => {
   const [alertMessage, setAlertMessage] = useState(stateMessages.info.message);
   const [alertType, setAlertType] = useState(stateTypes.info);
-  const [isModalShown, setIsModalShown] = useState(true);
-  const { username, setUsername } = useContext(DonateContext);
+  const { username, setUsername, modalUsernameShown, setModalUsernameShown } =
+    useContext(DonateContext);
 
   const handleOnChangeUsername = (e) => {
     setUsername(e.target.value);
@@ -96,7 +96,7 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
       } else {
         setAlertType(stateTypes.warning);
         setAlertMessage(result.data.message);
-        setIsModalShown(false);
+        setModalUsernameShown(false);
         setUsername(username);
       }
     } catch (error) {
@@ -109,7 +109,7 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
     <>
       <Modal
         size='xl'
-        isOpen={isModalShown}
+        isOpen={modalUsernameShown}
         isCentered
         motionPreset='slideInBottom'
       >
@@ -142,7 +142,7 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
                 />
               </FormControl>
             </ModalBody>
-            <ModalFooter mt='-4'>
+            <ModalFooter mb='2'>
               <ChromaButton
                 width='100%'
                 types={typesList.primary}

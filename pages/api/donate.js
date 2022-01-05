@@ -7,6 +7,10 @@ export default async function handler(req, res) {
     return res.status(404).json({ message: 'Not found' });
   }
   try {
+    if (!username || !email) {
+      return res.status(400).json({ message: 'Sistem mendeteksi username atau email kosong, silahkan muat halaman ini kembali.' });
+    }
+
     const resultCaptcha = await axios({
       url: `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${captchaCode}`,
       method: 'POST',
