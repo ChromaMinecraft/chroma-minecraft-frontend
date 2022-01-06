@@ -13,7 +13,7 @@ import {
 import React, { useContext, useState } from 'react';
 import { ChromaButton, typesList } from '../../BaseComponents/ChromaButton';
 import DonateAlert from '../DonateAlert';
-import InnerChildHTML from '../../BaseComponents/InnerChildHtml';
+import InnerChildHTML from '../../BaseComponents/InnerChildHTML';
 
 import * as gtag from '../../../lib/gtag';
 import Axios from 'axios';
