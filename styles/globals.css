@@ -28,3 +28,25 @@ button,
 select {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+/* Custom Scroll */
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f0375b #15151f;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #15151f;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #f0375b;
+  border-radius: 16px;
+  border: 2px solid #15151f;
+}

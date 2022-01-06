@@ -5,9 +5,10 @@ const DonateContext = createContext();
 const DonateProvider = ({ children }) => {
   const [username, setUsername] = useState('');
   const [modalUsernameShown, setModalUsernameShown] = useState(true);
+  const [donateDetail, setDonateDetail] = useState({});
 
   const values = {
-    username, setUsername, modalUsernameShown, setModalUsernameShown
+    username, setUsername, modalUsernameShown, setModalUsernameShown, donateDetail, setDonateDetail
   };
 
   return (

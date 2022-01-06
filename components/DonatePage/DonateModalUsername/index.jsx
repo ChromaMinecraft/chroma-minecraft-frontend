@@ -49,6 +49,7 @@ const stateTypes = {
 const DonateModalUsername = ({ parentTake, ...props }) => {
   const [alertMessage, setAlertMessage] = useState(stateMessages.info.message);
   const [alertType, setAlertType] = useState(stateTypes.info);
+  const [loading, setLoading] = useState(false);
   const { username, setUsername, modalUsernameShown, setModalUsernameShown } =
     useContext(DonateContext);
 
@@ -73,6 +74,8 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
       setAlertMessage('Username tidak boleh kosong.');
       return;
     }
+
+    setLoading(true);
 
     try {
       const result = await Axios({
@@ -103,6 +106,7 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
       setAlertType(stateTypes.error);
       setAlertMessage(error.response.data.message);
     }
+    setLoading(false);
   };
 
   return (
@@ -147,6 +151,7 @@ const DonateModalUsername = ({ parentTake, ...props }) => {
                 width='100%'
                 types={typesList.primary}
                 onClick={handleOnClickCheckUsername}
+                isLoading={loading}
               >
                 Cek Username
               </ChromaButton>

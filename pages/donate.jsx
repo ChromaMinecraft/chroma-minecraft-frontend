@@ -5,6 +5,7 @@ import DonateTab from '../components/DonatePage/DonateTab';
 import Footer from '../components/BaseComponents/Footer';
 import FloatingActionButton from '../components/BaseComponents/FloatingActionButton';
 import DonateModalUsername from '../components/DonatePage/DonateModalUsername';
+import DonateModalDetail from '../components/DonatePage/DonateModalDetail';
 import { DonateProvider } from '../context/donate';
 import DonateDescription from '../components/DonatePage/DonateDescription';
 
@@ -13,6 +14,7 @@ const Donate = () => {
     <>
       <DonateProvider>
         <DonateModalUsername />
+        <DonateModalDetail />
         <FloatingActionButton>
           <NavigationSection />
           <Flex color='white' bg='#15151F'>

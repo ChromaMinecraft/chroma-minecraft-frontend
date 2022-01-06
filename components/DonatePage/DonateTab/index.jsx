@@ -1,9 +1,23 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  useToast,
+} from '@chakra-ui/react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import DonateForm from '../DonateForm';
-import DonateHistory from '../DonateHistory';
+import DonateHistoryCardItem from '../DonateHistoryCardItem';
+
 import 'react-perfect-scrollbar/dist/css/styles.css';
+import { DonateContext } from '../../../context/donate';
+import InfiniteScroll from 'react-infinite-scroll-component';
+
+import * as gtag from '../../../lib/gtag';
+import Axios from 'axios';
+import ChromaToast from '../../BaseComponents/ChromaToast';
 
 const ModalTabItem = ({ children }) => {
   return (
@@ -19,10 +33,68 @@ const ModalTabItem = ({ children }) => {
   );
 };
 
-export default function DonateTab(props) {
-  const [isDetail, setIsDetail] = useState(false);
+const DonateTab = ({ ...props }) => {
   const [isRedirectedFromDetail, setIsRedirectedFromDetail] = useState(false);
-  const [detail, setDetail] = useState(0);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [donationHistoryData, setDonationHistoryData] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+
+  const { username, modalUsernameShown } = useContext(DonateContext);
+
+  const toast = useToast();
+
+  const sortBy = 'desc';
+  const orderBy = 'created_at';
+
+  const ScrollLoading = () => (
+    <h4 style={{ textAlign: 'center' }}>Loading...</h4>
+  );
+
+  const ScrollEnding = () => (
+    <p style={{ textAlign: 'center' }}>Yay! You have seen it all</p>
+  );
+
+  const getDonationHistory = async (username) => {
+    gtag.event({
+      action: 'Donate Check History',
+      category: 'Donate',
+      label: 'Donate Label',
+    });
+
+    try {
+      const result = await Axios({
+        url: `/api/donate-history?username=${username}&page=${currentPage}&sort_by=${sortBy}&order_by=${orderBy}`,
+        method: 'GET',
+      });
+
+      setCurrentPage(currentPage + 1);
+      setDonationHistoryData((oldData) => {
+        return [...oldData, ...result.data.data];
+      });
+      setHasMore(currentPage !== result.data.meta.total_page);
+    } catch (error) {
+      toast({
+        isClosable: true,
+        duration: null,
+        position: 'top-right',
+        render: () => {
+          return (
+            <ChromaToast
+              title='Terjadi kesalahan cek transaksi'
+              subtitle={error.response.data.message}
+            />
+          );
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (username === '') return;
+    if (modalUsernameShown) return;
+    getDonationHistory(username);
+  }, [username, modalUsernameShown]);
 
   return (
     <Tabs isFitted defaultIndex={isRedirectedFromDetail ? 1 : 0}>
@@ -35,9 +107,25 @@ export default function DonateTab(props) {
           <DonateForm />
         </TabPanel>
         <TabPanel>
-          <DonateHistory setIsDetail={setIsDetail} setDetail={setDetail} />
+          {donationHistoryData.length > 0 && (
+            <InfiniteScroll
+              height='400px'
+              dataLength={donationHistoryData.length}
+              next={() => getDonationHistory(username)}
+              hasMore={hasMore}
+              loader={<ScrollLoading />}
+              style={{ display: 'flex', flexDirection: 'column', gridGap: 8 }}
+              endMessage={<ScrollEnding />}
+            >
+              {donationHistoryData.map((data, idx) => (
+                <DonateHistoryCardItem {...data} key={idx} />
+              ))}
+            </InfiniteScroll>
+          )}
         </TabPanel>
       </TabPanels>
     </Tabs>
   );
-}
+};
+
+export default DonateTab;

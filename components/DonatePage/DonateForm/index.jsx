@@ -13,6 +13,7 @@ import {
   Spacer,
   Text,
   Box,
+  useToast,
 } from '@chakra-ui/react';
 import Axios from 'axios';
 import { useEffect, useState, useRef, useContext } from 'react';
@@ -20,6 +21,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 import DonateAlert from '../DonateAlert';
 import RupiahFormat from '../../BaseComponents/RupiahFormat';
+import ChromaToast from '../../BaseComponents/ChromaToast';
 
 import * as gtag from '../../../lib/gtag';
 import { ChromaButton, typesList } from '../../BaseComponents/ChromaButton';
@@ -41,6 +43,7 @@ export default function DonateForm() {
   const [totalFee, setTotalFee] = useState(0);
   const [totalPrice, setTotalPrice] = useState(1000);
   const recaptchaRef = useRef(null);
+  const toast = useToast();
 
   const { username } = useContext(DonateContext);
 
@@ -154,11 +157,18 @@ export default function DonateForm() {
           method: code,
         });
       } catch (error) {
-        setAlertMessage(
-          'Terjadi error saat mengambil daftar Metode Pembayaran. Silahkan muat ulang halaman ini'
-        );
-        setAlertStatus('error');
-        setIsAlertShown(true);
+        toast({
+          duration: null,
+          position: 'top-right',
+          render: () => {
+            return (
+              <ChromaToast
+                title='Terjadi kesalahan pengambilan list pembayaran'
+                subtitle={error.response.data.message}
+              />
+            );
+          },
+        });
       }
 
       setIsSubmitButtonLoading(false);
