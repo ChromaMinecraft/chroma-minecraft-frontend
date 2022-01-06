@@ -24,6 +24,10 @@ export default function Home() {
     if (router.query.tripay_reference) {
       onDonateFinishOpen();
     }
+
+    if (router.asPath.includes('#nav')) {
+      window.location = router.asPath;
+    }
   }, [router.query]);
 
   return (

@@ -16,23 +16,23 @@ import HamburgerMenu from 'react-hamburger-menu';
 const Links = [
   {
     label: 'Mode Permainan',
-    link: '#nav-gamemode',
+    link: '/#nav-gamemode',
   },
   {
     label: 'Donasi',
-    link: '#nav-donate',
+    link: '/#nav-donate',
   },
   {
     label: 'Vote',
-    link: '#nav-donate',
+    link: '/#nav-donate',
   },
   {
     label: 'Bantuan',
-    link: '#nav-help',
+    link: '/#nav-help',
   },
   {
     label: 'Laporan',
-    link: '#nav-report',
+    link: '/#nav-report',
   },
 ];
 
