@@ -24,10 +24,10 @@ const Donate = () => {
                 flexDirection={{ base: 'column', md: 'row' }}
                 justifyContent='space-between'
               >
-                <Box width={{ base: '100%', md: '40%' }}>
+                <Box width={{ base: '100%', md: '35%' }}>
                   <DonateDescription />
                 </Box>
-                <Box width={{ base: '100%', md: '50%' }}>
+                <Box width={{ base: '100%', md: '55%' }}>
                   <DonateTab />
                 </Box>
               </Flex>

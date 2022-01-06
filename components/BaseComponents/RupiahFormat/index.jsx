@@ -1,7 +1,9 @@
 import { Text } from '@chakra-ui/react';
 import NumberFormat from 'react-number-format';
 
-export default function RupiahFormat({ value, fontWeight, ...rest }) {
+export default function RupiahFormat({ value, fontWeight, fontSize, ...rest }) {
+  const fSize = !fontSize ? ['sm', 'md'] : fontSize;
+
   return (
     <NumberFormat
       {...rest}
@@ -13,7 +15,7 @@ export default function RupiahFormat({ value, fontWeight, ...rest }) {
       decimalScale={0}
       fixedDecimalScale={true}
       renderText={(value) => (
-        <Text fontWeight={fontWeight} fontSize={['sm', 'md']} color='white'>
+        <Text fontWeight={fontWeight} fontSize={fSize} color='white'>
           {value}
         </Text>
       )}

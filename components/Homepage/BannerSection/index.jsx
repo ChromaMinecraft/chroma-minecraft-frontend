@@ -51,7 +51,7 @@ const BannerSection = () => {
               onClick={() => {
                 copy('mc.chroma-gaming.xyz');
                 toast({
-                  duration: 750,
+                  duration: 1500,
                   position: 'top-right',
                   render: () => {
                     return (

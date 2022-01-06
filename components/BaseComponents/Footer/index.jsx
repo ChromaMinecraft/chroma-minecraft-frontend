@@ -65,7 +65,7 @@ const Footer = () => {
                     e.preventDefault();
                     copy('mc.chroma-gaming.xyz');
                     toast({
-                      duration: 750,
+                      duration: 1500,
                       position: 'top-right',
                       render: () => {
                         return (

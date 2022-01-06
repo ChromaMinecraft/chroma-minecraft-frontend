@@ -1,22 +1,44 @@
-import { Box, Button } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { Button } from '@chakra-ui/react';
+import React from 'react';
 
 const typesList = {
+  primaryFlat: 'primaryFlat',
   primary: 'primary',
   secondary: 'secondary',
   link: 'link',
 };
 
-const ChromaButton = ({ types, onClick, children, ...rest }) => {
-  const clicked = () => {
-    onClick && onClick();
-  };
-
+const ChromaButton = ({ types, children, ...rest }) => {
   const typesMap = {
     [typesList.primary]: () => <Primary />,
     [typesList.secondary]: () => <Secondary />,
     [typesList.link]: () => <Link />,
+    [typesList.primaryFlat]: () => <PrimaryFlat />,
   };
+
+  const PrimaryFlat = () => (
+    <Button
+      {...rest}
+      color='white'
+      size='lg'
+      backgroundColor='#F0375B'
+      borderRadius='8px'
+      width={{ base: '100%', md: 'fit-content' }}
+      _focus={{ outline: 'none' }}
+      _active={{ bg: '#F0375B', color: 'white' }}
+      _hover={{
+        color: '#F0375B',
+        bg: 'white',
+        _disabled: { bg: '#242429', color: '#606060' },
+      }}
+      _disabled={{
+        backgroundColor: '#242429',
+        color: '#606060',
+      }}
+    >
+      {children}
+    </Button>
+  );
 
   const Primary = () => {
     return (
@@ -38,7 +60,6 @@ const ChromaButton = ({ types, onClick, children, ...rest }) => {
         _active={{
           boxShadow: '0px 0px 0px 12px #F0375B',
         }}
-        onClick={clicked}
         _disabled={{
           boxShadow: '0px 0px 0px 12px rgba(36, 36, 41, 0.5)',
           backgroundColor: '#242429',
@@ -63,7 +84,6 @@ const ChromaButton = ({ types, onClick, children, ...rest }) => {
         _active={{ bg: '#F0375B' }}
         _focus={{ outline: 'none' }}
         width={{ base: '100%', md: 'fit-content' }}
-        onClick={clicked}
       >
         {children}
       </Button>
@@ -77,7 +97,6 @@ const ChromaButton = ({ types, onClick, children, ...rest }) => {
         colorScheme='white'
         variant='link'
         _focus={{ outline: 'none' }}
-        onClick={onClick}
       >
         {children}
       </Button>
