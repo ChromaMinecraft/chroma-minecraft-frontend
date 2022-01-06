@@ -16,23 +16,23 @@ import HamburgerMenu from 'react-hamburger-menu';
 const Links = [
   {
     label: 'Mode Permainan',
-    link: '#nav-gamemode',
+    link: '/#nav-gamemode',
   },
   {
     label: 'Donasi',
-    link: '#nav-donate',
+    link: '/#nav-donate',
   },
   {
     label: 'Vote',
-    link: '#nav-donate',
+    link: '/#nav-donate',
   },
   {
     label: 'Bantuan',
-    link: '#nav-help',
+    link: '/#nav-help',
   },
   {
     label: 'Laporan',
-    link: '#nav-report',
+    link: '/#nav-report',
   },
 ];
 
@@ -87,6 +87,7 @@ const NavigationSection = () => {
           sm: isTransparent ? 'none' : 'rgb(0 0 0 / 25%) 0px 0.6rem 0.4rem',
           md: isTransparent ? 'none' : 'rgb(0 0 0 / 25%) 0px 0.6rem 0.4rem',
         }}
+        id='nav-bar'
       >
         <Container maxW='container.lg'>
           <Box py={2}>

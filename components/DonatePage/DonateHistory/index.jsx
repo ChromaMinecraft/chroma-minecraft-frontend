@@ -1,4 +1,11 @@
-import { FormControl, FormLabel, Input, Button, Flex } from '@chakra-ui/react';
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Flex,
+  Box,
+} from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
 import { useState, useEffect, useRef } from 'react';
 import Axios from 'axios';
@@ -83,9 +90,9 @@ export default function DonateHistory(props) {
   }, [router.query.username]);
 
   return (
-    <>
+    <Box width='100%'>
       {isAlertShown && (
-        <DonateAlert status={alertStatus} message={alertMessage} />
+        <DonateAlert status={alertStatus}>{alertMessage}</DonateAlert>
       )}
       <FormControl id='username' isRequired>
         <FormLabel fontSize={['sm', 'md']} color='#ADADAD' fontWeight='light'>
@@ -126,6 +133,6 @@ export default function DonateHistory(props) {
           setOrderBy={setOrderBy}
         />
       )}
-    </>
+    </Box>
   );
 }

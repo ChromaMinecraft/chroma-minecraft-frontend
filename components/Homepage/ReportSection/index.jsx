@@ -10,6 +10,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import React from 'react';
+import { ChromaButton, typesList } from '../../BaseComponents/ChromaButton';
 import ChromaDropdown from '../../BaseComponents/ChromaDropdown';
 
 const ServerOptions = [
@@ -98,6 +99,7 @@ const ReportSection = () => {
               id='report-username'
               placeholder='Pakai yang terdaftar di Chroma Minecraft'
               backgroundColor='#24242980'
+              _focus={{ outline: 'none' }}
             ></Input>
           </FormControl>
           <FormControl marginTop='4'>
@@ -110,31 +112,18 @@ const ReportSection = () => {
               placeholder='Jangan panjang-panjang, biar gampang'
               backgroundColor='#24242980'
               resize='none'
+              _focus={{ outline: 'none' }}
             />
           </FormControl>
-          <Box
-            marginTop='4'
-            padding='12px'
-            borderRadius='8px'
-            backgroundColor='rgba(36, 36, 41, 0.5)'
+          <ChromaButton
+            mt='4'
+            ml={{ base: 'auto', md: '4' }}
             width={{ base: '100%', md: 'fit-content' }}
+            types={typesList.primary}
+            disabled
           >
-            <Button
-              color='white'
-              width={{ base: '100%', md: 'inherit' }}
-              size={['lg']}
-              backgroundColor='#F0375B'
-              _hover={{ bg: 'none' }}
-              _focus={{ outline: 'none' }}
-              disabled
-              _disabled={{
-                backgroundColor: '#242429',
-                color: '#606060',
-              }}
-            >
-              Laporkan
-            </Button>
-          </Box>
+            Laporkan
+          </ChromaButton>
         </Box>
       </Container>
     </Flex>
