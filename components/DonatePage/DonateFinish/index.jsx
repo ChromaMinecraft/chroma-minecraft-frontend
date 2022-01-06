@@ -3,40 +3,33 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
-  ModalCloseButton,
   Text,
-  Button,
 } from '@chakra-ui/react';
+import { ChromaButton, typesList } from '../../BaseComponents/ChromaButton';
 
-export default function DonateFinish(props) {
+export default function DonateFinish({ isOpen, onClose, ...props }) {
   return (
-    <Modal size='xl' isOpen={props.status} onClose={props.event}>
+    <Modal size='xl' isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg='#2D2D36' color='white'>
         <ModalHeader>Donasi</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <Text fontSize={['sm', 'md']}>
+        <ModalBody pb={6}>
+          <Text fontSize={['sm', 'md']} mb='4' fontWeight='light'>
             Terimakasih telah melakukan pembayaran. Silahkan tunggu hingga
-            sistem memverifikasi pembayaranmu, dan kode CCmu akan dikirim
-            otomatis oleh sistem.
+            sistem memverifikasi pembayaranmu dan kode CC mu akan dikirim
+            otomatis oleh sistem pada email mu.
           </Text>
-          <Button
+          <ChromaButton
             as='a'
-            mt='4'
-            colorScheme='blue'
-            w='100%'
-            type='submit'
-            fontSize='lg'
             href='/'
-            fontSize={['sm', 'md']}
+            width='100%'
+            types={typesList.primary}
+            mt='4'
           >
             Tutup
-          </Button>
+          </ChromaButton>
         </ModalBody>
-        <ModalFooter></ModalFooter>
       </ModalContent>
     </Modal>
   );

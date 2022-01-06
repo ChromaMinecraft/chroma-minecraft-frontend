@@ -1,11 +1,8 @@
-import { useState } from 'react';
-import { Box, Container, Flex, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Container, Flex, Text } from '@chakra-ui/react';
 import React from 'react';
 import { ChromaButton, typesList } from '../../BaseComponents/ChromaButton';
-import DonateModal from '../../DonatePage/DonateModal';
 
 const DonateSection = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex
       color='white'
@@ -19,7 +16,6 @@ const DonateSection = () => {
       backgroundPosition={{ base: 'bottom', md: 'bottom' }}
       id='nav-donate'
     >
-      <DonateModal status={isOpen} event={onClose} />
       <Container maxW='container.lg'>
         <Box
           marginX='auto'
@@ -63,7 +59,7 @@ const DonateSection = () => {
                 flexDirection={{ base: 'column', md: 'row', lg: 'row' }}
                 gridGap={{ base: '4' }}
               >
-                <ChromaButton types={typesList.primary} onClick={onOpen}>
+                <ChromaButton types={typesList.primary} as='a' href='/donate'>
                   Mulai Berdonasi
                 </ChromaButton>
                 <ChromaButton

@@ -2,6 +2,7 @@ import { Box, Container, Flex, Text, useToast } from '@chakra-ui/react';
 import copy from 'copy-to-clipboard';
 import React from 'react';
 import { ChromaButton, typesList } from '../../BaseComponents/ChromaButton';
+import ChromaToast from '../../BaseComponents/ChromaToast';
 
 const BannerSection = () => {
   const toast = useToast();
@@ -34,7 +35,7 @@ const BannerSection = () => {
               <br />
               <strong>lebih seru di chroma mc</strong>
             </Text>
-            <Text
+            <Box
               fontSize='lg'
               fontWeight='light'
               marginBottom='12'
@@ -44,32 +45,21 @@ const BannerSection = () => {
               <Text display={{ base: 'inline', lg: 'inline-block' }}>
                 Chroma mc selalu bisa kasih kamu cerita yang berbeda
               </Text>
-            </Text>
+            </Box>
             <ChromaButton
               types={typesList.primary}
+              width={{ base: '100%', md: 'fit-content' }}
               onClick={() => {
                 copy('mc.chroma-gaming.xyz');
                 toast({
-                  duration: 750,
+                  duration: 1500,
                   position: 'top-right',
                   render: () => {
                     return (
-                      <Box
-                        bg='#F0375B'
-                        color='white'
-                        py={3}
-                        px={5}
-                        rounded='md'
-                        width='fit-content'
-                        marginLeft='auto'
-                      >
-                        <Text fontSize='md' fontWeight='medium'>
-                          Link berhasil dicopy
-                        </Text>
-                        <Text fontSize='sm' fontWeight='light'>
-                          Periksa clipboardmu - mc.chroma-gaming.xyz
-                        </Text>
-                      </Box>
+                      <ChromaToast
+                        title='Link berhasil dicopy'
+                        subtitle='mc.chroma-gaming.xyz'
+                      />
                     );
                   },
                 });

@@ -15,6 +15,7 @@ import { FaDiscord } from 'react-icons/fa';
 import copy from 'copy-to-clipboard';
 
 import { ChromaButton, typesList } from '../ChromaButton';
+import ChromaToast from '../ChromaToast';
 
 const Footer = () => {
   const toast = useToast();
@@ -65,26 +66,14 @@ const Footer = () => {
                     e.preventDefault();
                     copy('mc.chroma-gaming.xyz');
                     toast({
-                      duration: 750,
+                      duration: 1500,
                       position: 'top-right',
                       render: () => {
                         return (
-                          <Box
-                            bg='#F0375B'
-                            color='white'
-                            py={3}
-                            px={5}
-                            rounded='md'
-                            width='fit-content'
-                            marginLeft='auto'
-                          >
-                            <Text fontSize='md' fontWeight='medium'>
-                              Link berhasil dicopy
-                            </Text>
-                            <Text fontSize='sm' fontWeight='light'>
-                              Periksa clipboardmu - mc.chroma-gaming.xyz
-                            </Text>
-                          </Box>
+                          <ChromaToast
+                            title='Link berhasil dicopy'
+                            subtitle='mc.chroma-gaming.xyz'
+                          />
                         );
                       },
                     });
