@@ -50,3 +50,8 @@ select {
   border-radius: 16px;
   border: 2px solid #15151f;
 }
+
+/* Markdown style (MDX) */
+details {
+  cursor: pointer;
+}

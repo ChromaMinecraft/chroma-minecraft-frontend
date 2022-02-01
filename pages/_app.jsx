@@ -59,9 +59,11 @@ function MyApp({ Component, pageProps }) {
               'index.mdx': true,
               donasi: {
                 'index.mdx': true,
-                'old.mdx': false,
               },
-              rules: true,
+              rules: {
+                'survival.mdx': true,
+                'skyblock.mdx': true,
+              },
               tutorial: true,
             },
             more: true,
