@@ -329,7 +329,7 @@ export default function DonateForm() {
           <ChromaButton
             types={typesList.link}
             as='a'
-            href='/wiki/donasi/new'
+            href='/wiki/donasi'
             target='_blank'
             mt='2'
             padding='4'
