@@ -47,7 +47,7 @@ export default function DonateForm() {
 
   const { username } = useContext(DonateContext);
 
-  const offlinePayment = ['Alfamart', 'Alfamidi', 'Indomaret'];
+  const offlinePayment = ['Indomaret'];
   const maxDonationAmount = 2000;
   const minDonationAmount = 10;
 
