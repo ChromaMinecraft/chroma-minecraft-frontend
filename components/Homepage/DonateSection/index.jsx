@@ -62,7 +62,7 @@ const DonateSection = () => {
                 <ChromaButton
                   types={typesList.primary}
                   as='a'
-                  href='#'
+                  href='/donate'
                   disabled
                 >
                   Mulai Berdonasi
