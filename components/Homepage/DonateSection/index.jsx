@@ -59,7 +59,12 @@ const DonateSection = () => {
                 flexDirection={{ base: 'column', md: 'row', lg: 'row' }}
                 gridGap={{ base: '4' }}
               >
-                <ChromaButton types={typesList.primary} as='a' href='/donate'>
+                <ChromaButton
+                  types={typesList.primary}
+                  as='a'
+                  href='#'
+                  disabled
+                >
                   Mulai Berdonasi
                 </ChromaButton>
                 <ChromaButton

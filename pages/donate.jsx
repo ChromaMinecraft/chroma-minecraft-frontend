@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Container, Flex, Box, Text } from '@chakra-ui/react';
+import { Container, Flex, Box } from '@chakra-ui/react';
 import NavigationSection from '../components/BaseComponents/NavigationSection';
 import DonateTab from '../components/DonatePage/DonateTab';
 import Footer from '../components/BaseComponents/Footer';
@@ -8,6 +7,15 @@ import DonateModalUsername from '../components/DonatePage/DonateModalUsername';
 import DonateModalDetail from '../components/DonatePage/DonateModalDetail';
 import { DonateProvider } from '../context/donate';
 import DonateDescription from '../components/DonatePage/DonateDescription';
+
+export const getServerSideProps = async (context) => {
+  return {
+    redirect: {
+      permanent: false,
+      destination: '/',
+    },
+  };
+};
 
 const Donate = () => {
   return (
